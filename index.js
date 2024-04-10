@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
-
+const someFunc = () => {
+    console.log ("Sacrifice Everything for Haruki!");
+    setTimeout(someFunc, 3000);
+}
+setTimeout(someFunc, 3000);
 app.listen(3000, () => {
   console.log("Project is running!");
 })
@@ -8,6 +12,12 @@ app.listen(3000, () => {
 app.get("/", (req,res) => {
   res.send("Haruki is Online! (i think)");
 })
+
+//bot.on("message", function (message) { if (message.content="h.test") {
+//const channel01 - bot.channels.cache.find(channel -> channel.id 1014184233679458385");
+  //channel01.send("It works!")
+//}                                
+//});
 
 const Discord = require("discord.js");
 const client = new Discord.Client({
@@ -48,6 +58,16 @@ client.on("messageCreate", message => {
 
     message.channel.send({ embeds: [embed] })
   }
+
+  if (message.content === "embed010") {
+    let embed = new Discord.MessageEmbed()
+      .setDescription("Haruki Nakatomi is Faction from the Haruki Empire which is a Japanese theme Village And Found on the Minecraft Server named kerotscraft.\n \n The Main Purpose of The server is to guide New members Of Haruki Nakatomi and easily access the Village Rules.\n \n KEROTSCRAFT SERVER INFORMATION: \n DISCORD: https://bit.ly/kerotscraftsmp \n Server IP: play.kerotscraft.com \n Port: 19111 \n \n HARUKI MAIN DISCORD:\n> https://bit.ly/HarukiEmpire \n \n FACTION FOUNDER:\n> <@947362523890470942> \n \n HARUKI FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804> \n \n DISCORD SERVER CREATOR:\n> <@947362523890470942> \n \n [春樹/Haruki]")
+      .setImage("https://i.ibb.co/ySbzqHN/20220424-140236.jpg")
+      .setColor("#FFFFFF")
+
+    message.channel.send({ embeds: [embed] })
+  }
+
   if (message.content === "embed2") {
     let embed = new Discord.MessageEmbed()
       .setTitle("HARUKI RULES")
