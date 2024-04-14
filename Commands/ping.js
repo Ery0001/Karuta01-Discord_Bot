@@ -3,4 +3,4 @@ module.exports.run = (cleint, message, args) => {
   message.delete(1000);
 }
 
-module.exports.name = ""
+module.exports.name = "ping"
