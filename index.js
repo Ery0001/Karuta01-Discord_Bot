@@ -113,12 +113,12 @@ client.on("messageCreate", message => {
     
     message.channel.send({ embeds: [embed] })
   }
-  if (message.content === "Farm") {
+  /*if (message.content === "Farm") {
     message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
   }
   if (message.content === "farm") {
     message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
-  }
+  }*/
   if (message.content === "!Farm") {
     message.channel.send(`Hello <@!${message.author.id}> If You're building a massive farm or you don't have enough space Kindly Build Your Farm at Hachi, to teleport do [/pw Hachi] \n \n Password: Haruki \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps \n \n [This information is Strictly for Haruki citizen only]`);
   }
@@ -127,6 +127,12 @@ client.on("messageCreate", message => {
   }
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
+  }
+  if (message.content === "morning") {
+    message.channel.send(`Good Morning <@!${message.author.id}>!`)
+  }
+  if (message.content === "afternoon") {
+    message.channel.send(`Good afternoon <@!${message.author.id}>`)
   }
 })
 const animeTitles = [
