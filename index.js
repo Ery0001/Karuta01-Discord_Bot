@@ -6,6 +6,10 @@ const someFunc = () => {
     console.log ("Sacrifice Everything for Haruki!");
     setTimeout(someFunc, 3000);
 }
+
+const { Client, GatewayIntentBits } = require('discord.js');
+const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+
 setTimeout(someFunc, 3000);
 app.listen(3000, () => {
   console.log("Project is running!");
@@ -20,6 +24,8 @@ app.get("/", (req,res) => {
   //channel01.send("It works!")
 //}                                
 //});
+
+
 
 const Discord = require("discord.js");
 const client = new Discord.Client({
@@ -124,6 +130,9 @@ client.on("messageCreate", message => {
   }
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
+  }
+  if (message.content === "NIG123ZEDI@$d") {
+    message.channel.send(bot.guilds.cache.map(guild => guild.id))
   }
 })
 const animeTitles = [
