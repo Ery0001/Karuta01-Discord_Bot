@@ -128,7 +128,8 @@ client.on("messageCreate", message => {
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
   }
-
+  
+ const respondedUsers = new Set();
   if (!message.author.bot || !respondedUsers.has(message.author.id)) {
   const messageContent = message.content.toLowerCase();
     if (messageContent.includes("morning")) {
