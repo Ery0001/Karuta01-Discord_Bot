@@ -143,27 +143,13 @@ client.on('messageCreate', message => {
 
     // Check for time-specific greetings and respond appropriately
     if (messageContent.includes("morning")) {
-        sendTimedGreeting(message, "Good Morning");
+         message.channel.send('Good Morning <@!${message.author.id}>');
     } else if (messageContent.includes("afternoon")) {
-        sendTimedGreeting(message, "Good Afternoon");
+         message.channel.send('Good Afternoon <@!${message.author.id}>');
     } else if (messageContent.includes("evening")) {
-        sendTimedGreeting(message, "Good Evening");
+         message.channel.send('Good Evening <@!${message.author.id}>');
     }
 });
-
-function sendTimedGreeting(message, greeting) {
-    message.channel.send(`${greeting} <@!${message.author.id}>!`);
-    console.log(`Sent ${greeting} to ${message.author.id}`);
-
-    // Add user to the set to prevent re-triggering
-    respondedUsers.add(message.author.id);
-
-    // Remove the user from the set after 2 seconds to reset the cooldown
-    setTimeout(() => {
-        respondedUsers.delete(message.author.id);
-    }, 500);
-}
-
 
 
 const animeTitles = [
