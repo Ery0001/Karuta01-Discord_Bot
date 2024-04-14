@@ -128,50 +128,67 @@ client.on("messageCreate", message => {
 })
 
 
-async function updateAnimeStatus() {
-  try {
-    const animeName = await fetchPopularAnime();
-    if (animeName) {
-      client.user.setActivity(animeName, { type: 'WATCHING' });
-      console.log(`Updated status to watching: ${animeName}`);
-    } else {
-      client.user.setActivity('Anime', { type: 'WATCHING' });
-      console.log('No popular anime found');
-    }
-  } catch (error) {
-    console.error('Failed to update anime status:', error);
-    client.user.setActivity('Anime', { type: 'WATCHING' });
-  }
-}
+const ANILIST_API_URL = 'https://graphql.anilist.co';
 
-async function fetchPopularAnime() {
-  const url = 'https://myanimelist.net/topanime.php?type=bypopularity';
-  const response = await fetch(url);
-  const body = await response.text();
-  const $ = cheerio.load(body);
-  let animeTitles = [];
-  $('a.hoverinfo_trigger').each(function() {
-    animeTitles.push($(this).text().trim());
-  });
-  if (animeTitles.length > 0) {
-    const randomIndex = Math.floor(Math.random() * animeTitles.length);
-    return animeTitles[randomIndex];
-  } else {
-    return null;
-  }
+async function fetchTrendingAnime() {
+    const query = `
+    {
+        Page(perPage: 10) {  // Fetch more to have a diverse selection
+            media(sort: TRENDING_DESC, type: ANIME) {
+                title {
+                    userPreferred
+                }
+            }
+        }
+    }`;
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query
+        })
+    };
+
+    try {
+        const response = await fetch(ANILIST_API_URL, options);
+        const json = await response.json();
+        const animeList = json.data.Page.media;
+        return animeList.map(anime => anime.title.userPreferred);
+    } catch (error) {
+        console.error('Error fetching data from AniList:', error);
+        return [];
+    }
 }
 
 client.on('ready', async () => {
   console.log('Bot Is Launched')
 
-  updateAnimeStatus();
-  setInterval(updateAnimeStatus, 3600000); // Update every hour
+    const animeTitles = await fetchTrendingAnime(); // Fetch once and store
+    setInterval(() => {
+        updateAnimeStatus(animeTitles);
+    }, 60000); // Update every minute
 
 /*  client.user.setActivity({
     name: `Anime`,
     type: 'WATCHING'
   })*/
-})
+});
+
+async function updateAnimeStatus(animeTitles) {
+    if (animeTitles.length > 0) {
+        const title = animeTitles[Math.floor(Math.random() * animeTitles.length)];
+        client.user.setActivity(title, { type: 'WATCHING' });
+        console.log(`Watching: ${title}`);
+    } else {
+        client.user.setActivity('Anime', { type: 'WATCHING' });
+        console.log('No popular anime found');
+    }
+}
+
 client.on('ready', () => {
   client.user.setStatus('idle');
   console.log(`Logged in as ${client.user.tag}`)
