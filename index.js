@@ -153,7 +153,19 @@ const animeTitles = [
     "Dog Meat Tutorial",
     "Demon Slayer",
     "Bombing Twin Tower",
-    "Death Note"
+    "Mushoku Tensei",
+    "Death Note",
+    "Solo Leveling",
+    "NieR:Automata",
+    "Noragami",
+    "Zankyou no Terror",
+    "The Apothecary Diaries",
+    "Mushoku Tensei",
+    "That Time I Got Reincarnated as a Slime Season",
+    "Ninja Kamui",
+    "Sousou no Frieren",
+    "Fullmetal Alchemist: Brotherhood",
+    "Bleach"
 ];
 
 client.on('ready', async () => {
