@@ -133,21 +133,32 @@ async function updateAnimeStatus() {
     const animeName = await fetchPopularAnime();
     if (animeName) {
       client.user.setActivity(animeName, { type: 'WATCHING' });
+      console.log(`Updated status to watching: ${animeName}`);
     } else {
-      client.user.setActivity('Code Geass', { type: 'WATCHING' });
+      client.user.setActivity('Anime', { type: 'WATCHING' });
       console.log('No popular anime found');
     }
   } catch (error) {
     console.error('Failed to update anime status:', error);
-    client.user.setActivity('Code Geass', { type: 'WATCHING' });
+    client.user.setActivity('Anime', { type: 'WATCHING' });
   }
 }
 
 async function fetchPopularAnime() {
-  const response = await fetch('https://myanimelist.net'); // Update URL to a specific page if needed
+  const url = 'https://myanimelist.net/topanime.php?type=bypopularity';
+  const response = await fetch(url);
   const body = await response.text();
   const $ = cheerio.load(body);
-  return $('.anime-ranking-title').first().text().trim(); // Correct selector needed
+  let animeTitles = [];
+  $('a.hoverinfo_trigger').each(function() {
+    animeTitles.push($(this).text().trim());
+  });
+  if (animeTitles.length > 0) {
+    const randomIndex = Math.floor(Math.random() * animeTitles.length);
+    return animeTitles[randomIndex];
+  } else {
+    return null;
+  }
 }
 
 client.on('ready', async () => {
