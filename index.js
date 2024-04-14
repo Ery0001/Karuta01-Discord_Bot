@@ -134,12 +134,12 @@ async function updateAnimeStatus() {
     if (animeName) {
       client.user.setActivity(animeName, { type: 'WATCHING' });
     } else {
-      client.user.setActivity('Anime', { type: 'WATCHING' });
+      client.user.setActivity('Code Geass', { type: 'WATCHING' });
       console.log('No popular anime found');
     }
   } catch (error) {
     console.error('Failed to update anime status:', error);
-    client.user.setActivity('Anime', { type: 'WATCHING' });
+    client.user.setActivity('Code Geass', { type: 'WATCHING' });
   }
 }
 
