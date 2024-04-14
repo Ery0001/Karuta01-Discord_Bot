@@ -161,7 +161,7 @@ const animeTitles = [
     "Zankyou no Terror",
     "The Apothecary Diaries",
     "Mushoku Tensei",
-    "That Time I Got Reincarnated as a Slime Season",
+    "That Time I Got Reincarnated as a Slime",
     "Ninja Kamui",
     "Sousou no Frieren",
     "Fullmetal Alchemist: Brotherhood",
