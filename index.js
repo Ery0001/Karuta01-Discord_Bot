@@ -131,11 +131,7 @@ client.on("messageCreate", message => {
 })
 
 
-const { Client, GatewayIntentBits } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
-
 const respondedUsers = new Set(); // Set to track users who have been responded to recently
-
 client.on('messageCreate', message => {
     // Prevent the bot from responding to its own messages or if the user has been recently responded to
     if (message.author.bot || respondedUsers.has(message.author.id)) {
