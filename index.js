@@ -131,13 +131,14 @@ client.on("messageCreate", message => {
 })
 
 
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+
 const respondedUsers = new Set(); // Set to track users who have been responded to recently
+
 client.on('messageCreate', message => {
     // Prevent the bot from responding to its own messages or if the user has been recently responded to
     if (message.author.bot || respondedUsers.has(message.author.id)) {
-        if (respondedUsers.has(message.author.id)) {
-            console.log(`Cooldown active for user: ${message.author.id}`);
-        }
         return;
     }
 
@@ -164,9 +165,10 @@ function sendTimedGreeting(message, greeting) {
     // Remove the user from the set after 2 seconds to reset the cooldown
     setTimeout(() => {
         respondedUsers.delete(message.author.id);
-        console.log(`Cooldown reset for user: ${message.author.id}`);
     }, 2000);
 }
+
+client.login('YOUR_DISCORD_BOT_TOKEN');
 
 
 
