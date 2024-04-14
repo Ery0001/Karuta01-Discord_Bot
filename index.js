@@ -161,11 +161,8 @@ function sendTimedGreeting(message, greeting) {
     // Remove the user from the set after 2 seconds to reset the cooldown
     setTimeout(() => {
         respondedUsers.delete(message.author.id);
-    }, 2000);
+    }, 500);
 }
-
-client.login('YOUR_DISCORD_BOT_TOKEN');
-
 
 
 
