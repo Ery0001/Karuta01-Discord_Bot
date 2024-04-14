@@ -126,66 +126,37 @@ client.on("messageCreate", message => {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
   }
 })
-
-
-const ANILIST_API_URL = 'https://graphql.anilist.co';
-
-async function fetchTrendingAnime() {
-    const query = `
-    {
-        Page(perPage: 10) {  // Fetch more to have a diverse selection
-            media(sort: TRENDING_DESC, type: ANIME) {
-                title {
-                    userPreferred
-                }
-            }
-        }
-    }`;
-
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-            query
-        })
-    };
-
-    try {
-        const response = await fetch(ANILIST_API_URL, options);
-        const json = await response.json();
-        const animeList = json.data.Page.media;
-        return animeList.map(anime => anime.title.userPreferred);
-    } catch (error) {
-        console.error('Error fetching data from AniList:', error);
-        return [];
-    }
-}
+const animeTitles = [
+    "Mushoku Tensei",
+    "Gurren Lagann",
+    "Attack on Titan",
+    "Mushoku Tensei",
+    "Kaijuu 8-gou",
+    "Re:Monster",
+    "Dog Meat Tutorial",
+    "Demon Slayer",
+    "Bombing Twin Tower",
+    "Death Note"
+];
 
 client.on('ready', async () => {
   console.log('Bot Is Launched')
-
-    const animeTitles = await fetchTrendingAnime(); // Fetch once and store
-    setInterval(() => {
-        updateAnimeStatus(animeTitles);
-    }, 60000); // Update every minute
-
+    updateAnimeStatus();  // Update status once initially
+    setInterval(updateAnimeStatus, 60000); // Update status every minute
 /*  client.user.setActivity({
     name: `Anime`,
     type: 'WATCHING'
   })*/
 });
 
-async function updateAnimeStatus(animeTitles) {
+function updateAnimeStatus() {
     if (animeTitles.length > 0) {
         const title = animeTitles[Math.floor(Math.random() * animeTitles.length)];
-        client.user.setActivity(title, { type: 'WATCHING' });
+        client.user.setActivity(`Anime - ${title}`, { type: 'WATCHING' });
         console.log(`Watching: ${title}`);
     } else {
         client.user.setActivity('Anime', { type: 'WATCHING' });
-        console.log('No popular anime found');
+        console.log('No anime titles available');
     }
 }
 
