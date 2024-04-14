@@ -161,7 +161,7 @@ client.on('ready', async () => {
 function updateAnimeStatus() {
     if (animeTitles.length > 0) {
         const title = animeTitles[Math.floor(Math.random() * animeTitles.length)];
-        client.user.setActivity(`Anime - ${title}`, { type: 'WATCHING' });
+        client.user.setActivity(`${title}`, { type: 'WATCHING' });
         console.log(`Watching: ${title}`);
     } else {
         client.user.setActivity('Anime', { type: 'WATCHING' });
