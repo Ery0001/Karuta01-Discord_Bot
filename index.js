@@ -143,11 +143,11 @@ client.on('messageCreate', message => {
 
     // Check for time-specific greetings and respond appropriately
     if (messageContent.includes("morning")) {
-         message.channel.send('Good Morning <@!${message.author.id}>');
+         message.channel.send('Good Morning <@!${message.author.id}>!');
     } else if (messageContent.includes("afternoon")) {
-         message.channel.send('Good Afternoon <@!${message.author.id}>');
+         message.channel.send('Good Afternoon <@!${message.author.id}>!');
     } else if (messageContent.includes("evening")) {
-         message.channel.send('Good Evening <@!${message.author.id}>');
+         message.channel.send('Good Evening <@!${message.author.id}>!');
     }
 });
 
