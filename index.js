@@ -128,13 +128,42 @@ client.on("messageCreate", message => {
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
   }
-  if (message.content.toLowerCase().includes("morning")) {
-    message.channel.send(`Good Morning <@!${message.author.id}>!`)
- }
-  if (message.content.toLowerCase().includes("afternoon")) {
-    message.channel.send(`Good afternoon <@!${message.author.id}>`)
-  }
 })
+
+const respondedUsers = new Set(); // Set to track users who have been responded to recently
+
+client.on('messageCreate', message => {
+    // Prevent responding if the user has been recently responded to
+    if (respondedUsers.has(message.author.id)) return;
+
+    // Lowercase the message to make the check case-insensitive
+    const messageContent = message.content.toLowerCase();
+
+    // Check for time-specific greetings and respond appropriately
+    if (messageContent.includes("morning")) {
+        sendTimedGreeting(message, "Good Morning");
+    } else if (messageContent.includes("afternoon")) {
+        sendTimedGreeting(message, "Good Afternoon");
+    } else if (messageContent.includes("evening")) {
+        sendTimedGreeting(message, "Good Evening");
+    }
+});
+
+function sendTimedGreeting(message, greeting) {
+    message.channel.send(`${greeting} <@!${message.author.id}>!`);
+
+    // Add user to the set to prevent re-triggering
+    respondedUsers.add(message.author.id);
+
+    // Remove the user from the set after 2 seconds to reset the cooldown
+    setTimeout(() => {
+        respondedUsers.delete(message.author.id);
+    }, 2000);
+}
+
+
+
+
 const animeTitles = [
     "Mushoku Tensei",
     "Gurren Lagann",
