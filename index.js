@@ -1,4 +1,6 @@
 const express = require("express");
+const cheerio = require('cheerio');
+const fetch = require('node-fetch');
 const app = express();
 const someFunc = () => {
     console.log ("Sacrifice Everything for Haruki!");
@@ -126,13 +128,38 @@ client.on("messageCreate", message => {
 })
 
 
+async function updateAnimeStatus() {
+  try {
+    const animeName = await fetchPopularAnime();
+    if (animeName) {
+      client.user.setActivity(animeName, { type: 'WATCHING' });
+    } else {
+      client.user.setActivity('Anime', { type: 'WATCHING' });
+      console.log('No popular anime found');
+    }
+  } catch (error) {
+    console.error('Failed to update anime status:', error);
+    client.user.setActivity('Anime', { type: 'WATCHING' });
+  }
+}
+
+async function fetchPopularAnime() {
+  const response = await fetch('https://myanimelist.net'); // Update URL to a specific page if needed
+  const body = await response.text();
+  const $ = cheerio.load(body);
+  return $('.anime-ranking-title').first().text().trim(); // Correct selector needed
+}
+
 client.on('ready', async () => {
   console.log('Bot Is Launched')
 
-  client.user.setActivity({
+  updateAnimeStatus();
+  setInterval(updateAnimeStatus, 3600000); // Update every hour
+
+/*  client.user.setActivity({
     name: `Anime`,
     type: 'WATCHING'
-  })
+  })*/
 })
 client.on('ready', () => {
   client.user.setStatus('idle');
