@@ -131,36 +131,14 @@ client.on("messageCreate", message => {
 
   if (!message.author.bot || !respondedUsers.has(message.author.id)) {
     if (messageContent.includes("morning")) {
-         message.channel.send('Good Morning <@!${message.author.id}> !');
+         message.channel.send(`Good Morning <@!${message.author.id}> !`);
     } else if (messageContent.includes("afternoon")) {
-         message.channel.send('Good Afternoon <@!${message.author.id}>!');
+         message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
     } else if (messageContent.includes("evening")) {
-         message.channel.send('Good Evening <@!${message.author.id}>!');
+         message.channel.send(`Good Evening <@!${message.author.id}>!`);
     }
     }
 })
-
-
-const respondedUsers = new Set(); // Set to track users who have been responded to recently
-client.on('messageCreate', message => {
-    // Prevent the bot from responding to its own messages or if the user has been recently responded to
-    if (message.author.bot || respondedUsers.has(message.author.id)) {
-        return;
-    }
-
-    // Lowercase the message to make the check case-insensitive
-    const messageContent = message.content.toLowerCase();
-
-    // Check for time-specific greetings and respond appropriately
-    if (messageContent.includes("morning")) {
-         message.channel.send('Good Morning <@!${message.author.id}> !');
-    } else if (messageContent.includes("afternoon")) {
-         message.channel.send('Good Afternoon <@!${message.author.id}>!');
-    } else if (messageContent.includes("evening")) {
-         message.channel.send('Good Evening <@!${message.author.id}>!');
-    }
-});
-
 
 const animeTitles = [
     "Mushoku Tensei",
