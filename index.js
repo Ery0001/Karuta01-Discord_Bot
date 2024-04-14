@@ -133,9 +133,11 @@ client.on("messageCreate", message => {
   const messageContent = message.content.toLowerCase();
     if (messageContent.includes("morning")) {
          message.channel.send(`Good Morning <@!${message.author.id}> !`);
-    } else if (messageContent.includes("afternoon")) {
+    }
+    if (messageContent.includes("afternoon")) {
          message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
-    } else if (messageContent.includes("evening")) {
+    }
+    if (messageContent.includes("evening")) {
          message.channel.send(`Good Evening <@!${message.author.id}>!`);
     }
     }
