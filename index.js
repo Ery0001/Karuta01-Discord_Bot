@@ -128,10 +128,10 @@ client.on("messageCreate", message => {
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
   }
-  if (message.content === "morning") {
+  if (message.content.toLowerCase().includes("morning")) {
     message.channel.send(`Good Morning <@!${message.author.id}>!`)
-  }
-  if (message.content === "afternoon") {
+ }
+  if (message.content.toLowerCase().includes("afternoon")) {
     message.channel.send(`Good afternoon <@!${message.author.id}>`)
   }
 })
