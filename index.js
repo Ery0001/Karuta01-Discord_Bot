@@ -130,11 +130,14 @@ client.on("messageCreate", message => {
   }
 })
 
-const respondedUsers = new Set(); // Set to track users who have been responded to recently
 
+const respondedUsers = new Set(); // Set to track users who have been responded to recently
 client.on('messageCreate', message => {
     // Prevent responding if the user has been recently responded to
-    if (respondedUsers.has(message.author.id)) return;
+    if (respondedUsers.has(message.author.id)) {
+        console.log(`Cooldown active for user: ${message.author.id}`);
+        return;
+    }
 
     // Lowercase the message to make the check case-insensitive
     const messageContent = message.content.toLowerCase();
@@ -151,6 +154,7 @@ client.on('messageCreate', message => {
 
 function sendTimedGreeting(message, greeting) {
     message.channel.send(`${greeting} <@!${message.author.id}>!`);
+    console.log(`Sent ${greeting} to ${message.author.id}`);
 
     // Add user to the set to prevent re-triggering
     respondedUsers.add(message.author.id);
@@ -158,6 +162,7 @@ function sendTimedGreeting(message, greeting) {
     // Remove the user from the set after 2 seconds to reset the cooldown
     setTimeout(() => {
         respondedUsers.delete(message.author.id);
+        console.log(`Cooldown reset for user: ${message.author.id}`);
     }, 2000);
 }
 
