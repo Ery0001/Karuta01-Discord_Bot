@@ -128,6 +128,16 @@ client.on("messageCreate", message => {
   if (message.content === "!Warps") {
     message.channel.send(`This is our Current Warps available \n \n [1] /Pw Haruki ( Haruki Village ) \n [2] /Pw Hachi ( Haruki Farm ) \n \n we will add more soon... <(￣︶￣)> \n \n More Commands: \n [!Hachi] For more Information/Password issues \n [!Warps] To see Haruki's Warps`)
   }
+
+  if (!message.author.bot || !respondedUsers.has(message.author.id)) {
+    if (messageContent.includes("morning")) {
+         message.channel.send('Good Morning <@!${message.author.id}> !');
+    } else if (messageContent.includes("afternoon")) {
+         message.channel.send('Good Afternoon <@!${message.author.id}>!');
+    } else if (messageContent.includes("evening")) {
+         message.channel.send('Good Evening <@!${message.author.id}>!');
+    }
+    }
 })
 
 
@@ -143,7 +153,7 @@ client.on('messageCreate', message => {
 
     // Check for time-specific greetings and respond appropriately
     if (messageContent.includes("morning")) {
-         message.channel.send('Good Morning <@!${message.author.id}>!');
+         message.channel.send('Good Morning <@!${message.author.id}> !');
     } else if (messageContent.includes("afternoon")) {
          message.channel.send('Good Afternoon <@!${message.author.id}>!');
     } else if (messageContent.includes("evening")) {
