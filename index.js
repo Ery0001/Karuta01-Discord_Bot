@@ -115,12 +115,45 @@ client.on("messageCreate", message => {
   }
 if (message.content === "embed_neverland_Main") {
     let embed = new Discord.MessageEmbed()
-    .setDescription(`# HARUKI IS COMING TO "THE LEGEND OF NEVERLAND"!\n<@&967473610149200012> I convince you, Shimins, to download and play with me in this fascinating game. It is like Genshin but with less hassle of Storage Space. We are currently creating a guild for the game, and it is called Haruki. I discovered this game because I was bored, so if you have noting to do, come let's grind and play!\n\n## IMPORTANT INFOs:\n - Make sure to select the correct server before playing so that we'll all meet at the same domain.\n - After reaching level 35, join the guild and search for "Haruki" to find it.\n**SERVER: N438**\n\n**DOWNLOAD LINKS:**\n > *IOS*: https://apple.co/3QlNlHC\n > *Android:* https://bit.ly/44fXH1F\n > *PC:* https://bit.ly/4bgCx5x`)
-    .setColor("#B486C1")
-.setImage("https://ik.imagekit.io/Zedi/20240427_220240.jpg?updatedAt=1714234354528")
-    
-    message.channel.send({ embeds: [embed] })
-  }
+        .setDescription(`# HARUKI IS COMING TO "THE LEGEND OF NEVERLAND"!\n
+        <@&967473610149200012> I convince you, Shimins, to download and play with me in this fascinating game. It is like Genshin but with less hassle of Storage Space. We are currently creating a guild for the game, and it is called Haruki. I discovered this game because I was bored, so if you have nothing to do, come let's grind and play!
+        \n\n## IMPORTANT INFOs:
+        \n - Make sure to select the correct server, which is N438, before playing so that we'll all meet at the same domain.
+        \n - After reaching level 35, join the guild and search for "Haruki" to find it.
+        \n\n**SERVER: N438**
+        \n\n**DOWNLOAD LINKS:**
+        \n > *IOS*: https://apple.co/3QlNlHC
+        \n > *Android:* https://bit.ly/44fXH1F
+        \n > *PC:* https://bit.ly/4bgCx5x`)
+        .setColor("#B486C1")
+        .setImage("https://ik.imagekit.io/Zedi/20240427_220240.jpg?updatedAt=1714234354528");
+
+    message.channel.send({ embeds: [embed] }).then(() => {
+        // After sending the embed, delete the trigger message
+        message.delete().catch(console.error);
+    });
+}
+if (message.content === "embed_neverland_Faction1") {
+    let embed = new Discord.MessageEmbed()
+        .setDescription(`# HARUKI IS COMING TO "THE LEGEND OF NEVERLAND"!\n
+        <@&1225833670582075443> I convince you, Shimins, to download and play with me in this fascinating game. It is like Genshin but with less hassle of Storage Space. We are currently creating a guild for the game, and it is called Haruki. I discovered this game because I was bored, so if you have nothing to do, come let's grind and play!
+        \n\n## IMPORTANT INFOs:
+        \n - Make sure to select the correct server, which is N438, before playing so that we'll all meet at the same domain.
+        \n - After reaching level 35, join the guild and search for "Haruki" to find it.
+        \n\n**SERVER: N438**
+        \n\n**DOWNLOAD LINKS:**
+        \n > *IOS*: https://apple.co/3QlNlHC
+        \n > *Android:* https://bit.ly/44fXH1F
+        \n > *PC:* https://bit.ly/4bgCx5x`)
+        .setColor("#B486C1")
+        .setImage("https://ik.imagekit.io/Zedi/20240427_220240.jpg?updatedAt=1714234354528");
+
+    message.channel.send({ embeds: [embed] }).then(() => {
+        // After sending the embed, delete the trigger message
+        message.delete().catch(console.error);
+    });
+}
+
 
   /*if (message.content === "Farm") {
     message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
