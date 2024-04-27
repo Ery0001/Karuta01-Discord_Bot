@@ -123,8 +123,8 @@ if (message.content === "embed_neverland_Main") {
         \n\n**SERVER: N438**
         \n\n**DOWNLOAD LINKS:**
         \n > *IOS*: https://apple.co/3QlNlHC
-        \n > *Android:* https://bit.ly/44fXH1F
-        \n > *PC:* https://bit.ly/4bgCx5x`)
+        > *Android:* https://bit.ly/44fXH1F
+        > *PC:* https://bit.ly/4bgCx5x`)
         .setColor("#B486C1")
         .setImage("https://ik.imagekit.io/Zedi/20240427_220240.jpg?updatedAt=1714234354528");
 
@@ -143,8 +143,8 @@ if (message.content === "embed_neverland_Faction1") {
         \n\n**SERVER: N438**
         \n\n**DOWNLOAD LINKS:**
         \n > *IOS*: https://apple.co/3QlNlHC
-        \n > *Android:* https://bit.ly/44fXH1F
-        \n > *PC:* https://bit.ly/4bgCx5x`)
+        > *Android:* https://bit.ly/44fXH1F
+        > *PC:* https://bit.ly/4bgCx5x`)
         .setColor("#B486C1")
         .setImage("https://ik.imagekit.io/Zedi/20240427_220240.jpg?updatedAt=1714234354528");
 
