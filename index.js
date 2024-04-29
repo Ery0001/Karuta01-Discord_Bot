@@ -153,7 +153,19 @@ if (message.content === "embed_neverland_Faction1") {
         message.delete().catch(console.error);
     });
 }
+  if (message.content === "embed_belatedBirthday_Hirohito") {
+    let embed = new Discord.MessageEmbed()
+        .setDescription(`# BELATEDLY, BIRTHDAY TO HIROHITO.
+        \n\n*Belatedly, @everyone, let us sincerely congratulate the late Emperor Michinomiya Hirohito on his birthday. His reign marked an era of resilience and progress for Japan. Under his guidance, our nation flourished, emerging as a global leader. Let us pay tribute to his legacy of leadership and dedication.
+        \n\nTo the late Emperor Hirohito, we, the Haruki Empire, extend our sincere respect and gratitude. May his memory continue to inspire us as we shape our future.*`)
+        .setColor("#D3D3D3")
+        .setImage("https://ik.imagekit.io/Zedi/20240429_182758.jpg?updatedAt=1714386755939");
 
+    message.channel.send({ embeds: [embed] }).then(() => {
+        // After sending the embed, delete the trigger message
+        message.delete().catch(console.error);
+    });
+}
 
   /*if (message.content === "Farm") {
     message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
