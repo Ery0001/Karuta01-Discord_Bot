@@ -11,21 +11,25 @@ module.exports.name = "say"*/
 module.exports.run = (client, message, args) => {
   let toSay = args.join(" ");
   let textChannel = message.mentions.channels.first();
+  let attachmentsText = "";
 
   // Check if there's any text to send
   if (!toSay && !message.attachments.size) {
     return message.channel.send("You have to provide something.");
   }
 
-  // Send the text
+  // Concatenate text with attachment URLs
   if (toSay) {
-    message.channel.send(toSay);
+    attachmentsText += toSay + "\n";
   }
 
-  // Send the attachments
+  // Concatenate attachment URLs
   message.attachments.forEach(attachment => {
-    message.channel.send({ files: [attachment.url] });
+    attachmentsText += attachment.url + "\n";
   });
+
+  // Send the combined text and attachments
+  message.channel.send(attachmentsText);
 };
 
 module.exports.name = "say";
