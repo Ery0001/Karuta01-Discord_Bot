@@ -8,27 +8,21 @@
 
 module.exports.name = "say"*/
 
-const { MessageAttachment } = require("discord.js");
-
 module.exports.run = (client, message, args) => {
-  let toSay = args.join(" ");
-  let textChannel = message.mentions.channels.first();
-
-  // Check if there's any text to send
-  if (!toSay && !message.attachments.size) {
-    return message.channel.send("You have to provide something.");
-  }
-
-  // Create an array to store attachments
-  let attachments = [];
-
-  // Add regular attachments to the array
-  message.attachments.forEach(attachment => {
-    attachments.push(new MessageAttachment(attachment.url));
-  });
-
-  // Send the text and attachments
-  message.channel.send(toSay, { files: attachments });
+    let toSay = args.join(" ");
+    let textChannel = message.mentions.channels.first();
+  
+    // Check if there's any text to send
+    if (!toSay && !message.attachments.size) {
+      return message.channel.send("You have to provide something.");
+    }
+  
+    // Send the text followed by each attachment
+    message.attachments.forEach(attachment => {
+        if (toSay) {
+            message.channel.send(toSay,{ files: [attachment.url] });
+        }
+    });
 };
-
+  
 module.exports.name = "say";
