@@ -65,7 +65,7 @@ client.on("messageCreate", message => {
   }*/
   if (message.content === "embed0") {
     let embed = new Discord.MessageEmbed()
-      .setDescription("## EDICT OF CONTEXT\n\nThe Haruki Empire stands as a vibrant community, primarily composed of enthusiasts and players deeply engrossed in Japanese culture and its multifaceted environment. Referred to affectionately as citizens (市民), its members find common ground in their shared passion for all things Japan, particularly anime, manga, manhwa, and other facets of Japanese culture.\n\nBeyond its cultural pursuits, Haruki also functions as a clan, guild, and various groups within gaming communities, continuously expanding its membership through these universal groups, all unified under the banner of the Haruki Empire.\n\n## FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804>")
+      .setDescription("## EDICT OF CONTEXT\n\nThe Haruki Empire stands as a vibrant community, primarily composed of enthusiasts and players deeply engrossed in Japanese culture and its multifaceted environment. Referred to affectionately as citizens (市民), its members find common ground in their shared passion for all things Japan, particularly anime, manga, manhwa, and other facets of Japanese culture.\n\nBeyond its cultural pursuits, Haruki also functions as a clan, guild, and various groups within gaming communities, continuously expanding its membership through these universal groups, all unified under the banner of the Haruki Empire.\n\n### FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804>")
       .setColor("#FF5B5B")
       .setImage("https://ik.imagekit.io/Zedi/20240505_001522.jpg?updatedAt=1714839350049")
       .setFooter("Haruki Empire - 春樹")
