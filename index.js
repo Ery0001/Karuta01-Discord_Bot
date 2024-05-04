@@ -64,14 +64,14 @@ client.on("messageCreate", message => {
     message.channel.send({ embeds: [embed] })
   }*/
   if (message.content === "embed0") {
-    let embed = new Discord.MessageEmbed()
-      .setDescription("## EDICT OF CONTEXT\n\nThe Haruki Empire stands as a vibrant community, primarily composed of enthusiasts and players deeply engrossed in Japanese culture and its multifaceted environment. Referred to affectionately as citizens (市民), its members find common ground in their shared passion for all things Japan, particularly anime, manga, manhwa, and other facets of Japanese culture.\n\nBeyond its cultural pursuits, Haruki also functions as a clan, guild, and various groups within gaming communities, continuously expanding its membership through these universal groups, all unified under the banner of the Haruki Empire.\n\n### FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804>")
-      .setColor("#FF5B5B")
-      .setImage("https://ik.imagekit.io/Zedi/20240505_001522.jpg?updatedAt=1714839350049")
-      .setFooter("Haruki Empire - 春樹")
+  let embed = new Discord.MessageEmbed()
+    .setDescription("## EDICT OF CONTEXT\n\nThe Haruki Empire stands as a vibrant community, primarily composed of enthusiasts and players deeply engrossed in Japanese culture and its multifaceted environment. Referred to affectionately as citizens (市民), its members find common ground in their shared passion for all things Japan, particularly anime, manga, manhwa, and other facets of Japanese culture.\n\nBeyond its cultural pursuits, Haruki also functions as a clan, guild, and various groups within gaming communities, continuously expanding its membership through these universal groups, all unified under the banner of the Haruki Empire.\n\n### HISTORY ORIGIN\nHaruki originated as a guild within the game Minecraft, specifically on a server known as FallenSkyMc. It started as a group of players who shared common goals and adventures within this virtual realm. However, when the server shut down due to personal reasons concerning its owner, Haruki members were disappointed but resolved to carry on. They expanded their presence to other games and platforms, welcoming new members and nurturing a sense of community. Despite its modest beginnings, Haruki's influence continues to expand, reflecting the resilience and adaptability of its members as they explore new avenues together.\n\n### FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804>")
+    .setColor("#FF5B5B")
+    .setImage("https://ik.imagekit.io/Zedi/20240505_001522.jpg?updatedAt=1714839350049")
+    .setFooter("Haruki Empire - 春樹")
 
-    message.channel.send({ embeds: [embed] })
-  }
+  message.channel.send({ embeds: [embed] })
+}
 
   if (message.content === "embed010") {
     let embed = new Discord.MessageEmbed()
