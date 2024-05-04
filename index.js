@@ -55,11 +55,20 @@ client.on("messageCreate", message => {
 
     message.channel.send({ embeds: [embed] })
   }
-  if (message.content === "embed0") {
+  /*if (message.content === "embed0") {
     let embed = new Discord.MessageEmbed()
       .setDescription("Haruki will Temporary Become a Community discord Server, and of course if our original platform will eventually came back, Haruki will Gladly return to exactly the same as before.\n \n There are Currently two domains on this server \n by the following:\n \n GENERAL COMMUNITY - A Public domain and everyone can access this. \n \n WEEB/OTAKU COMMUNITY - Private domain for a specific kind of groups only are allowed, but of course everyone shall have permission on this domain if they desired it. \n \n FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804> \n \n DISCORD SERVER CREATOR:\n> <@894665274123513856> \n \n [春樹/Haruki]")
       .setImage("https://i.ibb.co/ySbzqHN/20220424-140236.jpg")
       .setColor("#FFFFFF")
+
+    message.channel.send({ embeds: [embed] })
+  }*/
+  if (message.content === "embed0") {
+    let embed = new Discord.MessageEmbed()
+      .setDescription("## EDICT OF CONTEXT\n\nThe Haruki Empire stands as a vibrant community, primarily composed of enthusiasts and players deeply engrossed in Japanese culture and its multifaceted environment. Referred to affectionately as citizens (市民), its members find common ground in their shared passion for all things Japan, particularly anime, manga, manhwa, and other facets of Japanese culture. Beyond its cultural pursuits, Haruki also functions as a clan, guild, and various groups within gaming communities, continuously expanding its membership through these universal groups, all unified under the banner of the Haruki Empire.\n\n## FOUNDERS:\n> <@894665274123513856> \n> <@526289740945686538> \n> <@617160581023137804>")
+      .setColor("#FF5B5B")
+      .setImage("https://ik.imagekit.io/Zedi/20240505_001522.jpg?updatedAt=1714839350049")
+      .setFooter("Haruki Empire - 春樹")
 
     message.channel.send({ embeds: [embed] })
   }
