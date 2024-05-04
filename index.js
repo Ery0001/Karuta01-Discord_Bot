@@ -91,8 +91,8 @@ client.on("messageCreate", message => {
   }*/
   if (message.content === "embed02") {
     let embed = new Discord.MessageEmbed()
-      .setTitle("EDICT OF UNITY")
-      .setDescription("\n- Within this realm of Discord, let all know that names and avatars must uphold honor and dignity.\n- May all who enter these halls do so with respect and kindness, for here, we reject toxicity and embrace harmony. Let us show no tolerance for prejudice or hate.\n- Let our words be as elegant as the cherry blossoms in spring. Profanity is unwelcome, and any speech that belittles another is forbidden.\n- In this sanctuary of Haruki, let there be no room for bullying or harassment. Let peace reign, and may all find refuge here.\n- Let our intentions be pure, like freshly fallen snow. Lewdness has no place here; our interactions shall be marked by grace and dignity.\n- The privacy of others shall be respected as sacred. Revealing personal information is strictly prohibited; here, privacy is honored above all.\n")
+      //.setTitle("EDICT OF UNITY")
+      .setDescription("## EDICT OF UNITY\n- Within this realm of Discord, let all know that names and avatars must uphold honor and dignity.\n- May all who enter these halls do so with respect and kindness, for here, we reject toxicity and embrace harmony. Let us show no tolerance for prejudice or hate.\n- Let our words be as elegant as the cherry blossoms in spring. Profanity is unwelcome, and any speech that belittles another is forbidden.\n- In this sanctuary of Haruki, let there be no room for bullying or harassment. Let peace reign, and may all find refuge here.\n- Let our intentions be pure, like freshly fallen snow. Lewdness has no place here; our interactions shall be marked by grace and dignity.\n- The privacy of others shall be respected as sacred. Revealing personal information is strictly prohibited; here, privacy is honored above all.\n")
       .setColor("#FF5B5B")
       .setImage("https://ik.imagekit.io/Zedi/20240504_210654.jpg?updatedAt=1714828320495")
       .setFooter("Haruki Empire - 春樹")
