@@ -99,15 +99,15 @@ client.on("messageCreate", message => {
     message.channel.send({ embeds: [embed] })
   }*/
   if (message.content === "embed02") {
-    let embed = new Discord.MessageEmbed()
-      //.setTitle("EDICT OF UNITY")
-      .setDescription("## EDICT OF UNITY\n- Within this realm of Discord, let all know that names and avatars must uphold honor and dignity.\n- May all who enter these halls do so with respect and kindness, for here, we reject toxicity and embrace harmony. Let us show no tolerance for prejudice or hate.\n- Let our words be as elegant as the cherry blossoms in spring. Profanity is unwelcome, and any speech that belittles another is forbidden.\n- In this sanctuary of Haruki, let there be no room for bullying or harassment. Let peace reign, and may all find refuge here.\n- Let our intentions be pure, like freshly fallen snow. Lewdness has no place here; our interactions shall be marked by grace and dignity.\n- The privacy of others shall be respected as sacred. Revealing personal information is strictly prohibited; here, privacy is honored above all.\n")
-      .setColor("#FF5B5B")
-      .setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")
-      .setFooter("Haruki Empire - 春樹")
-    
-    message.channel.send({ embeds: [embed] })
-  } 
+  let embed = new Discord.MessageEmbed()
+    //.setTitle("EDICT OF UNITY")
+    .setDescription("## EDICT OF UNITY\n- Within this realm of Discord, let all know that names and avatars must uphold honor and dignity.\n- May all who enter these halls do so with respect and kindness, for here, we reject toxicity and embrace harmony. Let us show no tolerance for prejudice or hate.\n- Let our words be as elegant as the cherry blossoms in spring. Profanity is unwelcome, and any speech that belittles another is forbidden.\n- In this sanctuary of Haruki, let there be no room for bullying or harassment. Let peace reign, and may all find refuge here.\n- Let our intentions be pure, like freshly fallen snow. Lewdness has no place here; our interactions shall be marked by grace and dignity.\n- The privacy of others shall be respected as sacred. Revealing personal information is strictly prohibited; here, privacy is honored above all.\n\nWe strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
+    .setColor("#FF5B5B")
+    .setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")
+    .setFooter("Haruki Empire - 春樹")
+  
+  message.channel.send({ embeds: [embed] })
+} 
   if (message.content === "embed3") {
     let embed = new Discord.MessageEmbed()
       .setDescription("Haruki Village is a Japanese theme Village And Found on the Minecraft Server named Fallenskymc.\n \n The Main Purpose of The server is to guide New members Of Haruki village and easily access the Village Rules.\n \n FALLENSKYMC SERVER INFORMATION: \n DISCORD/ https://bit.ly/fsmcdiscord \n Server IP: play.fallenskymc.com \n Port: 19132 \n \n HARUKI FOUNDER: \n EmpireOfZedi16 \n EmperorPads \n \n DISCORD SERVER CREATOR: \n EmpireOfZedi16")
