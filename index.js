@@ -81,13 +81,22 @@ client.on("messageCreate", message => {
     
     message.channel.send({ embeds: [embed] })
   }
-  if (message.content === "embed02") {
+/*  if (message.content === "embed02") {
     let embed = new Discord.MessageEmbed()
       .setTitle("𝙃𝙖𝙧𝙪𝙠𝙞 𝘿𝙞𝙨𝙘𝙤𝙧𝙙 𝙧𝙪𝙡𝙚𝙨")
       .setDescription("﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌ \n \n [1] Discord names and avatars must be appropriate. \n \n [2] Be respectful and welcoming as toxicity is disallowed. these applies to all members and don't be racist, homophobic, etc. \n \n [3] No Inappropriate Language The use of profanity should be kept to a minimum. However, any derogatory language towards any user is prohibited. \n \n [4] Do not bully or harass another member in any way, shape, or form Haruki is a place of peace. \n \n [5] lewdness Intentions is strictly prohibited. \n \n [6] Leaking the personal information of others is prohibited. \n \n [春樹/Haruki] ").setImage("https://c.tenor.com/CljZoHx0rzAAAAAC/tenor.gif")
       .setColor("#2FC9E3")
     
     message.channel.send({ embeds: [embed] })
+  }*/
+  if (message.content === "embed02") {
+    let embed = new Discord.MessageEmbed()
+      .setTitle("Domain Rules")
+      .setDescription("- Within this realm of Discord, let all know that names and avatars must uphold honor and dignity. May all who enter these halls do so with respect and kindness, for here, we reject toxicity and embrace harmony. Let our words be as elegant as the cherry blossoms in spring. Profanity is unwelcome, and any speech that belittles another is forbidden. In this sanctuary of Haruki, let there be no room for bullying or harassment. Let peace reign, and may all find refuge here. Let our intentions be pure, like freshly fallen snow. Lewdness has no place here; our interactions shall be marked by grace and dignity. The privacy of others shall be respected as sacred. Revealing personal information is strictly prohibited; here, privacy is honored above all.\n\n[春樹/Haruki]")
+      .setColor("#FF5B5B")
+      .setImage("https://ik.imagekit.io/Zedi/20240504_210654.jpg?updatedAt=1714828320495");
+
+    message.channel.send({ embeds: [embed] });
   }
   if (message.content === "embed3") {
     let embed = new Discord.MessageEmbed()
