@@ -16,9 +16,6 @@ app.get("/", (req,res) => {
   res.send("Erythina is Online! (i think)");
 })
 
-
-
-
 const Discord = require("discord.js");
 const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
