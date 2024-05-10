@@ -16,6 +16,23 @@ app.get("/", (req,res) => {
   res.send("Erythina is Online! (i think)");
 })
 
+const DiscordRPC = require('discord-rpc');
+const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+
+rpc.login({ clientId: '1238230035169673216' })
+  .catch(console.error);
+
+rpc.once('ready', () => {
+  rpc.setActivity({
+    details: 'Playing The Legend Of Neverland',
+    state: 'In a quest for adventure',
+    startTimestamp: new Date(),
+    largeImageKey: 'https://ik.imagekit.io/Zedi/20240510_172810.jpg?updatedAt=1715333637656',
+    instance: false,
+    buttons: [{ label: 'Download', url: 'https://bit.ly/4bgCx5x' }]
+  });
+});
+
 const Discord = require("discord.js");
 const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
@@ -69,14 +86,6 @@ client.on("messageCreate", message => {
     }
     }
 })
-
-client.on('ready', async () => {
-  console.log('Bot Is Launched')
-   client.user.setActivity({
-    name: `The Legend Of Neverland`,
-    type: 'PLAYING'
-  })
-});
 
 client.on('ready', () => {
   client.user.setStatus('idle');
