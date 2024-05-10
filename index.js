@@ -31,70 +31,56 @@ for (file of commands) {
   client.commands.set(commandName, command)
 }
 
-// Importing aoi.js and initializing the chat bot
-const aoijs = require("aoi.js");
-const bot = new aoijs.AoiClient({
-  token: process.env.Token, // Replace "Token" with your actual token
-  prefix: prefix,
-  intents: ["GUILDS", "GUILD_MESSAGES"],
-  mobilePlatform: true,
-});
-
-// Main command for the chat bot
-bot.command({
-  name: "$alwaysExecute",
-  category: "Command Support",
-  code: `
-  $reply[$messageID;yes]
-  $httpRequest[https://api.udit.tk/api/chatbot?message=$message&name=Erythrina&gender=Female&race=Flower%20Fairy&description=She%20may%20be%20quiet%2C%20but%20her%20very%20presence%20draws%20people's%20respect.%20The%20mystery%20surrounding%20her%20comes%20from%20her%20unusual%20grasp%20of%20time.%20In%20the%20eyes%20of%20Erythrina%2C%20the%20abstract%20of%20time%20becomes%20a%20%5Bsilky%20substance%5D.%20She%20doesn't%20know%20how%20she%20got%20this%20power%2C%20probably%20because%20the%20Cabala%20ancients%20used%20to%20use%20her%20to%20count%20time.%0A%0A**Details**%0AFloriography: Unyielding%0ABirthday: 12/22%0AHeight: 164 cm%0AZodiac: Sagittarius%0AInstrument: Piano%0AFavorite Food: Vegetables%0AGifts: Two-tone Hourglass%0AHobby: Sand art%0ADislikes: Socializing&user=$authorId;GET;;message]
-  $botTyping
-  $cooldown[2s;{newEmbed:{description:\:_\: Don't send messages too fast, you can break me by doing it}{color:RED}}]
-
-  $onlyIf[$checkContains[$message;@everyone;@here]==false;{newEmbed:{description:\:_\: I don't disturb people!}{color:#ff0000}}]
-
-  $onlyForChannels[$getServerVar[chatbotChannel];]
-
-  $onlyIf[$getServerVar[chatbotChannel]!=;]
-  $suppressErrors
-  `,
-});
-
-
-bot.variables({
-  money: 0,
-  chatbotChannel: "",
-});
-
-// Event handler for incoming messages
 client.on("messageCreate", message => {
-  // Your existing message event handling code here
+  if (message.content.startsWith(prefix)) {
+    const args = message.content.slice(prefix.length).trim().split(/ +/g)
+    const commandName = args.shift()
+    const command = client.commands.get(commandName)
+    if (!command) return
+    command.run(client, message, args)
+  }
+  if (message.content === "embed02") {
+  let embed = new Discord.MessageEmbed()
+    //.setTitle("EDICT OF UNITY")
+    .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
+    .setColor("#B76A82")
+    /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
+    .setFooter("Noblese Guild")
+  
+  message.channel.send({ embeds: [embed] })
+} 
 
-  // Chat bot interaction
+  /*if (message.content === "Farm") {
+    message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
+  }
+  if (message.content === "farm") {
+    message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
+  }*/
   if (!message.author.bot) {
-    const messageContent = message.content.toLowerCase();
+  const messageContent = message.content.toLowerCase();
     if (messageContent.includes("morning")) {
-      message.channel.send(`Good Morning <@!${message.author.id}>!`);
+         message.channel.send(`Good Morning <@!${message.author.id}>!`);
     }
     if (messageContent.includes("afternoon")) {
-      message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
+         message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
     }
     if (messageContent.includes("evening")) {
-      message.channel.send(`Good Evening <@!${message.author.id}>!`);
+         message.channel.send(`Good Evening <@!${message.author.id}>!`);
     }
-
-    // Pass the message to the chat bot
-    bot.executeCommand(message.content, message);
-  }
-});
+    }
+})
 
 client.on('ready', async () => {
   console.log('Bot Is Launched')
-  client.user.setActivity({
+   client.user.setActivity({
     name: `The Legend Of Neverland`,
     type: 'PLAYING'
-  });
-  client.user.setStatus('idle');
-  console.log(`Logged in as ${client.user.tag}`);
+  })
 });
+
+client.on('ready', () => {
+  client.user.setStatus('idle');
+  console.log(`Logged in as ${client.user.tag}`)
+})
 
 client.login(process.env.token);
