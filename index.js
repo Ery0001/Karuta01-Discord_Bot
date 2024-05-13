@@ -48,6 +48,15 @@ client.on("messageCreate", message => {
     .setFooter("Noblese Guild")
   
   message.channel.send({ embeds: [embed] })
+}
+if (message.content === "OfficalAnnounce_0001_embed") {
+  let embed = new Discord.MessageEmbed()
+    .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone we are thrilled to share that on May 14, 2024, at 04:50 AM, the **Noblese  guild** will be merging with the esteemed **Overlord guild**. This exciting union marks a new chapter for both guilds as we welcome new members into our community. We look forward to the opportunities this combine will bring and the growth it will inspire. Let us extend our warmest welcome to all the new members!")
+    .setColor("#B76A82")
+    .setImage("https://ik.imagekit.io/Zedi/20240513_234454.png?updatedAt=1715615188837")
+    .setFooter("Noblese Guild")
+  
+  message.channel.send({ embeds: [embed] })
 } 
 
   /*if (message.content === "Farm") {
