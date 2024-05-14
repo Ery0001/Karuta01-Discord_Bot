@@ -60,12 +60,12 @@ if (message.content === "OfficalAnnounce_0001_embed") {
 }
 if (message.content === "serverInfo_0001_embed") {
   let embed = new Discord.MessageEmbed()
-    .setDescription("## Welcome to Noblese!\nHave fun and enjoy the game. For dailies assist, just inform in guild chat, we'll help out!\n\nJoin us on:\n- Guild bath at 7:30pm (server time)\n- Guild boss at 7:40pm\n-Guild war at 8:00pm\n\nAuction:\nJust bid as you please, no permission needed")
+    .setDescription("## WELCOME TO NOBLESE!\nRemember to have fun and savor every moment in the game! If you need assistance with daily tasks, simply drop a message in the guild chat, and we'll be more than happy to lend a hand!!\n\n**JOIN US ON (SERVER TIME):**\n- Guild bath at 7:30pm\n- Guild boss at 7:40pm\n- Guild war at 8:00pm\n\n**AUCTION:**\nJust bid as you please, no permission needed")
     .setColor("#B76A82")
     .setFooter("Noblese Guild")
   
   message.channel.send({ embeds: [embed] })
-}
+} 
 
   /*if (message.content === "Farm") {
     message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
