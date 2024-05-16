@@ -48,6 +48,55 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
+const ErythinaMorningPhrase = [
+    "Was I harsh yesterday? Sorry, not sorry. Now, do your dailies, darlings! @everyone",
+    "Ugh, @everyone better snap outta dreamland and hustle up on those dailies! Like, pronto!",
+    "Hey, sleepyheads! Time to rise and shine and get cracking on those dailies, cuties! @everyone",
+    "@everyone Get up, get your stuff done. It's not like I care, but we've all got our dailies to tackle. And yes, I'm still fabulous.",
+    "Ahem. Listen up, @everyone. The clock's ticking, and if you dawdle too long, you'll find yourself knee-deep in regrets. So, consider this your wake-up call, lovelies!",
+    "Did I come off too harsh yesterday? Whatever. Time for dailies, beauties! @everyone",
+    "Get your butts outta bed, @everyone! Dailies won't do themselves, you know. And yes, I woke up like this.",
+    "Wakey-wakey, sleepyheads! Let's tackle those dailies, angels! @everyone",
+    "Hey, rise and shine, @everyone! Dailies await, whether you like it or not. And yes, I'm still the fairest of them all.",
+    "Morning, @everyone! Let's not waste time. Dailies won't wait for anyone. And yes, I'm as radiant as ever.",
+    "Was I too blunt yesterday? Meh. Dailies time, sweethearts! @everyone. Oh, and by the way, have you seen my new outfit?",
+    "Yo, @everyone! Time to kick yesterday's dust off and do those dailies! And yes, I'm still fabulous.",
+    "Rise and grind, @everyone! Dailies aren't gonna do themselves, you know. And yes, I'm still flawless.",
+    "Did I lay it on thick yesterday? Who cares. Dailies, darlings! @everyone. Oh, and by the way, have I mentioned how stunning I look today?",
+    "Attention, @everyone! It's time to tackle those dailies head-on. And yes, I'm still the queen of this castle.",
+    "Hey, sleepyheads! Let's rise and conquer those dailies, cuties! @everyone. Oh, and by the way, have you seen my new hairstyle?",
+    "No time for slacking, @everyone! Dailies are calling, loud and clear. And yes, I'm still turning heads wherever I go.",
+    "Morning, @everyone! Let's make today count. Dailies first, complaints later. And yes, I'm still as fabulous as ever.",
+    "Did I ruffle feathers yesterday? Oh well. Dailies, sweethearts! @everyone. And yes, I'm still the envy of all.",
+    "Time's ticking, @everyone! Let's hustle up and knock out those dailies. And yes, I'm still the center of attention.",
+    "Wake up, @everyone! Dailies won't wait for late risers. And yes, I'm still the belle of the ball.",
+    "Alright, @everyone! Rise and grind. Dailies won't tackle themselves. And yes, I'm still as stunning as ever.",
+    "Was I too blunt yesterday? Tough luck. Dailies, beauties! @everyone. Oh, and by the way, have you noticed my flawless complexion?",
+    "Hey there, @everyone! Time to roll up those sleeves and tackle those dailies, angels! And yes, I'm still as captivating as ever.",
+    "Morning, @everyone! Let's make today's dailies count, shall we? And yes, I'm still as charming as ever.",
+    "Enough with the snoozing, @everyone! Dailies time is now. And yes, I'm still as radiant as ever.",
+    "Did I hit a nerve yesterday? Whatever. Dailies, darlings! @everyone. Oh, and by the way, have you seen my sparkling smile?",
+    "Attention, @everyone! Let's tackle those dailies with gusto. And yes, I'm still as glamorous as ever.",
+    "Wake up and smell the dailies, @everyone! No time to waste. And yes, I'm still as fabulous as ever.",
+    "No excuses, @everyone! Time to dive into those dailies headfirst. And yes, I'm still as stylish as ever.",
+    "Alright, @everyone! Let's shake off yesterday's dust and tackle those dailies. And yes, I'm still as captivating as ever.",
+    "Morning, @everyone! Dailies await, so let's get to it. And yes, I'm still as dazzling as ever.",
+    "Time to rise and shine, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as mesmerizing as ever.",
+    "Did I rub some folks the wrong way yesterday? Meh. Dailies, sweethearts! @everyone. Oh, and by the way, have you noticed my radiant aura?",
+    "Get up, get moving, @everyone! Dailies won't tackle themselves. And yes, I'm still as enchanting as ever.",
+    "Wakey-wakey, @everyone! Dailies are calling, loud and clear. And yes, I'm still as fabulous as ever.",
+    "Enough dilly-dallying, @everyone! Dailies time is now. And yes, I'm still as stunning as ever.",
+    "Morning, @everyone! Let's kickstart the day with some dailies. And yes, I'm still as captivating as ever.",
+    "Did I lay it on thick yesterday? Tough luck. Dailies, beauties! @everyone. Oh, and by the way, have you seen my impeccable grace?",
+    "Rise and grind, @everyone! Dailies await, so let's get to it. And yes, I'm still as radiant as ever.",
+    "Attention, @everyone! It's time to show those dailies who's boss. And yes, I'm still as charming as ever.",
+    "Morning, @everyone! Let's tackle those dailies like pros. And yes, I'm still as captivating as ever.",
+    "Time's a-wasting, @everyone! Let's dive into those dailies pronto. And yes, I'm still as alluring as ever.",
+    "Up and at 'em, @everyone! Dailies await, so let's get moving. And yes, I'm still as mesmerizing as ever.",
+    "Did I step on some toes yesterday? Whoops. Dailies, darlings! @everyone. Oh, and by the way, have you noticed my impeccable poise?",
+    "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
+];
+
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -104,6 +153,12 @@ client.on("messageCreate", message => {
     }
 })
 
+function randomMorningCalls() {
+    if (ErythinaMorningPhrase.length > 0) {
+        return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
+    }
+}
+
 client.on('ready', async () => {
     console.log('Bot Is Launched')
     client.user.setActivity({
@@ -115,7 +170,7 @@ client.on('ready', async () => {
     scheduleMessage('30 19 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, Join us!.', "1237979376872718439");
     scheduleMessage('40 19 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle!', "1237979376872718439");
     scheduleMessage('0 20 * * 4-6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
-    scheduleMessage('0 6 * * *', 'Asia/Manila', '@everyone wake up and do your dailies!', "1237979376872718439");
+    scheduleMessage('25 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
 });
 
