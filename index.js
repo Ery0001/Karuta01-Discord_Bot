@@ -150,6 +150,13 @@ client.on("messageCreate", message => {
         if (messageContent.includes("evening")) {
             message.channel.send(`Good Evening <@!${message.author.id}>!`);
         }
+
+        const words = messageContent.split(" ");
+        const hasInvite = words.includes("invite");
+        const hasLink = words.includes("link");
+        if (hasInvite && hasLink) {
+            message.channel.send(`**INVITE LINK:** https://discord.gg/j5BJHtzhnm`);
+    }
     }
 })
 
