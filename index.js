@@ -155,7 +155,7 @@ client.on("messageCreate", message => {
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
         if (hasInvite && hasLink) {
-            message.channel.send(`**INVITE LINK:** https://discord.gg/j5BJHtzhnm`);
+            message.channel.send(`<@!${message.author.id}>, take it then https://discord.gg/j5BJHtzhnm :Stare_erythrina:`);
     }
     }
 })
