@@ -20,7 +20,8 @@ app.get("/", (req, res) => {
 const Discord = require("discord.js");
 const client = new Discord.Client({
     intents: ["GUILDS", "GUILD_MESSAGES"],
-    allowedMentions: ["users"]
+    allowedMentions: ["users"],
+    allowedMentions: { parse: ['everyone'] }
 });
 const fs = require("fs");
 const prefix = "c."
