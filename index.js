@@ -21,7 +21,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
     intents: ["GUILDS", "GUILD_MESSAGES"],
     allowedMentions: ["users"],
-    allowedMentions: { parse: ['everyone'] }
+    allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
 const fs = require("fs");
 const prefix = "c."
@@ -115,7 +115,7 @@ client.on('ready', async () => {
     scheduleMessage('30 19 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, Join us!.', "1237979376872718439");
     scheduleMessage('40 19 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle!', "1237979376872718439");
     scheduleMessage('0 20 * * 4-6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
-    scheduleMessage('35 1 * * *', 'Asia/Manila', '@everyone test', "1237979376872718439");
+    scheduleMessage('0 6 * * *', 'Asia/Manila', '@everyone wake up and do your dailies!', "1237979376872718439");
 
 });
 
