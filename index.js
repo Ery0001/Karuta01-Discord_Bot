@@ -114,6 +114,8 @@ client.on('ready', async () => {
     scheduleMessage('30 19 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, Join us!.', "1237979376872718439");
     scheduleMessage('40 19 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle!', "1237979376872718439");
     scheduleMessage('0 20 * * 4-6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
+    scheduleMessage('15 1 * * *', 'Asia/Manila', '@everyone test', "1237979376872718439");
+
 });
 
 client.on('ready', () => {
