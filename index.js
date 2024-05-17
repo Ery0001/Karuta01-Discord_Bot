@@ -48,6 +48,26 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
+const scheduleEmbed = (cronTime, timezone, message, channelId) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            
+        let embed = new Discord.MessageEmbed()
+            .setDescription(message)
+            .setColor("#B76A82")
+            .setFooter("Noblese Guild")
+            message.channel.send({ embeds: [embed] })
+            
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
+
 const ErythinaMorningPhrase = [
     "Was I harsh yesterday? Sorry, not sorry. Now, do your dailies, darlings! @everyone",
     "Ugh, @everyone better snap outta dreamland and hustle up on those dailies! Like, pronto!",
@@ -179,6 +199,8 @@ client.on('ready', async () => {
     scheduleMessage('56 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '## [NOTICE]\n@everyone Instrumental Perform EXP in Life has been refreshed', "1239586188092768348");
+    scheduleEmbed('24 21 * * 5', 'Asia/Manila', '## [NOTICE]\n@everyone test run', "1239586188092768348");
 });
 
 client.on('ready', () => {
