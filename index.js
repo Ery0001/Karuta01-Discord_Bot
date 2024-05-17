@@ -54,7 +54,7 @@ const scheduleEmbed = (cronTime, timezone, message, channelId) => {
         if (channel) {
             let embed = new Discord.MessageEmbed()
                 .setDescription(message)
-                .setColor("#B76A82")
+                /*.setColor("#B76A82")*/
                 .setFooter("Noblese Guild");
             channel.send({ embeds: [embed] });
         } else {
