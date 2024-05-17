@@ -52,13 +52,11 @@ const scheduleEmbed = (cronTime, timezone, message, channelId) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
-            
-        let embed = new Discord.MessageEmbed()
-            .setDescription(message)
-            .setColor("#B76A82")
-            .setFooter("Noblese Guild")
-            message.channel.send({ embeds: [embed] })
-            
+            let embed = new Discord.MessageEmbed()
+                .setDescription(message)
+                .setColor("#B76A82")
+                .setFooter("Noblese Guild");
+            channel.send({ embeds: [embed] });
         } else {
             console.log('Channel not found.');
         }
@@ -67,6 +65,7 @@ const scheduleEmbed = (cronTime, timezone, message, channelId) => {
         timezone: timezone
     });
 };
+
 
 const ErythinaMorningPhrase = [
     "Was I harsh yesterday? Sorry, not sorry. Now, do your dailies, darlings! @everyone",
