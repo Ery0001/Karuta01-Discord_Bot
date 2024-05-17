@@ -55,6 +55,7 @@ const scheduleEmbed = (cronTime, timezone, message, channelId) => {
             let embed = new Discord.MessageEmbed()
                 .setDescription(message)
                 /*.setColor("#B76A82")*/
+                .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082")
                 .setFooter("Noblese Guild");
             channel.send({ embeds: [embed] });
         } else {
@@ -199,7 +200,19 @@ client.on('ready', async () => {
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
     // Schedule multiple embeds
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1239586188092768348");
-    /*scheduleEmbed('47 21 * * 5', 'Asia/Manila', '### [NOTICE]\n@everyone test test test test test test test test', "1239586188092768348");*/
+    
+    scheduleEmbed('0 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting.', "1239586188092768348");
+    scheduleEmbed('30 21 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing.', "1239586188092768348");
+    
+    scheduleEmbed('35 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('35 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('35 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('35 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+
+    scheduleEmbed('35 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is ongoing! ', "1239586188092768348");
+
+    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is available!', "1239586188092768348");
+    scheduleEmbed('47 4 * * *', 'Asia/Manila', '### [NOTICE]\nTest is available!', "1239586188092768348");
 });
 
 client.on('ready', () => {
