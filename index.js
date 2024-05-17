@@ -198,8 +198,8 @@ client.on('ready', async () => {
     scheduleMessage('56 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '## [NOTICE]\n@everyone Instrumental Perform EXP in Life has been refreshed', "1239586188092768348");
-    scheduleEmbed('39 21 * * 5', 'Asia/Manila', '## [NOTICE]\n@everyone test run', "1239586188092768348");
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\n@everyone Instrumental Perform EXP in Life has been refreshed', "1239586188092768348");
+    scheduleEmbed('47 21 * * 5', 'Asia/Manila', '### [NOTICE]\n@everyone test test test test test test test test', "1239586188092768348");
 });
 
 client.on('ready', () => {
