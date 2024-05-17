@@ -212,7 +212,7 @@ client.on('ready', async () => {
     scheduleEmbed('35 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is ongoing! ', "1239586188092768348");
 
     scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is available!', "1239586188092768348");
-    scheduleEmbed('47 4 * * *', 'Asia/Manila', '### [NOTICE]\nTest is available!', "1239586188092768348");
+    scheduleEmbed('50 4 * * *', 'Asia/Manila', '### [NOTICE]\nTest is available!', "1239586188092768348");
 });
 
 client.on('ready', () => {
