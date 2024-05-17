@@ -174,9 +174,9 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
-    scheduleMessage('30 19 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, folks. Join us or miss out, your loss!', "1237979376872718439");
-    scheduleMessage('40 19 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle! Don\'t slack off now, we need everyone!', "1237979376872718439");
-    scheduleMessage('0 20 * * 4-6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
+    scheduleMessage('29 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, folks. Join us or miss out, your loss!', "1237979376872718439");
+    scheduleMessage('40 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle! Don\'t slack off now, we need everyone!', "1237979376872718439");
+    scheduleMessage('50 20 * * 4-6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
 });
