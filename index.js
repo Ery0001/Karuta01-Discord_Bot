@@ -226,7 +226,7 @@ client.on('ready', async () => {
     scheduleEmbed('0 13 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting!', "1239586188092768348");
     scheduleEmbed('0 17 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting!', "1239586188092768348");
     scheduleEmbed('0 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 24 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 0 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting!', "1239586188092768348");
      //Top League
     scheduleEmbed('0 21 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting!', "1239586188092768348");
      //Thunderroar Rcess
@@ -235,7 +235,7 @@ client.on('ready', async () => {
     scheduleEmbed('0 13 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting!', "1239586188092768348");
     scheduleEmbed('0 17 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting!', "1239586188092768348");
     scheduleEmbed('0 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 24 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 0 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting!', "1239586188092768348");
      //Scenic Quiz
     scheduleEmbed('0 10 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting!', "1239586188092768348");
      //Miru Party
