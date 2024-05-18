@@ -232,10 +232,21 @@ client.on('ready', async () => {
      //Thunderroar Rcess
     scheduleEmbed('0 20 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting! ', "1239586188092768348");
      //Crystal Battlefield
-    scheduleEmbed('0 13 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('0 17 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('0 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('0 24 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('0 13 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 17 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 24 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting!', "1239586188092768348");
+     //Scenic Quiz
+    scheduleEmbed('0 10 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting!', "1239586188092768348");
+     //Miru Party
+    scheduleEmbed('0 10 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting!', "1239586188092768348");
+     //Miru Marathon
+    scheduleEmbed('30 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting!', "1239586188092768348");
+    scheduleEmbed('30 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting!', "1239586188092768348");
+    scheduleEmbed('30 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon third Wave is starting!', "1239586188092768348");
+    scheduleEmbed('30 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon last Wave is starting!', "1239586188092768348");
+     //Holy Fruit and Fog Island
+    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available!', "1239586188092768348");
     //}
 });
 
