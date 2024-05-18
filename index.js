@@ -199,21 +199,44 @@ client.on('ready', async () => {
     scheduleMessage('56 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
     // Schedule multiple embeds
-    scheduleEmbed('0 5 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has ended!', "1239586188092768348");
-    
+
+    // Official{
+     //Instrumental Perform
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1239586188092768348");
-    
-    scheduleEmbed('0 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting.', "1239586188092768348");
-    scheduleEmbed('30 21 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing.', "1239586188092768348");
-    
-    scheduleEmbed('35 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('35 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('35 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-    scheduleEmbed('35 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
-
-    scheduleEmbed('35 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is ongoing! ', "1239586188092768348");
-
-    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is available!', "1239586188092768348");
+     //Elemental Realm
+    scheduleEmbed('55 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has reseted!', "1239586188092768348");
+     //Madness Raid
+    scheduleEmbed('0 10 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting!', "1239586188092768348");
+    scheduleEmbed('30 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1239586188092768348");
+     //Abyss Ruin
+    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1239586188092768348");
+     //Time Trial 
+    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1239586188092768348");
+     //Disaster Crusade
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reseted!', "1239586188092768348");
+     //Burning Soul Battle
+    scheduleEmbed('0 20 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting!', "1239586188092768348");
+     //Starleaf Garden
+    /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1239586188092768348");*/
+     //Shrine Rivalry
+    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1239586188092768348");
+     //Shrine Peak
+    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting!', "1239586188092768348");
+     //Uncharted Battlefield
+    scheduleEmbed('0 13 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 17 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting!', "1239586188092768348");
+    scheduleEmbed('0 24 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting!', "1239586188092768348");
+     //Top League
+    scheduleEmbed('0 21 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting!', "1239586188092768348");
+     //Thunderroar Rcess
+    scheduleEmbed('0 20 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting! ', "1239586188092768348");
+     //Crystal Battlefield
+    scheduleEmbed('0 13 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('0 17 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('0 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    scheduleEmbed('0 24 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield is available!', "1239586188092768348");
+    //}
 });
 
 client.on('ready', () => {
