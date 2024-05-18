@@ -199,8 +199,7 @@ client.on('ready', async () => {
     scheduleMessage('56 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
     // Schedule multiple embeds
-    scheduleEmbed('54 17 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has ended!', "1239586188092768348");
-    scheduleEmbed('0 5 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm reseted!', "1239586188092768348");
+    scheduleEmbed('0 5 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has ended!', "1239586188092768348");
     
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1239586188092768348");
     
