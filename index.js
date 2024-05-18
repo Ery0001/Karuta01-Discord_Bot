@@ -204,7 +204,7 @@ client.on('ready', async () => {
      //Instrumental Perform
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1239586188092768348");
      //Elemental Realm
-    scheduleEmbed('55 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has reseted!', "1239586188092768348");
+    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reseted!', "1239586188092768348");
      //Madness Raid
     scheduleEmbed('0 10 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting!', "1239586188092768348");
     scheduleEmbed('30 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1239586188092768348");
