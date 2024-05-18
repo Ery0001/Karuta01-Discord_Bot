@@ -194,19 +194,23 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
-    scheduleMessage('29 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath, folks. Join us or miss out, your loss!', "1237979376872718439");
-    scheduleMessage('40 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle! Don\'t slack off now, we need everyone!', "1237979376872718439");
-    scheduleMessage('56 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin! Prepare yourself!', "1237979376872718439");
+    scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
+    scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
+    scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
     scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
     // Schedule multiple embeds
 
     // Official{
+     //Guild
+    scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1239586188092768348");
+    scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild boss has started!', "1239586188092768348");
+    scheduleEmbed('0 21 * * *', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1239586188092768348");
      //Instrumental Perform
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1239586188092768348");
      //Elemental Realm
     scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reseted!', "1239586188092768348");
      //Madness Raid
-    scheduleEmbed('0 10 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting!', "1239586188092768348");
+    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting in 5 minutes!', "1239586188092768348");
     scheduleEmbed('30 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1239586188092768348");
      //Abyss Ruin
     scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1239586188092768348");
@@ -215,36 +219,36 @@ client.on('ready', async () => {
      //Disaster Crusade
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reseted!', "1239586188092768348");
      //Burning Soul Battle
-    scheduleEmbed('0 20 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting!', "1239586188092768348");
+    scheduleEmbed('55 19 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!', "1239586188092768348");
      //Starleaf Garden
     /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1239586188092768348");*/
      //Shrine Rivalry
     scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1239586188092768348");
      //Shrine Peak
-    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting!', "1239586188092768348");
+    scheduleEmbed('55 21 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting in 5 minutes!', "1239586188092768348");
      //Uncharted Battlefield
-    scheduleEmbed('0 13 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 17 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 0 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting!', "1239586188092768348");
+    scheduleEmbed('55 12 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 16 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 22 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting in 5 minutes!', "1239586188092768348");
      //Top League
-    scheduleEmbed('0 21 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting!', "1239586188092768348");
+    scheduleEmbed('55 20 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting in 5 minutes!', "1239586188092768348");
      //Thunderroar Rcess
-    scheduleEmbed('0 20 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting! ', "1239586188092768348");
+    scheduleEmbed('55 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes! ', "1239586188092768348");
      //Crystal Battlefield
-    scheduleEmbed('0 13 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 17 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting!', "1239586188092768348");
-    scheduleEmbed('0 0 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting!', "1239586188092768348");
+    scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting in 5 minutes!', "1239586188092768348");
      //Scenic Quiz
-    scheduleEmbed('0 10 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting!', "1239586188092768348");
+    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting in 5 minutes!', "1239586188092768348");
      //Miru Party
-    scheduleEmbed('0 10 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting!', "1239586188092768348");
+    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting in 5 minutes!', "1239586188092768348");
      //Miru Marathon
-    scheduleEmbed('30 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting!', "1239586188092768348");
-    scheduleEmbed('30 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting!', "1239586188092768348");
-    scheduleEmbed('30 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon third Wave is starting!', "1239586188092768348");
-    scheduleEmbed('30 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon last Wave is starting!', "1239586188092768348");
+    scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon third Wave is starting in 5 minutes!', "1239586188092768348");
+    scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon last Wave is starting in 5 minutes!', "1239586188092768348");
      //Holy Fruit and Fog Island
     scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available!', "1239586188092768348");
     //}
