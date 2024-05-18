@@ -56,7 +56,7 @@ const scheduleEmbed = (cronTime, timezone, message, channelId) => {
                 .setDescription(message)
                 /*.setColor("#B76A82")*/
                 .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082")
-                .setFooter("Noblese Guild");
+                /*.setFooter("Noblese Guild");*/
             channel.send({ embeds: [embed] });
         } else {
             console.log('Channel not found.');
