@@ -170,13 +170,29 @@ client.on("messageCreate", message => {
         if (messageContent.includes("evening")) {
             message.channel.send(`Good Evening <@!${message.author.id}>!`);
         }
-
         const words = messageContent.split(" ");
+
+        const hasMention = words.some(word =>
+        word.startsWith("erythrina") ||
+        word.startsWith("erythrin") ||
+        word.startsWith("erythri") ||
+        word.startsWith("erythr") ||
+        word.startsWith("eryth") ||
+        word.startsWith("eryt") ||
+        word.startsWith("ery")
+        );
+        const hasThanked = words.some(word => word === "thank" || word === "thanks");
+
+        const hasThanked = words.includes("Thank"),("Thanks");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
         if (hasInvite && hasLink) {
-            message.channel.send(`<@!${message.author.id}>, take it then <:Stare_erythrina:1238029119632048159>\n\nhttps://discord.gg/j5BJHtzhnm`);
-    }
+            message.reply(`<@!${message.author.id}>, take it then <:Stare_erythrina:1238029119632048159>\n\nhttps://discord.gg/j5BJHtzhnm`);
+        }
+        if (hasMention && hasThanked) {
+            message.reply(`you're welcome <@!${message.author.id}>`);
+        }
+        
     }
 })
 
