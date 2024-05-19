@@ -117,13 +117,6 @@ const ErythinaMorningPhrase = [
     "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
 ];
 
-const ErythinaRelpyGreetings = [
-    `Oh, you’re here. nice to meet you.`,
-    `Oh, it’s you. hello <@!${message.author.id}>..`,
-    `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
-    `Hi<:Stare_erythrina:1238029119632048159>`
-];
-
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -215,6 +208,13 @@ client.on("messageCreate", message => {
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
         if (hasMention && hasGreet) {
+            const ErythinaRelpyGreetings = [
+                `Oh, you’re here. nice to meet you.`,
+                `Oh, it’s you. hello <@!${message.author.id}>..`,
+                `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
+                `Hi<:Stare_erythrina:1238029119632048159>`
+            ];
+            const randomReplyGreetings ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
             message.reply(randomReplyGreetings());
         }
         if (hasInvite && hasLink) {
@@ -233,12 +233,6 @@ client.on("messageCreate", message => {
 function randomMorningCalls() {
     if (ErythinaMorningPhrase.length > 0) {
         return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
-    }
-}
-
-function randomReplyGreetings() {
-    if (ErythinaRelpyGreetings.length > 0) {
-        return ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
     }
 }
 
