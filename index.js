@@ -117,6 +117,13 @@ const ErythinaMorningPhrase = [
     "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
 ];
 
+const ErythinaRelpyGreetings = [
+    "Oh, you’re here..",
+    "Oh, it’s you. Hello <@!${message.author.id}>..",
+    "Pretend that I am not here<:Stare_erythrina:1238029119632048159>",
+    "Hi<:Stare_erythrina:1238029119632048159>"
+];
+
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -181,14 +188,43 @@ client.on("messageCreate", message => {
         word.startsWith("eryt") ||
         word.startsWith("ery")
         );
+        const hasGreet = words.some(word =>
+        word.startsWith("hello") ||
+        word.startsWith("hi") ||
+        word.startsWith("hey") ||
+        word.startsWith("greetings") ||
+        word.startsWith("howdy") ||
+        word.startsWith("hiya") ||
+        word.startsWith("hey there") ||
+        word.startsWith("yo") ||
+        word.startsWith("what's up") ||
+        word.startsWith("aloha") ||
+        word.startsWith("bonjour") ||
+        word.startsWith("hola") ||
+        word.startsWith("ciao") ||
+        word.startsWith("guten tag") ||
+        word.startsWith("namaste") ||
+        word.startsWith("salaam") ||
+        word.startsWith("konnichiwa") ||
+        word.startsWith("annyeong") ||
+        word.startsWith("zdravstvuyte") ||
+        word.startsWith("sup")
+    );
         const hasThanked = words.some(word => word === "thank" || word === "thanks");
+        const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
+        if (hasMention && hasGreet) {
+            message.reply(randomReplyGreetings());
+        }
         if (hasInvite && hasLink) {
-            message.reply(`<@!${message.author.id}>, take it then <:Stare_erythrina:1238029119632048159>\n\nhttps://discord.gg/j5BJHtzhnm`);
+            message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://discord.gg/j5BJHtzhnm`);
         }
         if (hasMention && hasThanked) {
-            message.reply(`you're welcome <@!${message.author.id}>`);
+            message.reply(`you're welcome <@!${message.author.id}><:Stare_erythrina:1238029119632048159>`);
+        }
+        if (hasMention && hasAsk) {
+            message.reply(`I was used by Cabala ancients to count the time.`);
         }
         
     }
@@ -197,6 +233,12 @@ client.on("messageCreate", message => {
 function randomMorningCalls() {
     if (ErythinaMorningPhrase.length > 0) {
         return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
+    }
+}
+
+function randomReplyGreetings() {
+    if (ErythinaRelpyGreetings.length > 0) {
+        return ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
     }
 }
 
