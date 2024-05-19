@@ -118,10 +118,10 @@ const ErythinaMorningPhrase = [
 ];
 
 const ErythinaRelpyGreetings = [
-    "Oh, you’re here..",
-    "Oh, it’s you. Hello <@!${message.author.id}>..",
-    "Pretend that I am not here<:Stare_erythrina:1238029119632048159>",
-    "Hi<:Stare_erythrina:1238029119632048159>"
+    `Oh, you’re here. nice to meet you.`,
+    `Oh, it’s you. hello <@!${message.author.id}>..`,
+    `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
+    `Hi<:Stare_erythrina:1238029119632048159>`
 ];
 
 client.on("messageCreate", message => {
