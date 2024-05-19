@@ -182,8 +182,6 @@ client.on("messageCreate", message => {
         word.startsWith("ery")
         );
         const hasThanked = words.some(word => word === "thank" || word === "thanks");
-
-        const hasThanked = words.includes("Thank"),("Thanks");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
         if (hasInvite && hasLink) {
