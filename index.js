@@ -48,15 +48,19 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
-const scheduleEmbed = (cronTime, timezone, message, channelId) => {
+const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
             let embed = new Discord.MessageEmbed()
                 .setDescription(message)
-                /*.setColor("#B76A82")*/
                 .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082")
                 /*.setFooter("Noblese Guild");*/
+                if (status == 2){
+                 .setColor("#EE4E4E")
+                } else if (status == 1){
+                 .setColor("#A1DD70")
+                }
             channel.send({ embeds: [embed] });
         } else {
             console.log('Channel not found.');
@@ -253,55 +257,55 @@ client.on('ready', async () => {
 
     // Official{
      //Guild
-    scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1237979376872718439");
-    scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild boss has started!', "1237979376872718439");
-    scheduleEmbed('0 21 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1237979376872718439");
+    scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1237979376872718439", 1);
+    scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild boss has started!', "1237979376872718439", 1);
+    scheduleEmbed('0 21 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1237979376872718439", 1);
      //Instrumental Perform
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1237979376872718439");
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1237979376872718439", 0);
      //Elemental Realm
-    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reseted!', "1237979376872718439");
+    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reseted!', "1237979376872718439", 1);
      //Madness Raid
-    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting in 9:00 to 21:30(server time)!', "1237979376872718439");
-    scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439");
+    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting in 9:00 to 21:30(server time)!', "1237979376872718439", 1);
+    scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439", 2);
      //Abyss Ruin
-    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439");
+    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439", 1);
      //Time Trial 
-    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1237979376872718439");
+    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1237979376872718439", 1);
      //Disaster Crusade
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reseted!', "1237979376872718439");
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reseted!', "1237979376872718439", 0);
      //Burning Soul Battle
-    scheduleEmbed('55 19 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 19 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!', "1237979376872718439", 1);
      //Starleaf Garden
     /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1237979376872718439");*/
      //Shrine Rivalry
-    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1237979376872718439");
+    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1237979376872718439", 1);
      //Shrine Peak
-    scheduleEmbed('55 21 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 21 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting in 5 minutes!', "1237979376872718439", 1);
      //Uncharted Battlefield
-    scheduleEmbed('55 12 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 16 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 22 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 12 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 16 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 22 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield third Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      //Top League
-    scheduleEmbed('55 20 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 20 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting in 5 minutes!', "1237979376872718439,", 1);
      //Thunderroar Rcess
-    scheduleEmbed('55 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes! ', "1237979376872718439");
+    scheduleEmbed('55 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes! ', "1237979376872718439", 1);
      //Crystal Battlefield
-    scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield third Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      //Scenic Quiz
-    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting in 5 minutes!', "1237979376872718439", 1);
      //Miru Party
-    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting in 5 minutes!', "1237979376872718439", 1);
      //Miru Marathon
-    scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon third Wave is starting in 5 minutes!', "1237979376872718439");
-    scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon last Wave is starting in 5 minutes!', "1237979376872718439");
+    scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon third Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      //Holy Fruit and Fog Island
-    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available!', "1237979376872718439");
+    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available!', "1237979376872718439", 0);
     //}
 });
 
