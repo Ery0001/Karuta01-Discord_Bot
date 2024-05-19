@@ -231,6 +231,19 @@ client.on("messageCreate", message => {
         if (hasMention && hasAsk) {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
+
+        //ADMIN COMMANDS
+        if (message.member.permissions.has('ADMINISTRATOR')) {
+            if (messageContent.includes("reminderMessage") {
+            scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
+            }
+            if (messageContent.includes("reminderEmbed") {
+            scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1237979376872718439", 1);
+            }
+            if (messageContent.includes("reminderEmbed2") {
+            scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439", 2);
+            }
+        }
         
     }
 })
