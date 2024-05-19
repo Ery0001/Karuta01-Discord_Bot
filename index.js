@@ -255,7 +255,7 @@ client.on('ready', async () => {
      //Guild
     scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1237979376872718439");
     scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild boss has started!', "1237979376872718439");
-    scheduleEmbed('0 21 * * *', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1237979376872718439");
+    scheduleEmbed('0 21 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1237979376872718439");
      //Instrumental Perform
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Perform EXP in Life has been refreshed', "1237979376872718439");
      //Elemental Realm
