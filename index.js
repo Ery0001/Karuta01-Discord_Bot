@@ -211,7 +211,7 @@ client.on('ready', async () => {
     scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reseted!', "1237979376872718439");
      //Madness Raid
     scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting in 9:00 to 21:30(server time)!', "1237979376872718439");
-    /*scheduleEmbed('30 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439");*/
+    scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439");
      //Abyss Ruin
     scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439");
      //Time Trial 
