@@ -161,6 +161,8 @@ client.on("messageCreate", message => {
     }*/
     if (!message.author.bot) {
         const messageContent = message.content.toLowerCase();
+        const words = messageContent.split(" ");
+        
         if (messageContent.includes("morning")) {
             message.channel.send(`Good Morning <@!${message.author.id}>!`);
         }
@@ -170,7 +172,6 @@ client.on("messageCreate", message => {
         if (messageContent.includes("evening")) {
             message.channel.send(`Good Evening <@!${message.author.id}>!`);
         }
-        const words = messageContent.split(" ");
 
         const hasMention = words.some(word =>
         word.startsWith("erythrina") ||
@@ -210,12 +211,12 @@ client.on("messageCreate", message => {
         if (hasMention && hasGreet) {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
-                `Oh, it’s you. hello <@!${message.author.id}>..`,
+                `Oh, it’s you. hello..`,
                 `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
                 `Hi<:Stare_erythrina:1238029119632048159>`
             ];
-            const randomReplyGreetings = ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
-            message.reply(randomReplyGreetings());
+            const randomReplyGreeting = ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
+            message.reply(randomReplyGreeting);
         }
         if (hasInvite && hasLink) {
             message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://discord.gg/j5BJHtzhnm`);
