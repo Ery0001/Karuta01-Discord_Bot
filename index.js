@@ -214,7 +214,7 @@ client.on("messageCreate", message => {
                 `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
                 `Hi<:Stare_erythrina:1238029119632048159>`
             ];
-            const randomReplyGreetings ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
+            const randomReplyGreetings = ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
             message.reply(randomReplyGreetings());
         }
         if (hasInvite && hasLink) {
