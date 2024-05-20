@@ -207,8 +207,72 @@ client.on("messageCreate", message => {
         word.startsWith("annyeong") ||
         word.startsWith("zdravstvuyte") ||
         word.startsWith("sup")
-    );
-        const hasThanked = words.some(word => word === "thank" || word === "thanks");
+        );
+        const hasCompliment1 = words.some(word =>
+        word.startsWith("awesome") || 
+        word.startsWith("amazing") || 
+        word.startsWith("fantastic") || 
+        word.startsWith("great") || 
+        word.startsWith("wonderful") || 
+        word.startsWith("excellent") || 
+        word.startsWith("brilliant") || 
+        word.startsWith("outstanding") || 
+        word.startsWith("remarkable") || 
+        word.startsWith("impressive") || 
+        word.startsWith("fabulous") || 
+        word.startsWith("incredible") || 
+        word.startsWith("spectacular") || 
+        word.startsWith("marvelous") || 
+        word.startsWith("terrific") || 
+        word.startsWith("superb") || 
+        word.startsWith("good")
+        );
+        const hasSubject = words.some(word =>
+            word.startsWith("you're") ||
+            word.startsWith("you are") ||
+            word.startsWith("your") ||
+            word.startsWith("you") ||
+            word.startsWith("you is") ||
+            word.startsWith("u") ||
+            word.startsWith("she") ||
+            word.startsWith("her") ||
+            word.startsWith("them") ||
+            word.startsWith("female") ||
+            word.startsWith("bot") ||
+            word.startsWith("ai") ||
+            word.startsWith("a.i") ||
+            word.startsWith("the")
+            word.startsWith("that") ||
+            word.startsWith("this")
+        );
+        const hasThanks = words.some(word =>
+    word.startsWith("thanks") ||
+    word.startsWith("thank") ||
+    word.startsWith("thankful") ||
+    word.startsWith("grateful") ||
+    word.startsWith("appreciate") ||
+    word.startsWith("appreciated") ||
+    word.startsWith("appreciation") ||
+    word.startsWith("gratitude") ||
+    word.startsWith("cheers") ||
+    word.startsWith("ta") ||
+    word.startsWith("much obliged") ||
+    word.startsWith("big thanks") ||
+    word.startsWith("heartfelt thanks") ||
+    word.startsWith("sincere thanks") ||
+    word.startsWith("many thanks") ||
+    word.startsWith("i appreciate it") ||
+    word.startsWith("i'm thankful") ||
+    word.startsWith("thank you") ||
+    word.startsWith("terima kasih") || // Indonesian/Malay
+    word.startsWith("salamat") || // Filipino/Tagalog
+    word.startsWith("khob khun") || // Thai
+    word.startsWith("khop kun") || // Thai
+    word.startsWith("cảm ơn") || // Vietnamese
+    word.startsWith("ကျေးဇူးတင်ပါတယ်") || // Burmese
+    word.startsWith("ຂອບ​ໃຈ") || // Lao
+    word.startsWith("អរគុណ") // Khmer
+);
         const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
@@ -222,10 +286,19 @@ client.on("messageCreate", message => {
             const randomReplyGreeting = ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
             message.reply(randomReplyGreeting);
         }
+        if (hasMention && hasSubject && hasCompliment1) {
+            const ErythinaRelpyCompliment = [
+                `Oh, thank you`,
+                `Oh, it was nothing.`,
+                `I know.`,
+            ];
+            const randomReplyCompliment = ErythinaRelpyCompliment[Math.floor(Math.random() * ErythinaRelpyCompliment.length)];
+            message.reply(randomReplyCompliment);
+        }
         if (hasInvite && hasLink) {
             message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://discord.gg/j5BJHtzhnm`);
         }
-        if (hasMention && hasThanked) {
+        if (hasMention && hasThanks) {
             message.reply(`you're welcome <@!${message.author.id}><:Stare_erythrina:1238029119632048159>`);
         }
         if (hasMention && hasAsk) {
