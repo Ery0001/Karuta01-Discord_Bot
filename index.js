@@ -276,7 +276,7 @@ client.on("messageCreate", message => {
         const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
-        if (hasMention && hasGreet) {
+        if (hasGreet && hasMention) {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
                 `Oh, it’s you. hello..`,
