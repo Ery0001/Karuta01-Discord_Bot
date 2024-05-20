@@ -176,6 +176,9 @@ client.on("messageCreate", message => {
         if (messageContent.includes("evening")) {
             message.channel.send(`Good Evening <@!${message.author.id}>!`);
         }
+        if (messageContent.includes("night")) {
+            message.channel.send(`Good Night <@!${message.author.id}>!`);
+        }
 
         const hasMention = words.some(word =>
         word.startsWith("erythrina") ||
