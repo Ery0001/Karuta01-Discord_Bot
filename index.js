@@ -194,7 +194,6 @@ client.on("messageCreate", message => {
         word.startsWith("howdy") ||
         word.startsWith("hiya") ||
         word.startsWith("hey there") ||
-        word.startsWith("yo ") ||
         word.startsWith("what's up") ||
         word.startsWith("aloha") ||
         word.startsWith("bonjour") ||
@@ -276,7 +275,7 @@ client.on("messageCreate", message => {
         const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
-        if (hasGreet && hasMention) {
+        if (hasGreet && hasMention || "yo") {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
                 `Oh, it’s you. hello..`,
