@@ -241,7 +241,7 @@ client.on("messageCreate", message => {
             word.startsWith("bot") ||
             word.startsWith("ai") ||
             word.startsWith("a.i") ||
-            word.startsWith("the")
+            word.startsWith("the") ||
             word.startsWith("that") ||
             word.startsWith("this")
         );
