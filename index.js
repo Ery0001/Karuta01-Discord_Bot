@@ -191,8 +191,8 @@ client.on("messageCreate", message => {
         );
         const hasGreet = words.some(word =>
         word.startsWith("hello") ||
-        word.startsWith("hi") ||
-        word.startsWith("hey") ||
+        word.toLowerCase() === "hi" ||
+         word.toLowerCase() === "hey" ||
         word.startsWith("greetings") ||
         word.startsWith("howdy") ||
         word.startsWith("hey there") ||
@@ -234,18 +234,18 @@ client.on("messageCreate", message => {
             word.startsWith("you're") ||
             word.startsWith("you are") ||
             word.startsWith("your") ||
-            word.startsWith("you") ||
+            word.toLowerCase() === "you" ||
             word.startsWith("you is") ||
             word.startsWith("u") ||
             word.startsWith("she") ||
-            word.startsWith("her") ||
+            word.toLowerCase() === "her" ||
             word.startsWith("them") ||
             word.startsWith("female") ||
             word.startsWith("bot") ||
             word.startsWith("ai") ||
             word.startsWith("a.i") ||
-            word.startsWith("the") ||
-            word.startsWith("that") ||
+            word.toLowerCase() === "the" ||
+             word.toLowerCase() === "that" ||
             word.startsWith("this")
         );
         const hasThanks = words.some(word =>
@@ -258,7 +258,7 @@ client.on("messageCreate", message => {
     word.startsWith("appreciation") ||
     word.startsWith("gratitude") ||
     word.startsWith("cheers") ||
-    word.startsWith("ta") ||
+     word.toLowerCase() === "ta" ||
     word.startsWith("much obliged") ||
     word.startsWith("big thanks") ||
     word.startsWith("heartfelt thanks") ||
@@ -279,7 +279,7 @@ client.on("messageCreate", message => {
         const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
-        if (messageContent.includes("yo") || hasGreet && hasMention) {
+        if (hasGreet && hasMention) {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
                 `Oh, it’s you. hello..`,
