@@ -194,7 +194,7 @@ client.on("messageCreate", message => {
         word.startsWith("howdy") ||
         word.startsWith("hiya") ||
         word.startsWith("hey there") ||
-        word.startsWith("yo") ||
+        word.startsWith("yo ") ||
         word.startsWith("what's up") ||
         word.startsWith("aloha") ||
         word.startsWith("bonjour") ||
