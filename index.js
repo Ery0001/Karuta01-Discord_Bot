@@ -264,7 +264,7 @@ client.on('ready', async () => {
      // Instrumental Performance
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Performance EXP in Life has been refreshed', "1237979376872718439", 0);
      // Elemental Realm
-    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reset!', "1237979376872718439", 1);
+    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reset!', "1237979376872718439", 0);
      // Madness Raid
     scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting from 9:00 to 21:30 (server time)!', "1237979376872718439", 1);
     scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439", 2);
@@ -277,9 +277,9 @@ client.on('ready', async () => {
      // Burning Soul Battle
     scheduleEmbed('55 19 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!', "1237979376872718439", 1);
      // Starleaf Garden
-    /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1237979376872718439");*/
+    /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1237979376872718439", 1);*/
      // Shrine Rivalry
-    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1237979376872718439", 1);
+    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1237979376872718439", 0);
      // Shrine Peak
     scheduleEmbed('55 21 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting in 5 minutes!', "1237979376872718439", 1);
      // Uncharted Battlefield
