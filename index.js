@@ -195,12 +195,10 @@ client.on("messageCreate", message => {
         word.startsWith("hey") ||
         word.startsWith("greetings") ||
         word.startsWith("howdy") ||
-        word.startsWith("hiya") ||
         word.startsWith("hey there") ||
         word.startsWith("what's up") ||
         word.startsWith("aloha") ||
         word.startsWith("bonjour") ||
-        word.startsWith("hola") ||
         word.startsWith("ciao") ||
         word.startsWith("guten tag") ||
         word.startsWith("namaste") ||
@@ -208,7 +206,10 @@ client.on("messageCreate", message => {
         word.startsWith("konnichiwa") ||
         word.startsWith("annyeong") ||
         word.startsWith("zdravstvuyte") ||
-        word.startsWith("sup")
+        word.toLowerCase() === "hiya" ||
+        word.toLowerCase() === "hola" ||
+        word.toLowerCase() === "sup" ||
+        word.toLowerCase() === "yo"
         );
         const hasCompliment1 = words.some(word =>
         word.startsWith("awesome") || 
