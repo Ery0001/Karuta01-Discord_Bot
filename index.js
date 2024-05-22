@@ -367,6 +367,7 @@ client.on('ready', async () => {
     scheduleEmbed('55 20 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting in 5 minutes!', "1237979376872718439", 1);
      // Thunderroar Recess
     scheduleEmbed('55 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 21 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!', "1237979376872718439", 1);
      // Crystal Battlefield
     scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
