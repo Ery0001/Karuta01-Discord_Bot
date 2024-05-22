@@ -345,9 +345,9 @@ client.on('ready', async () => {
     scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting from 9:00 to 21:30 (server time)!', "1237979376872718439", 1);
     scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439", 2);
      // Abyss Ruin
-    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439", 1);
+    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439", 0);
      // Time Trial 
-    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1237979376872718439", 1);
+    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1237979376872718439", 0);
      // Disaster Crusade
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reset!', "1237979376872718439", 0);
      // Burning Soul Battle
