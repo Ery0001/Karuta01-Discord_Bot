@@ -298,7 +298,7 @@ client.on("messageCreate", message => {
             message.reply(randomReplyCompliment);
         }
         if (hasInvite && hasLink) {
-            message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://discord.gg/j5BJHtzhnm`);
+            message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nbit.ly/Noblese`);
         }
         if (hasMention && hasThanks) {
             message.reply(`you're welcome <@!${message.author.id}><:Stare_erythrina:1238029119632048159>`);
