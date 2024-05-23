@@ -343,7 +343,7 @@ client.on('ready', async () => {
      // Elemental Realm
     scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reset!', "1237979376872718439", 0);
      // Madness Raid
-    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting from 9:00 to 21:30 (server time)!', "1237979376872718439", 1);
+    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting today from 9:00 to 21:30 (server time)!', "1237979376872718439", 1);
     scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1237979376872718439", 2);
      // Abyss Ruin
     scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1237979376872718439", 0);
@@ -375,16 +375,16 @@ client.on('ready', async () => {
     scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('10 0 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      // Scenic Quiz
-    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting from 9:00 to 23:00 (server time)!', "1237979376872718439", 1);
+    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting today from 9:00 to 23:00 (server time)!', "1237979376872718439", 1);
      // Miru Party
-    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting today from 9:00 to 23:00 (server time)!', "1237979376872718439", 1);
      // Miru Marathon
     scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Third Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      // Holy Fruit and Fog Island
-    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available!', "1237979376872718439", 0);
+    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available today from 9:00 to 23:00 (server time)!', "1237979376872718439", 0);
      //TEST
     /*scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 0);
     scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 1);
