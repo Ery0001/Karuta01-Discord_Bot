@@ -375,7 +375,7 @@ client.on('ready', async () => {
     scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('10 0 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      // Scenic Quiz
-    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting from 9:00 to 23:00 (server time)!', "1237979376872718439", 1);
      // Miru Party
     scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting in 5 minutes!', "1237979376872718439", 1);
      // Miru Marathon
@@ -391,10 +391,5 @@ client.on('ready', async () => {
     scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 2);*/
     //}
 });
-
-/*client.on('ready', () => {
-    client.user.setStatus('idle');
-    console.log(`Logged in as ${client.user.tag}`)
-})*/
 
 client.login(process.env.token);
