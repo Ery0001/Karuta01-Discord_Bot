@@ -391,9 +391,9 @@ client.on('ready', async () => {
     //}
 });
 
-client.on('ready', () => {
+/*client.on('ready', () => {
     client.user.setStatus('idle');
     console.log(`Logged in as ${client.user.tag}`)
-})
+})*/
 
 client.login(process.env.token);
