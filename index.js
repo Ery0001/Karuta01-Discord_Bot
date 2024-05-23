@@ -317,7 +317,8 @@ function randomMorningCalls() {
 }
 
 client.on('ready', async () => {
-    console.log('Bot Is Launched')
+    client.user.setStatus('idle');
+    console.log(`Logged in as ${client.user.tag}`)
     client.user.setActivity({
         name: `The Legend Of Neverland`,
         type: 'PLAYING'
