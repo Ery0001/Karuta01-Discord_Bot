@@ -345,7 +345,7 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-        if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
+if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
     let upcomingSchedules = schedules.map(schedule => {
         const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
         const nextRun = interval.next().toDate();
@@ -363,9 +363,11 @@ client.on("messageCreate", message => {
 
     upcomingSchedules.slice(0, 5).forEach(schedule => {
         const timeFormatted = moment(schedule.nextRun).format('MMMM Do YYYY, h:mm:ss a');
-        const messageWithStatus = schedule.nextRun < currentTime ? `${schedule.message} ✔` : schedule.message;
+        const messageField = schedule.nextRun < currentTime ? `${schedule.message}` : `${schedule.message} :white_check_mark:`;
+        const statusField = schedule.nextRun < currentTime ? '' : ':white_check_mark:';
         embed.addField('Time', timeFormatted, true);
-        embed.addField('Message', messageWithStatus, true);
+        embed.addField('Message', messageField, true);
+        embed.addField('Status', statusField, true); // Add Status field
     });
 
     message.reply({ embeds: [embed] });
