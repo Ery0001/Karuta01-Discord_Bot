@@ -120,6 +120,42 @@ const ErythinaMorningPhrase = [
     "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
 ];
 
+const schedules = [
+    { time: '0 6 * * *', message: '### [NOTICE]\nServer events and activities have been reset.' },
+    { time: '30 20 * * *', message: '### [NOTICE]\nGuild Bath has started!' },
+    { time: '40 20 * * *', message: '### [NOTICE]\nGuild Boss has started!' },
+    { time: '0 21 * * 2,4,6', message: '### [NOTICE]\nGuild War has started!' },
+    { time: '0 6 * * 1', message: '### [NOTICE]\nInstrumental Performance EXP in Life has been refreshed' },
+    { time: '0 6 * * 1', message: '### [NOTICE]\nThe special quest of Tess has begun.' },
+    { time: '0 6 * * *', message: '### [NOTICE]\nElemental Realm has been reset!' },
+    { time: '55 9 * * 1,3,5,7', message: '### [NOTICE]\nMadness Raid is starting today from 9:00 to 21:30 (server time)!' },
+    { time: '30 23 * * 1,3,5,7', message: '### [NOTICE]\nMadness Raid is closing!' },
+    { time: '0 6 * * 2,4,6,7', message: '### [NOTICE]\nAbyss Ruin is available!' },
+    { time: '0 6 * * 1,3,5,7', message: '### [NOTICE]\nTime Trial is available!' },
+    { time: '0 6 * * 1', message: '### [NOTICE]\nDisaster Crusade has been reset!' },
+    { time: '55 19 * * 2,4,6,7', message: '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!' },
+    { time: '0 6 * * 3-5', message: '### [NOTICE]\nShrine Rivalry is available!' },
+    { time: '55 21 * * 6', message: '### [NOTICE]\nShrine Peak is starting in 5 minutes!' },
+    { time: '55 12 * * 2,4,6', message: '### [NOTICE]\nUncharted Battlefield First Wave is starting in 5 minutes!' },
+    { time: '55 16 * * 2,4,6', message: '### [NOTICE]\nUncharted Battlefield Second Wave is starting in 5 minutes!' },
+    { time: '55 22 * * 2,4,6', message: '### [NOTICE]\nUncharted Battlefield Third Wave is starting in 5 minutes!' },
+    { time: '55 23 * * 2,4,6', message: '### [NOTICE]\nUncharted Battlefield Last Wave is starting in 5 minutes!' },
+    { time: '55 20 * * 3,5,7', message: '### [NOTICE]\nTop League is starting in 5 minutes!' },
+    { time: '55 19 * * 1,3,5', message: '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!' },
+    { time: '55 21 * * 1,3,5', message: '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!' },
+    { time: '55 12 * * 1,3,5,7', message: '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!' },
+    { time: '55 16 * * 1,3,5,7', message: '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!' },
+    { time: '55 22 * * 1,3,5,7', message: '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!' },
+    { time: '10 0 * * 1,3,5,7', message: '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!' },
+    { time: '55 9 * * 1,4', message: '### [NOTICE]\nScenic Quiz is starting today from 9:00 to 23:00 (server time)!' },
+    { time: '55 9 * * 2,6', message: '### [NOTICE]\nMiru Party is starting today from 9:00 to 23:00 (server time)!' },
+    { time: '25 12 * * *', message: '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!' },
+    { time: '25 15 * * *', message: '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!' },
+    { time: '25 18 * * *', message: '### [NOTICE]\nMiru Marathon Third Wave is starting in 5 minutes!' },
+    { time: '25 21 * * *', message: '### [NOTICE]\nMiru Marathon Last Wave is starting in 5 minutes!' },
+    { time: '0 10 * * 3,5,7', message: '### [NOTICE]\nHoly Fruit and Fog Island is available today from 9:00 to 23:00 (server time)!' },
+];
+
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -306,8 +342,29 @@ client.on("messageCreate", message => {
         if (hasMention && hasAsk) {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
+
+        if (hasMention && messageContent.includes("schedule") || messageContent.includes("schedules")) {
+            let upcomingSchedules = schedules.map(schedule => {
+                const nextRun = cron.nextDates(schedule.time, new Date());
+                return {
+                    nextRun,
+                    message: schedule.message
+                };
+            }).sort((a, b) => a.nextRun - b.nextRun);
+
+            let embed = new MessageEmbed()
+                .setTitle('Upcoming Schedules')
+                .setColor('#B76A82');
+
+            upcomingSchedules.slice(0, 5).forEach(schedule => {
+                embed.addField('Time', moment(schedule.nextRun).format('MMMM Do YYYY, h:mm:ss a'), true);
+                embed.addField('Message', schedule.message, true);
+            });
+
+            message.reply({ embeds: [embed] });
+        }
     }
-})
+});
 
 function randomMorningCalls() {
     if (ErythinaMorningPhrase.length > 0) {
