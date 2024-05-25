@@ -363,9 +363,11 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     const phTimezone = 'Asia/Manila';
 
     upcomingSchedules.slice(0, 5).forEach(schedule => {
-        const timeFormatted = moment(schedule.nextRun, phTimezone).format('MMM Do, HH:mm');
+        const phTime = moment.tz(schedule.nextRun, phTimezone);
+        const timeFormatted = phTime.format('Do HH:mm');
         const messageField = schedule.nextRun < currentTime ? `${schedule.message}` : `${schedule.message}`;
         const statusField = schedule.nextRun < currentTime ? '' : ':white_check_mark:';
+        
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
         embed.addField('Status', statusField, true);
