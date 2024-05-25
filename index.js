@@ -346,14 +346,15 @@ client.on("messageCreate", message => {
 
         if (hasMention && messageContent.includes("schedule") || messageContent.includes("schedules")) {
             let upcomingSchedules = schedules.map(schedule => {
-                const nextRun = cron.nextDates(schedule.time, new Date());
+                const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+                const nextRun = interval.next().toDate();
                 return {
                     nextRun,
                     message: schedule.message
                 };
             }).sort((a, b) => a.nextRun - b.nextRun);
 
-            let embed = new MessageEmbed()
+            let embed = new Discord.MessageEmbed()
                 .setTitle('Upcoming Schedules')
                 .setColor('#B76A82');
 
