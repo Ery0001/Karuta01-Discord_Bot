@@ -346,25 +346,31 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
-    let upcomingSchedules = schedules.map(schedule => {
-        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-        const nextRun = interval.next().toDate();
-        return {
-            nextRun,
-            message: schedule.message
-        };
-    }).sort((a, b) => a.nextRun - b.nextRun);
+    let upcomingSchedules = schedules
+        .map(schedule => {
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+            const nextRun = interval.next().toDate();
+            return {
+                nextRun,
+                message: schedule.message
+            };
+        })
+        .filter(schedule => {
+            const scheduleTime = moment(schedule.nextRun);
+            const today = moment().startOf('day');
+            return scheduleTime.isSame(today, 'day');
+        })
+        .sort((a, b) => a.nextRun - b.nextRun);
 
     let embed = new Discord.MessageEmbed()
-        .setTitle('Upcoming Schedules')
+        .setTitle('Today\'s Upcoming Schedules')
         .setColor('#B76A82');
 
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
 
-    upcomingSchedules.slice(0, 5).forEach(schedule => {
-        const phTime = moment.tz(schedule.nextRun, phTimezone);
-        const timeFormatted = phTime.format('Do HH:mm');
+    upcomingSchedules.forEach(schedule => {
+        const timeFormatted = moment(schedule.nextRun).format('MMM Do, HH:mm');
         const messageField = schedule.nextRun < currentTime ? `${schedule.message}` : `${schedule.message}`;
         const statusField = schedule.nextRun < currentTime ? '' : ':white_check_mark:';
         
