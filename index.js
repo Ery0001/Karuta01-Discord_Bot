@@ -362,7 +362,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     const currentTime = new Date();
 
     upcomingSchedules.slice(0, 5).forEach(schedule => {
-        const timeFormatted = moment(schedule.nextRun).format('MMMM Do YYYY, h:mm:ss a');
+        const timeFormatted = moment(schedule.nextRun).format('MMM Do, HH:mm');
         const messageField = schedule.nextRun < currentTime ? `${schedule.message}` : `${schedule.message} :white_check_mark:`;
         const statusField = schedule.nextRun < currentTime ? '' : ':white_check_mark:';
         embed.addField('Time', timeFormatted, true);
