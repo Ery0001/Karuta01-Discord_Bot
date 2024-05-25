@@ -40,8 +40,6 @@ client.once('ready', () => {
     scheduleEmbed(client);
 });
 
-client.login('YOUR_BOT_TOKEN');
-
 app.listen(3000, () => {
     console.log("Project is running!");
 });
@@ -49,3 +47,5 @@ app.listen(3000, () => {
 app.get("/", (req, res) => {
     res.send("Erythina is Online! (i think)");
 });
+
+client.login(process.env.token);
