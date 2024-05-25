@@ -339,6 +339,8 @@ client.on('ready', async () => {
     scheduleEmbed('0 21 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1237979376872718439", 1);
      // Instrumental Performance
     scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Performance EXP in Life has been refreshed', "1237979376872718439", 0);
+     // Special Quest of Tess
+    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nThe special quest of Tess has begun.', "1237979376872718439", 0);
      // Elemental Realm
     scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reset!', "1237979376872718439", 0);
      // Madness Raid
