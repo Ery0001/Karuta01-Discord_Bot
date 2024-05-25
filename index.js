@@ -345,27 +345,31 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-        if (hasMention && messageContent.includes("schedule") || messageContent.includes("schedules")) {
-            let upcomingSchedules = schedules.map(schedule => {
-                const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-                const nextRun = interval.next().toDate();
-                return {
-                    nextRun,
-                    message: schedule.message
-                };
-            }).sort((a, b) => a.nextRun - b.nextRun);
+        if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
+    let upcomingSchedules = schedules.map(schedule => {
+        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+        const nextRun = interval.next().toDate();
+        return {
+            nextRun,
+            message: schedule.message
+        };
+    }).sort((a, b) => a.nextRun - b.nextRun);
 
-            let embed = new Discord.MessageEmbed()
-                .setTitle('Upcoming Schedules')
-                .setColor('#B76A82');
+    let embed = new Discord.MessageEmbed()
+        .setTitle('Upcoming Schedules')
+        .setColor('#B76A82');
 
-            upcomingSchedules.slice(0, 5).forEach(schedule => {
-                embed.addField('Time', moment(schedule.nextRun).format('MMMM Do YYYY, h:mm:ss a'), true);
-                embed.addField('Message', schedule.message, true);
-            });
+    const currentTime = new Date();
 
-            message.reply({ embeds: [embed] });
-        }
+    upcomingSchedules.slice(0, 5).forEach(schedule => {
+        const timeFormatted = moment(schedule.nextRun).format('MMMM Do YYYY, h:mm:ss a');
+        const messageWithStatus = schedule.nextRun < currentTime ? `${schedule.message} ✔` : schedule.message;
+        embed.addField('Time', timeFormatted, true);
+        embed.addField('Message', messageWithStatus, true);
+    });
+
+    message.reply({ embeds: [embed] });
+}
     }
 });
 
