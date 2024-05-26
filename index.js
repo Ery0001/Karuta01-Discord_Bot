@@ -359,6 +359,7 @@ if (hasMention && hasMentionSchedule) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
     const todayEnd = currentTime.clone().endOf('day');
+   
 
     let todaysSchedules = schedules
         .map(schedule => {
@@ -370,7 +371,7 @@ if (hasMention && hasMentionSchedule) {
             };
         })
         .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); // Minus 1 hour and convert to PH timezone
+            const scheduleTime = moment(schedule.nextRun); // Minus 1 hour and convert to PH timezone
             return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
         })
         .sort((a, b) => a.nextRun - b.nextRun);
@@ -381,7 +382,7 @@ if (hasMention && hasMentionSchedule) {
         .setColor('#B76A82');
 
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun); 
+        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); 
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
