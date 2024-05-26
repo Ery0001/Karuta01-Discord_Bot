@@ -356,65 +356,45 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-// This function checks if a given cron time string matches the current time
-function checkIfPast(timeString) {
-    const schedule = later.parse.cron(timeString, true);
-    const now = new Date();
-    const next = later.schedule(schedule).next(1, now);
-    return moment(next).isBefore(now);
-}
-
-// Adjust schedules to Asia/Manila timezone and determine if the event is over
-const adjustedSchedules = schedules.map(schedule => {
-    const manilaTime = moment.tz(schedule.time, 'Asia/Manila');
-    const isPast = checkIfPast(schedule.time);
-    return {
-        ...schedule,
-        time: manilaTime.format('HH:mm'),
-        status: isPast ? ':white_check_mark:' : ''
-    };
-});
-
-// Filter the schedules for events between 2AM and 1AM
-const todaySchedules = adjustedSchedules.filter(schedule => {
-    const time = moment(schedule.time, 'HH:mm');
-    return time.isBetween(moment('02:00', 'HH:mm'), moment('01:00', 'HH:mm').add(1, 'day'));
-});
-
-// Function to create embed
-function createEmbed(title, events) {
-    const embed = new MessageEmbed()
-        .setTitle(title)
-        .setColor('#0099ff');
-
-    events.forEach(event => {
-        embed.addField(event.time, `${event.message} ${event.status}`, false);
-    });
-
-    return embed;
-}
-
 if (hasMention && hasMentionSchedule) {
-    // Create embeds
-    const embeds = [];
-    let tempEvents = [];
-    const embedLimit = 25; // Discord embed field limit
+ later.date.localTime();
 
-    todaySchedules.forEach((event, index) => {
-        tempEvents.push(event);
+        const currentTime = moment().tz('Asia/Manila');
 
-        if (tempEvents.length === embedLimit || index === todaySchedules.length - 1) {
-            embeds.push(createEmbed('Today\'s Events', tempEvents));
-            tempEvents = [];
-        }
-    });
+        const todayStart = currentTime.clone().startOf('day').add(2, 'hours');
+        const todayEnd = currentTime.clone().endOf('day').add(1, 'day').subtract(1, 'hours');
 
-    // Output embeds
-    embeds.forEach(embed => {
-        // Assuming you have a function to send embed to your Discord channel
-        sendEmbedToChannel(embed);
-    });
-}
+        const todaysSchedules = schedules.map(schedule => {
+            const parsed = later.parse.cron(schedule.time, true);
+            const nextRun = later.schedule(parsed).next(1);
+            return {
+                nextRun,
+                message: schedule.message
+            };
+        }).filter(schedule => {
+            const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
+            const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
+            return adjustedScheduleTime.isBetween(todayStart, todayEnd, null, '[]');
+        }).sort((a, b) => a.nextRun - b.nextRun);
+
+        const embed = new MessageEmbed()
+            .setTitle('Today\'s Schedules')
+            .setColor('#B76A82');
+
+        todaysSchedules.forEach(schedule => {
+            const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
+            const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
+            const timeFormatted = adjustedScheduleTime.format('MMM Do, HH:mm');
+            const statusField = adjustedScheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
+
+            embed.addField('Time', timeFormatted, true);
+            embed.addField('Message', schedule.message, true);
+            embed.addField('Status', statusField, true);
+        });
+
+        message.channel.send({ embeds: [embed] });
+    }
+
 
     }
 });
