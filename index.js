@@ -356,25 +356,24 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && hasMentionSchedule) {
-    const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
-    const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
+    const currentTime = moment().tz('Asia/Manila');
+    const todayStart = currentTime.clone().startOf('day');
     const todayEnd = currentTime.clone().endOf('day');
    
-
-let todaysSchedules = schedules
-    .map(schedule => {
-        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-        const nextRun = interval.next().toDate();
-        return {
-            nextRun,
-            message: schedule.message
-        };
-    })
-    .filter(schedule => {
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
-        return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
-    })
-    .sort((a, b) => a.nextRun - b.nextRun);
+    let todaysSchedules = schedules
+        .map(schedule => {
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+            const nextRun = interval.next().toDate();
+            return {
+                nextRun,
+                message: schedule.message
+            };
+        })
+        .filter(schedule => {
+            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
+            return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
+        })
+        .sort((a, b) => a.nextRun - b.nextRun);
 
     const embeds = [];
     let currentEmbed = new Discord.MessageEmbed()
@@ -382,8 +381,8 @@ let todaysSchedules = schedules
         .setColor('#B76A82');
 
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); 
-        const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
+        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila'); 
+        const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
 
@@ -393,7 +392,9 @@ let todaysSchedules = schedules
 
         if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
             embeds.push(currentEmbed);
-            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82');
+            currentEmbed = new Discord.MessageEmbed()
+                .setTitle('Today\'s Schedules')
+                .setColor('#B76A82');
         }
     });
 
