@@ -356,13 +356,14 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && hasMentionSchedule) {
-    const currentTime = moment().tz('Asia/Manila');
-    const todayStart = currentTime.clone().startOf('day');
-    const todayEnd = currentTime.clone().endOf('day');
+    const currentTime = new Date();
+    const phTimezone = 'Asia/Manila';
+    const todayStart = moment.tz(currentTime, phTimezone).startOf('day');
+    const todayEnd = moment(today).add(1, 'day');
    
     let todaysSchedules = schedules
         .map(schedule => {
-            const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentDate});
             const nextRun = interval.next().toDate();
             return {
                 nextRun,
@@ -370,7 +371,7 @@ if (hasMention && hasMentionSchedule) {
             };
         })
         .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
+            const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
             return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
         })
         .sort((a, b) => a.nextRun - b.nextRun);
@@ -381,7 +382,7 @@ if (hasMention && hasMentionSchedule) {
         .setColor('#B76A82');
 
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila'); 
+        const scheduleTime = moment(schedule.nextRun).tz(phTimezone); 
         const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
