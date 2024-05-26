@@ -355,8 +355,8 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
-      later.date.localTime();
+if (hasMention && hasMentionSchedule) {
+       later.date.localTime();
 
     let upcomingSchedules = schedules.map(schedule => {
         const parsed = later.parse.cron(schedule.time, true);
@@ -367,6 +367,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         };
     }).sort((a, b) => a.nextRun - b.nextRun);
 
+    const embeds = [];
     let embed = new Discord.MessageEmbed()
         .setTitle('Today\'s Schedules')
         .setColor('#B76A82');
