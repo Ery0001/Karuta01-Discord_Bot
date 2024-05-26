@@ -389,8 +389,8 @@ if (hasMention && hasMentionSchedule) {
 
     // Iterate over the filtered schedules and add them to embeds
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour'); // Convert to PH timezone and subtract 1 hour
-        const timeFormatted = scheduleTime.format('MMM Do, HH:mm'); // Format time
+        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila'); // Convert to PH timezone and subtract 1 hour
+        const timeFormatted = scheduleTime.subtract(1, 'hour').format('MMM Do, HH:mm'); // Format time
         const messageField = `${schedule.message}`; // Message field
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Status field
 
