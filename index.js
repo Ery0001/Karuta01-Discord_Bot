@@ -350,10 +350,8 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
     const todayEnd = currentTime
     .clone()
-    .startOf('day') // Start of the current day (12:00:00 AM)
-    .add(1, 'day') // Move to the next day
-    .startOf('day') // Start of the next day (12:00:00 AM)
-    .subtract(1, 'second'); // Subtract one second to reach the end of the current day
+    .endOf('day') // End of the current day (11:59:59 PM)
+    .subtract(1, 'second'); // Subtract one second to include events up to 23:59:59
 
     let todaysSchedules = schedules
         .map(schedule => {
