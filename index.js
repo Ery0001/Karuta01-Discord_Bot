@@ -369,7 +369,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setTitle('Today\'s Schedules')
         .setColor('#B76A82');
 
-    todaysSchedules.forEach(schedule => {
+    todaysSchedules.slice(0, 8).forEach(schedule => { // Limit to 8 schedules (24 fields)
         const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
