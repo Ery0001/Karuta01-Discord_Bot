@@ -361,20 +361,20 @@ if (hasMention && hasMentionSchedule) {
     const todayEnd = currentTime.clone().endOf('day');
    
 
-    let todaysSchedules = schedules
-        .map(schedule => {
-            const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-            const nextRun = interval.next().toDate();
-            return {
-                nextRun,
-                message: schedule.message
-            };
-        })
-        .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun); // Minus 1 hour and convert to PH timezone
-            return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
-        })
-        .sort((a, b) => a.nextRun - b.nextRun);
+let todaysSchedules = schedules
+    .map(schedule => {
+        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+        const nextRun = interval.next().toDate();
+        return {
+            nextRun,
+            message: schedule.message
+        };
+    })
+    .filter(schedule => {
+        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
+        return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
+    })
+    .sort((a, b) => a.nextRun - b.nextRun);
 
     const embeds = [];
     let currentEmbed = new Discord.MessageEmbed()
