@@ -348,7 +348,7 @@ client.on("messageCreate", message => {
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day');
-    const todayEnd = currentTime.clone().endOf('day');
+    const todayEnd = currentTime.clone().endOf('day').add(1, 'second'); // End of the day (12:00:00 AM next day)
 
     let todaysSchedules = schedules
         .map(schedule => {
@@ -382,11 +382,14 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
 
         if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
             embeds.push(currentEmbed);
-            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82');
+            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82').setTitle('Today\'s Schedules');
         }
     });
 
-    embeds.forEach(embed => message.reply({ embeds: [embed] }));
+    embeds.forEach((embed, index) => {
+        const sendOptions = index === 0 ? {} : { allowedMentions: { repliedUser: false } };
+        message.reply({ embeds: [embed], ...sendOptions });
+    });
 }
     }
 });
