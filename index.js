@@ -374,7 +374,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     todaysSchedules.forEach(schedule => {
         const timeFormatted = moment(schedule.nextRun).tz(phTimezone).format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
-        const statusField = schedule.nextRun < currentTime ? ':white_check_mark:' : ''; // Check mark for past events
+        const statusField = schedule.nextRun < currentTime ? ':white_check_mark:' : '\u200B'; // Use zero-width space for empty status
         
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
