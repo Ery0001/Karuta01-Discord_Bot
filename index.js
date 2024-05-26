@@ -359,7 +359,7 @@ if (hasMention && hasMentionSchedule) {
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
     const todayStart = moment.tz(currentTime, phTimezone).startOf('day');
-    const todayEnd = moment(today).add(1, 'day');
+    const todayEnd = moment.tz(today).add(1, 'day');
    
     let todaysSchedules = schedules
         .map(schedule => {
