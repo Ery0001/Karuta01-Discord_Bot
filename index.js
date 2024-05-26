@@ -356,7 +356,7 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && hasMentionSchedule) {
-       later.date.localTime();
+       //later.date.localTime();
 
     let upcomingSchedules = schedules.map(schedule => {
         const parsed = later.parse.cron(schedule.time, true);
