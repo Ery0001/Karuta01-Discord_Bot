@@ -375,10 +375,12 @@ if (hasMention && hasMentionSchedule) {
             message: schedule.message
         };
     }).filter(schedule => {
-        // Convert the schedule time to PH timezone and subtract 1 hour
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
-        // Check if the schedule time is within today's range
-        return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
+        // Convert the schedule time to PH timezone
+        const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
+        // Adjust the schedule time if needed (subtract 1 hour)
+        const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
+        // Check if the adjusted schedule time is within today's range
+        return adjustedScheduleTime.isBetween(todayStart, todayEnd, null, '[]');
     }).sort((a, b) => a.nextRun - b.nextRun);
 
     // Create embeds to display the schedules
@@ -389,10 +391,12 @@ if (hasMention && hasMentionSchedule) {
 
     // Iterate over the filtered schedules and add them to embeds
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila'); // Convert to PH timezone and subtract 1 hour
-        const timeFormatted = scheduleTime.subtract(1, 'hour').format('MMM Do, HH:mm'); // Format time
+        const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
+        // Adjust the schedule time if needed (subtract 1 hour)
+        const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
+        const timeFormatted = adjustedScheduleTime.format('MMM Do, HH:mm'); // Format time
         const messageField = `${schedule.message}`; // Message field
-        const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Status field
+        const statusField = adjustedScheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Status field
 
         // Add fields to the embed
         embed.addField('Time', timeFormatted, true);
