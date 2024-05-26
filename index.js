@@ -372,9 +372,10 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setColor('#B76A82');
 
     todaysSchedules.forEach(schedule => {
-        const timeFormatted = moment(schedule.nextRun).format('MMM Do, HH:mm');
+        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour');
+        const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
-        const statusField = schedule.nextRun < currentTime ? ':white_check_mark:' : '\u200B'; // Use zero-width space for empty status
+        const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Show checkmark if event is in the past
         
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
