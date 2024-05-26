@@ -226,6 +226,16 @@ client.on("messageCreate", message => {
         word.startsWith("eryt") ||
         word.startsWith("ery")
         );
+
+        const hasMentionSchedule = words.some(word =>
+        word.startsWith("schedules") ||
+        word.startsWith("schedule") ||
+        word.startsWith("schedul") ||
+        word.startsWith("sched") ||
+        word.startsWith("scheds") ||
+        word.startsWith("sche") ||
+        );
+
         const hasGreet = words.some(word =>
         word.startsWith("hello") ||
         word.toLowerCase() === "hi" ||
@@ -345,10 +355,10 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
+if (hasMention && hasMentionSchedule) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
-    const todayEnd = currentTime.clone().endOf('day').add(1, 'second');
+    const todayEnd = currentTime.clone().endOf('day');
 
     let todaysSchedules = schedules
         .map(schedule => {
