@@ -345,15 +345,14 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
+
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
-    const currentTime = new Date();
-    const phTimezone = 'Asia/Manila';
-    const today = moment.tz(currentTime, phTimezone).startOf('day');
-    const tomorrow = moment(today).add(1, 'day');
+    const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
+    const today = currentTime.clone().startOf('day');
 
     let todaysSchedules = schedules
         .map(schedule => {
-            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentTime });
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
             const nextRun = interval.next().toDate();
             return {
                 nextRun,
@@ -361,7 +360,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
             };
         })
         .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
+            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
             return scheduleTime.isSame(today, 'day');
         })
         .sort((a, b) => a.nextRun - b.nextRun);
@@ -371,11 +370,11 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setColor('#B76A82');
 
     todaysSchedules.forEach(schedule => {
-        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); // Subtract 1 hour without timezone conversion
+        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Show checkmark if event is in the past
-        
+
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
         embed.addField('Status', statusField, true);
