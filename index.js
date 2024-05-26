@@ -233,7 +233,7 @@ client.on("messageCreate", message => {
         word.startsWith("schedul") ||
         word.startsWith("sched") ||
         word.startsWith("scheds") ||
-        word.startsWith("sche") ||
+        word.startsWith("sche")
         );
 
         const hasGreet = words.some(word =>
