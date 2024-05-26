@@ -355,54 +355,35 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-if (hasMention && hasMentionSchedule) {
-    const currentTime = new Date();
-    const phTimezone = 'Asia/Manila';
-    const todayStart = moment.tz(currentTime, phTimezone).startOf('day');
-    const todayEnd = moment.tz(currentTime, phTimezone).endOf('day').subtract(1, 'minute'); // Set to 23:59 to avoid crossing the day boundary
+if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
+    let upcomingSchedules = schedules.map(schedule => {
+        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
+        const nextRun = interval.next().toDate();
+        return {
+            nextRun,
+            message: schedule.message
+        };
+    }).sort((a, b) => a.nextRun - b.nextRun);
 
-    let todaysSchedules = schedules
-        .map(schedule => {
-            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentTime });
-            const nextRun = interval.next().toDate();
-            return {
-                nextRun,
-                message: schedule.message
-            };
-        })
-        .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
-            return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
-        })
-        .sort((a, b) => a.nextRun - b.nextRun);
-
-    const embeds = [];
-    let currentEmbed = new Discord.MessageEmbed()
-        .setTitle('Today\'s Schedules')
+    let embed = new Discord.MessageEmbed()
+        .setTitle('Upcoming Schedules')
         .setColor('#B76A82');
 
-    todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).tz(phTimezone); 
+    const currentTime = new Date();
+    const phTimezone = 'Asia/Manila';
+
+    upcomingSchedules.slice(0, 5).forEach(schedule => {
+        const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
         const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(moment.tz(currentTime, phTimezone)) ? ':white_check_mark:' : '\u200B';
-
-        currentEmbed.addField('Time', timeFormatted, true);
-        currentEmbed.addField('Message', messageField, true);
-        currentEmbed.addField('Status', statusField, true);
-
-        if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
-            embeds.push(currentEmbed);
-            currentEmbed = new Discord.MessageEmbed()
-                .setTitle('Today\'s Schedules')
-                .setColor('#B76A82');
-        }
+        
+        embed.addField('Time', timeFormatted, true);
+        embed.addField('Message', messageField, true);
+        embed.addField('Status', statusField, true);
     });
 
-    embeds.forEach((embed, index) => {
-        const sendOptions = index === 0 ? {} : { allowedMentions: { repliedUser: false } };
-        message.channel.send({ embeds: [embed], ...sendOptions });
-    });
+    message.reply({ embeds: [embed] });
 }
     }
 });
