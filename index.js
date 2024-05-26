@@ -359,8 +359,8 @@ if (hasMention && hasMentionSchedule) {
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
     const todayStart = moment.tz(currentTime, phTimezone).startOf('day');
-    const todayEnd = moment.tz(currentTime, phTimezone).endOf('day');
-   
+    const todayEnd = moment.tz(currentTime, phTimezone).endOf('day').subtract(1, 'minute'); // Set to 23:59 to avoid crossing the day boundary
+
     let todaysSchedules = schedules
         .map(schedule => {
             const interval = cronParser.parseExpression(schedule.time, { currentDate: currentTime });
