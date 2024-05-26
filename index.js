@@ -356,9 +356,11 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
+      later.date.localTime();
+
     let upcomingSchedules = schedules.map(schedule => {
-        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-        const nextRun = interval.next().toDate();
+        const parsed = later.parse.cron(schedule.time, true);
+        const nextRun = later.schedule(parsed).next(1);
         return {
             nextRun,
             message: schedule.message
@@ -366,24 +368,42 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     }).sort((a, b) => a.nextRun - b.nextRun);
 
     let embed = new Discord.MessageEmbed()
-        .setTitle('Upcoming Schedules')
+        .setTitle('Today\'s Schedules')
         .setColor('#B76A82');
 
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
 
-    upcomingSchedules.slice(0, 5).forEach(schedule => {
+    const todayStart = moment.tz(currentTime, phTimezone).startOf('day').add(1, 'hour'); // 1:00 AM
+    const todayEnd = moment.tz(currentTime, phTimezone).endOf('day'); // End of day (11:59:59 PM)
+
+    let todaysSchedules = upcomingSchedules.filter(schedule => {
         const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
-        const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm');
+        return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
+    });
+
+    todaysSchedules.forEach((schedule, index) => {
+        const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
+        const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm'); // Subtract one hour for display
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(moment.tz(currentTime, phTimezone)) ? ':white_check_mark:' : '\u200B';
-        
+
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
         embed.addField('Status', statusField, true);
+
+        if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
+            embeds.push(embed);
+            embed = new Discord.MessageEmbed()
+                .setTitle('Today\'s Schedules')
+                .setColor('#B76A82');
+        }
     });
 
-    message.reply({ embeds: [embed] });
+    embeds.forEach((embed, index) => {
+        const sendOptions = index === 0 ? {} : { allowedMentions: { repliedUser: false } };
+        message.channel.send({ embeds: [embed], ...sendOptions });
+    });
 }
     }
 });
