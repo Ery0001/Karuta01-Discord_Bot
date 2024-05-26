@@ -348,7 +348,12 @@ client.on("messageCreate", message => {
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
-    const todayEnd = currentTime.clone().endOf('day').add(1, 'day').startOf('day').subtract(1, 'hour'); // End of the next day (12:00 AM)
+    const todayEnd = currentTime
+        .clone()
+        .endOf('day') // End of the current day (11:59:59 PM)
+        .add(1, 'day') // Move to the next day
+        .startOf('day') // Start of the next day (12:00:00 AM)
+        .subtract(1, 'hour'); // Subtract one hour to get 11:00 PM of the current day
 
     let todaysSchedules = schedules
         .map(schedule => {
@@ -360,7 +365,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
             };
         })
         .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour'); // Minus 1 hour and convert to PH timezone
+            const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); // Minus 1 hour and convert to PH timezone
             return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
         })
         .sort((a, b) => a.nextRun - b.nextRun);
@@ -371,7 +376,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setColor('#B76A82');
 
     todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour'); // Minus 1 hour and convert to PH timezone
+        const scheduleTime = moment(schedule.nextRun); 
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
@@ -382,13 +387,13 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
 
         if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
             embeds.push(currentEmbed);
-            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82').setTitle('Today\'s Schedules');
+            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82');
         }
     });
 
     embeds.forEach((embed, index) => {
         const sendOptions = index === 0 ? {} : { allowedMentions: { repliedUser: false } };
-        message.reply({ embeds: [embed], ...sendOptions });
+        message.channel.send({ embeds: [embed], ...sendOptions });
     });
 }
     }
