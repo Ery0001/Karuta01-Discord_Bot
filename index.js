@@ -345,7 +345,6 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
@@ -372,7 +371,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setColor('#B76A82');
 
     todaysSchedules.forEach(schedule => {
-        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour');
+        const scheduleTime = moment(schedule.nextRun).subtract(1, 'hour'); // Subtract 1 hour without timezone conversion
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Show checkmark if event is in the past
