@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const cron = require('node-cron');
 const cronParser = require('cron-parser');
+const later = require('later');
 const moment = require('moment-timezone');
 const app = express();
 const someFunc = () => {
@@ -356,7 +357,7 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && hasMentionSchedule) {
-       //later.date.localTime();
+       later.date.localTime();
 
     let upcomingSchedules = schedules.map(schedule => {
         const parsed = later.parse.cron(schedule.time, true);
