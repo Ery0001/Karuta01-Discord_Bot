@@ -345,10 +345,10 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
-    const today = currentTime.clone().startOf('day');
+    const todayStart = currentTime.clone().startOf('day');
+    const todayEnd = currentTime.clone().endOf('day');
 
     let todaysSchedules = schedules
         .map(schedule => {
@@ -361,7 +361,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         })
         .filter(schedule => {
             const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
-            return scheduleTime.isSame(today, 'day');
+            return scheduleTime.isBetween(todayStart, todayEnd, null, '[]');
         })
         .sort((a, b) => a.nextRun - b.nextRun);
 
