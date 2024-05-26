@@ -372,7 +372,7 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         .setColor('#B76A82');
 
     todaysSchedules.forEach(schedule => {
-        const timeFormatted = moment(schedule.nextRun).tz(phTimezone).format('MMM Do, HH:mm');
+        const timeFormatted = moment(schedule.nextRun).format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
         const statusField = schedule.nextRun < currentTime ? ':white_check_mark:' : '\u200B'; // Use zero-width space for empty status
         
