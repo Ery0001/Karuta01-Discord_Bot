@@ -349,11 +349,11 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
     const todayEnd = currentTime
-        .clone()
-        .endOf('day') // End of the current day (11:59:59 PM)
-        .add(1, 'day') // Move to the next day
-        .startOf('day') // Start of the next day (12:00:00 AM)
-        .subtract(1, 'hour'); // Subtract one hour to get 11:00 PM of the current day
+    .clone()
+    .startOf('day') // Start of the current day (12:00:00 AM)
+    .add(1, 'day') // Move to the next day
+    .startOf('day') // Start of the next day (12:00:00 AM)
+    .subtract(1, 'second'); // Subtract one second to reach the end of the current day
 
     let todaysSchedules = schedules
         .map(schedule => {
