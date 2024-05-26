@@ -135,26 +135,26 @@ const schedules = [
     { time: '0 6 * * 2,4,6,7', message: 'Abyss Ruin.' },
     { time: '0 6 * * 1,3,5,7', message: 'Time Trial.' },
     { time: '0 6 * * 1', message: 'Disaster Crusade reset.' },
-    { time: '55 19 * * 2,4,6,7', message: 'Burning Soul Battle.' },
+    { time: '0 20 * * 2,4,6,7', message: 'Burning Soul Battle.' },
     { time: '0 6 * * 3-5', message: 'Shrine Rivalry.' },
-    { time: '55 21 * * 6', message: 'Shrine Peak.' },
-    { time: '55 12 * * 2,4,6', message: 'Uncharted Battlefield First Wave.' },
-    { time: '55 16 * * 2,4,6', message: 'Uncharted Battlefield Second Wave.' },
-    { time: '55 22 * * 2,4,6', message: 'Uncharted Battlefield Third Wave.' },
-    { time: '55 23 * * 2,4,6', message: 'Uncharted Battlefield Last Wave.' },
-    { time: '55 20 * * 3,5,7', message: 'Top League.' },
-    { time: '55 21 * * 1,3,5', message: 'Thunderroar Recess (19:00 to 21:00).' },
+    { time: '0 22 * * 6', message: 'Shrine Peak.' },
+    { time: '0 13 * * 2,4,6', message: 'Uncharted Battlefield First Wave.' },
+    { time: '0 17 * * 2,4,6', message: 'Uncharted Battlefield Second Wave.' },
+    { time: '0 23 * * 2,4,6', message: 'Uncharted Battlefield Third Wave.' },
+    { time: '0 24 * * 2,4,6', message: 'Uncharted Battlefield Last Wave.' },
+    { time: '0 21 * * 3,5,7', message: 'Top League.' },
+    { time: '0 22 * * 1,3,5', message: 'Thunderroar Recess (19:00 to 21:00).' },
     //{ time: '55 21 * * 1,3,5', message: 'Thunderroar Recess.' },
-    { time: '55 12 * * 1,3,5,7', message: 'Crystal Battlefield First Wave.' },
-    { time: '55 16 * * 1,3,5,7', message: 'Crystal Battlefield Second Wave.' },
-    { time: '55 22 * * 1,3,5,7', message: 'Crystal Battlefield Third Wave.' },
-    { time: '10 0 * * 1,3,5,7', message: 'Crystal Battlefield Last Wave.' },
-    { time: '55 23 * * 1,4', message: 'Scenic Quiz today (9:00 to 23:00).' },
-    { time: '55 23 * * 2,6', message: 'Miru Party today (9:00 to 23:00).' },
-    { time: '25 12 * * *', message: 'Miru Marathon First Wave.' },
-    { time: '25 15 * * *', message: 'Miru Marathon Second Wave.' },
-    { time: '25 18 * * *', message: 'Miru Marathon Third Wave.' },
-    { time: '25 21 * * *', message: 'Miru Marathon Last Wave.' },
+    { time: '0 13 * * 1,3,5,7', message: 'Crystal Battlefield First Wave.' },
+    { time: '0 17 * * 1,3,5,7', message: 'Crystal Battlefield Second Wave.' },
+    { time: '0 23 * * 1,3,5,7', message: 'Crystal Battlefield Third Wave.' },
+    { time: '0 0 * * 1,3,5,7', message: 'Crystal Battlefield Last Wave.' },
+    { time: '0 0 * * 1,4', message: 'Scenic Quiz today (9:00 to 23:00).' },
+    { time: '0 0 * * 2,6', message: 'Miru Party today (9:00 to 23:00).' },
+    { time: '30 12 * * *', message: 'Miru Marathon First Wave.' },
+    { time: '30 15 * * *', message: 'Miru Marathon Second Wave.' },
+    { time: '30 18 * * *', message: 'Miru Marathon Third Wave.' },
+    { time: '30 21 * * *', message: 'Miru Marathon Last Wave.' },
     { time: '0 10 * * 3,5,7', message: 'Holy Fruit and Fog Island (9:00 to 23:00).' },
 ];
 
@@ -456,7 +456,7 @@ client.on('ready', async () => {
     scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1237979376872718439", 1);
     scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!', "1237979376872718439", 1);
-    scheduleEmbed('10 0 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1237979376872718439", 1);
+    scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1237979376872718439", 1);
      // Scenic Quiz
     scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting today from 9:00 to 23:00 (server time)!', "1237979376872718439", 1);
      // Miru Party
