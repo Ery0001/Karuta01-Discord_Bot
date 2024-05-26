@@ -365,22 +365,28 @@ if (hasMention && (messageContent.includes("schedule") || messageContent.include
         })
         .sort((a, b) => a.nextRun - b.nextRun);
 
-    let embed = new Discord.MessageEmbed()
+    const embeds = [];
+    let currentEmbed = new Discord.MessageEmbed()
         .setTitle('Today\'s Schedules')
         .setColor('#B76A82');
 
-    todaysSchedules.slice(0, 8).forEach(schedule => { // Limit to 8 schedules (24 fields)
+    todaysSchedules.forEach((schedule, index) => {
         const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila').subtract(1, 'hour');
         const timeFormatted = scheduleTime.format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
-        const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Show checkmark if event is in the past
+        const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
 
-        embed.addField('Time', timeFormatted, true);
-        embed.addField('Message', messageField, true);
-        embed.addField('Status', statusField, true);
+        currentEmbed.addField('Time', timeFormatted, true);
+        currentEmbed.addField('Message', messageField, true);
+        currentEmbed.addField('Status', statusField, true);
+
+        if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) { // Check if we need a new embed
+            embeds.push(currentEmbed);
+            currentEmbed = new Discord.MessageEmbed().setColor('#B76A82');
+        }
     });
 
-    message.reply({ embeds: [embed] });
+    embeds.forEach(embed => message.reply({ embeds: [embed] }));
 }
     }
 });
