@@ -356,67 +356,66 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
+// This function checks if a given cron time string matches the current time
+function checkIfPast(timeString) {
+    const schedule = later.parse.cron(timeString, true);
+    const now = new Date();
+    const next = later.schedule(schedule).next(1, now);
+    return moment(next).isBefore(now);
+}
+
+// Adjust schedules to Asia/Manila timezone and determine if the event is over
+const adjustedSchedules = schedules.map(schedule => {
+    const manilaTime = moment.tz(schedule.time, 'Asia/Manila');
+    const isPast = checkIfPast(schedule.time);
+    return {
+        ...schedule,
+        time: manilaTime.format('HH:mm'),
+        status: isPast ? ':white_check_mark:' : ''
+    };
+});
+
+// Filter the schedules for events between 2AM and 1AM
+const todaySchedules = adjustedSchedules.filter(schedule => {
+    const time = moment(schedule.time, 'HH:mm');
+    return time.isBetween(moment('02:00', 'HH:mm'), moment('01:00', 'HH:mm').add(1, 'day'));
+});
+
+// Function to create embed
+function createEmbed(title, events) {
+    const embed = new MessageEmbed()
+        .setTitle(title)
+        .setColor('#0099ff');
+
+    events.forEach(event => {
+        embed.addField(event.time, `${event.message} ${event.status}`, false);
+    });
+
+    return embed;
+}
+
 if (hasMention && hasMentionSchedule) {
-    later.date.localTime();
-
-    // Get the current time in the PH timezone
-    const currentTime = moment().tz('Asia/Manila');
-
-    // Define the time range for today's schedules (2:00 AM to 1:00 AM next day)
-    const todayStart = currentTime.clone().startOf('day').add(2, 'hours'); // Start from 2:00 AM
-    const todayEnd = currentTime.clone().endOf('day').add(1, 'day').subtract(1, 'hours'); // End at 1:00 AM the next day
-
-    // Map, filter, and sort the upcoming schedules
-    let todaysSchedules = schedules
-        .map(schedule => {
-            const parsed = later.parse.cron(schedule.time, true);
-            const nextRun = later.schedule(parsed).next(1);
-            return {
-                nextRun,
-                message: schedule.message
-            };
-        })
-        .filter(schedule => {
-            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
-            return scheduleTime.isBetween(todayStart, todayEnd);
-        })
-        .sort((a, b) => a.nextRun - b.nextRun);
-
+    // Create embeds
     const embeds = [];
-    let embed = new Discord.MessageEmbed()
-        .setTitle('Today\'s Schedules')
-        .setColor('#B76A82');
+    let tempEvents = [];
+    const embedLimit = 25; // Discord embed field limit
 
-    todaysSchedules.forEach((schedule, index) => {
-        const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
-        // Adjust the schedule time if needed (subtract 1 hour)
-        const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
-        const timeFormatted = adjustedScheduleTime.format('MMM Do, HH:mm'); // Format time
-        const messageField = `${schedule.message}`; // Message field
+    todaySchedules.forEach((event, index) => {
+        tempEvents.push(event);
 
-        // Add fields to the embed
-        embed.addField('Time', timeFormatted, true);
-        embed.addField('Message', messageField, true);
-
-        // If the current embed is full or it's the last schedule, push the current embed to embeds and create a new embed
-        if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) {
-            embeds.push(embed);
-            embed = new Discord.MessageEmbed()
-                .setTitle('Today\'s Schedules')
-                .setColor('#B76A82');
+        if (tempEvents.length === embedLimit || index === todaySchedules.length - 1) {
+            embeds.push(createEmbed('Today\'s Events', tempEvents));
+            tempEvents = [];
         }
     });
 
-    // Add status field outside the loop
-    const statusField = currentTime.isBefore(todayEnd) ? ':white_check_mark:' : '\u200B';
-    embed.addField('Status', statusField, true);
-
-    // Send the embeds to the channel
-    embeds.forEach((embed, index) => {
-        const sendOptions = index === 0 ? {} : { allowedMentions: { repliedUser: false } };
-        message.channel.send({ embeds: [embed], ...sendOptions });
+    // Output embeds
+    embeds.forEach(embed => {
+        // Assuming you have a function to send embed to your Discord channel
+        sendEmbedToChannel(embed);
     });
 }
+
     }
 });
 
