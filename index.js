@@ -346,26 +346,35 @@ client.on("messageCreate", message => {
         }
 
 if (hasMention && (messageContent.includes("schedule") || messageContent.includes("schedules"))) {
-    let upcomingSchedules = schedules.map(schedule => {
-        const interval = cronParser.parseExpression(schedule.time, { currentDate: new Date() });
-        const nextRun = interval.next().toDate();
-        return {
-            nextRun,
-            message: schedule.message
-        };
-    }).sort((a, b) => a.nextRun - b.nextRun);
-
-    let embed = new Discord.MessageEmbed()
-        .setTitle('Upcoming Schedules')
-        .setColor('#B76A82');
-
     const currentTime = new Date();
     const phTimezone = 'Asia/Manila';
+    const today = moment.tz(currentTime, phTimezone).startOf('day');
+    const tomorrow = moment(today).add(1, 'day');
 
-    upcomingSchedules.slice(0, 5).forEach(schedule => {
-        const timeFormatted = moment(schedule.nextRun, phTimezone).format('MMM Do, HH:mm');
-        const messageField = schedule.nextRun < currentTime ? `${schedule.message}` : `${schedule.message}`;
-        const statusField = schedule.nextRun < currentTime ? '' : ':white_check_mark:';
+    let todaysSchedules = schedules
+        .map(schedule => {
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentTime });
+            const nextRun = interval.next().toDate();
+            return {
+                nextRun,
+                message: schedule.message
+            };
+        })
+        .filter(schedule => {
+            const scheduleTime = moment(schedule.nextRun).tz(phTimezone);
+            return scheduleTime.isSame(today, 'day');
+        })
+        .sort((a, b) => a.nextRun - b.nextRun);
+
+    let embed = new Discord.MessageEmbed()
+        .setTitle('Today\'s Schedules')
+        .setColor('#B76A82');
+
+    todaysSchedules.forEach(schedule => {
+        const timeFormatted = moment(schedule.nextRun).tz(phTimezone).format('MMM Do, HH:mm');
+        const messageField = `${schedule.message}`;
+        const statusField = schedule.nextRun < currentTime ? ':white_check_mark:' : ''; // Check mark for past events
+        
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
         embed.addField('Status', statusField, true);
