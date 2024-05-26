@@ -358,7 +358,7 @@ client.on("messageCreate", message => {
 if (hasMention && hasMentionSchedule) {
     const currentTime = moment().tz('Asia/Manila'); // Current time in PH timezone
     const todayStart = currentTime.clone().startOf('day').add(1, 'hour'); // Start from 1:00 AM
-    const todayEnd = currentTime.clone().endOf('day');
+    const todayEnd = currentTime.clone().endOf('day').subtract(1, 'hour');
 
     let todaysSchedules = schedules
         .map(schedule => {
