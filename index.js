@@ -367,41 +367,36 @@ if (hasMention && hasMentionSchedule) {
     const todayEnd = currentTime.clone().endOf('day').add(1, 'day').subtract(1, 'hours'); // End at 1:00 AM the next day
 
     // Map, filter, and sort the upcoming schedules
-    let todaysSchedules = schedules.map(schedule => {
-        const parsed = later.parse.cron(schedule.time, true);
-        const nextRun = later.schedule(parsed).next(1);
-        return {
-            nextRun,
-            message: schedule.message
-        };
-    }).filter(schedule => {
-        // Convert the schedule time to PH timezone
-        const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
-        // Adjust the schedule time if needed (subtract 1 hour)
-        const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
-        // Check if the adjusted schedule time is within today's range
-        return adjustedScheduleTime.isBetween(todayStart, todayEnd, null, '[]');
-    }).sort((a, b) => a.nextRun - b.nextRun);
+    let todaysSchedules = schedules
+        .map(schedule => {
+            const parsed = later.parse.cron(schedule.time, true);
+            const nextRun = later.schedule(parsed).next(1);
+            return {
+                nextRun,
+                message: schedule.message
+            };
+        })
+        .filter(schedule => {
+            const scheduleTime = moment(schedule.nextRun).tz('Asia/Manila');
+            return scheduleTime.isBetween(todayStart, todayEnd);
+        })
+        .sort((a, b) => a.nextRun - b.nextRun);
 
-    // Create embeds to display the schedules
     const embeds = [];
     let embed = new Discord.MessageEmbed()
         .setTitle('Today\'s Schedules')
         .setColor('#B76A82');
 
-    // Iterate over the filtered schedules and add them to embeds
     todaysSchedules.forEach((schedule, index) => {
         const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
         // Adjust the schedule time if needed (subtract 1 hour)
         const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
         const timeFormatted = adjustedScheduleTime.format('MMM Do, HH:mm'); // Format time
         const messageField = `${schedule.message}`; // Message field
-        const statusField = adjustedScheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B'; // Status field
 
         // Add fields to the embed
         embed.addField('Time', timeFormatted, true);
         embed.addField('Message', messageField, true);
-        embed.addField('Status', statusField, true);
 
         // If the current embed is full or it's the last schedule, push the current embed to embeds and create a new embed
         if ((index + 1) % 8 === 0 || index === todaysSchedules.length - 1) {
@@ -411,6 +406,10 @@ if (hasMention && hasMentionSchedule) {
                 .setColor('#B76A82');
         }
     });
+
+    // Add status field outside the loop
+    const statusField = currentTime.isBefore(todayEnd) ? ':white_check_mark:' : '\u200B';
+    embed.addField('Status', statusField, true);
 
     // Send the embeds to the channel
     embeds.forEach((embed, index) => {
