@@ -363,7 +363,7 @@ if (hasMention && hasMentionSchedule) {
    
     let todaysSchedules = schedules
         .map(schedule => {
-            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentDate});
+            const interval = cronParser.parseExpression(schedule.time, { currentDate: currentTime });
             const nextRun = interval.next().toDate();
             return {
                 nextRun,
@@ -385,7 +385,7 @@ if (hasMention && hasMentionSchedule) {
         const scheduleTime = moment(schedule.nextRun).tz(phTimezone); 
         const timeFormatted = scheduleTime.clone().subtract(1, 'hour').format('MMM Do, HH:mm');
         const messageField = `${schedule.message}`;
-        const statusField = scheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
+        const statusField = scheduleTime.isBefore(moment.tz(currentTime, phTimezone)) ? ':white_check_mark:' : '\u200B';
 
         currentEmbed.addField('Time', timeFormatted, true);
         currentEmbed.addField('Message', messageField, true);
