@@ -51,6 +51,21 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
+const scheduleMessageTheWakeUpCall = (cronTime, timezone, messageFunction, channelId) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            const message = messageFunction(); // Get a new message each time
+            channel.send(message);
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
+
 const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
@@ -76,12 +91,10 @@ const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
 
 
 const ErythinaMorningPhrase = [
-    "Was I harsh yesterday? Sorry, not sorry. Now, do your dailies, darlings! @everyone",
     "Ugh, @everyone better snap outta dreamland and hustle up on those dailies! Like, pronto!",
     "Hey, sleepyheads! Time to rise and shine and get cracking on those dailies, cuties! @everyone",
-    "@everyone Get up, get your stuff done. It's not like I care, but we've all got our dailies to tackle. And yes, I'm still fabulous.",
+    "@everyone Get up! It's not like I care, but we've all got our dailies to tackle. And yes, I'm still fabulous.",
     "Ahem. Listen up, @everyone. The clock's ticking, and if you dawdle too long, you'll find yourself knee-deep in regrets. So, consider this your wake-up call, lovelies!",
-    "Did I come off too harsh yesterday? Whatever. Time for dailies, beauties! @everyone",
     "Get your butts outta bed, @everyone! Dailies won't do themselves, you know. And yes, I woke up like this.",
     "Wakey-wakey, sleepyheads! Let's tackle those dailies, angels! @everyone",
     "Hey, rise and shine, @everyone! Dailies await, whether you like it or not. And yes, I'm still the fairest of them all.",
@@ -418,7 +431,7 @@ client.on('ready', async () => {
     scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
-    scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
+    scheduleMessageTheWakeUpCall('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
     // Schedule multiple embeds
     // Official{
