@@ -51,6 +51,20 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
+const scheduleRndmMessage = (cronTime, timezone, channelId) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            const randomMessage = randomMorningCalls();
+            channel.send(randomMessage);
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
 
 const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
     cron.schedule(cronTime, () => {
@@ -417,7 +431,7 @@ client.on('ready', async () => {
     scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
-    scheduleMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
+    scheduleRndmMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
 
     // Schedule multiple embeds
     // Official{
