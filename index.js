@@ -1,4 +1,4 @@
-    const express = require("express");
+const express = require("express");
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const cron = require('node-cron');
@@ -56,6 +56,21 @@ const scheduleRndmMessage = (cronTime, timezone, channelId) => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
             const randomMessage = randomMorningCalls();
+            channel.send(randomMessage);
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
+
+const scheduleRemindersChannel = (cronTime, timezone, channelId) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            const randomMessage = randomRemindersChannel();
             channel.send(randomMessage);
         } else {
             console.log('Channel not found.');
@@ -135,6 +150,13 @@ const ErythinaMorningPhrase = [
     "Up and at 'em, @everyone! Dailies await, so let's get moving. And yes, I'm still as mesmerizing as ever.",
     "Did I step on some toes yesterday? Whoops. Dailies, darlings! @everyone. Oh, and by the way, have you noticed my impeccable poise?",
     "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
+];
+
+const ErythinaMorningPhrase = [
+    "@everyone Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
+    "@everyone The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
+    "@everyone In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
+    "@everyone The reminders channel is over here: <#1249229369625546823>. Use it or don’t, up to you."
 ];
 
 const schedules = [
@@ -419,6 +441,12 @@ function randomMorningCalls() {
     }
 }
 
+function randomRemindersChannel() {
+    if (ErythinaMorningPhrase.length > 0) {
+        return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
+    }
+}
+
 client.on('ready', async () => {
     client.user.setStatus('idle');
     console.log(`Logged in as ${client.user.tag}`)
@@ -434,12 +462,15 @@ client.on('ready', async () => {
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
     scheduleRndmMessage('30 6 * * *', 'Asia/Manila', "1237979376872718439");
-    
 
     //every 10 minutes
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
+    
      //Reminders of reminder channel
-    scheduleMessage('0 12 * * *', 'Asia/Manila', '@everyone Reminders channel are over here: <#1249229369625546823>.', "1237979376872718439");
+    scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439");
+    scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439");
+    scheduleRemindersChannel('0 21 * * *', 'Asia/Manila', "1237979376872718439");
+    
     // Schedule multiple embeds
     // Official{
      //Server Reset
