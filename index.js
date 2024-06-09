@@ -37,7 +37,7 @@ for (file of commands) {
 }
 
 // Function to schedule messages
-/*const scheduleMessage = (cronTime, timezone, message, channelId) => {
+const scheduleMessage = (cronTime, timezone, message, channelId) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
@@ -49,7 +49,7 @@ for (file of commands) {
         scheduled: true,
         timezone: timezone
     });
-};*/
+};
 
 const scheduleRndmMessage = (cronTime, timezone, channelId) => {
     cron.schedule(cronTime, () => {
@@ -428,18 +428,13 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
+    scheduleMessage('55 19 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439");
     scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
-    scheduleRndmMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
-    scheduleRndmMessage('7 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
-    scheduleRndmMessage('10 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
-    scheduleRndmMessage('11 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
-    scheduleRndmMessage('12 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
-
+    scheduleRndmMessage('30 6 * * *', 'Asia/Manila', "1237979376872718439");
+    scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
     
-    scheduleRndmMessage('10 * * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
-
     // Schedule multiple embeds
     // Official{
      //Server Reset
