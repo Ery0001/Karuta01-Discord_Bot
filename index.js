@@ -152,7 +152,7 @@ const ErythinaMorningPhrase = [
     "Enough lollygagging, @everyone! Dailies aren't gonna do themselves. And yes, I'm still as captivating as ever."
 ];
 
-const ErythinaMorningPhrase = [
+const ErythinaRemindersChannelPhrase = [
     "@everyone Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
     "@everyone The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
     "@everyone In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
@@ -442,8 +442,8 @@ function randomMorningCalls() {
 }
 
 function randomRemindersChannel() {
-    if (ErythinaMorningPhrase.length > 0) {
-        return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
+    if (ErythinaRemindersChannelPhrase.length > 0) {
+        return ErythinaRemindersChannelPhrase[Math.floor(Math.random() * ErythinaRemindersChannelPhrase.length)];
     }
 }
 
