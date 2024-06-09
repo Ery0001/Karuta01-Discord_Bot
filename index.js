@@ -458,9 +458,13 @@ client.on('ready', async () => {
     // Schedule multiple messages
     scheduleMessage('0 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439");
     scheduleMessage('20 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 10 minutes.', "1237979376872718439");
+    
     scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone Time for the Guild bath in 5 minutes. Join us or miss out, your loss!', "1237979376872718439");
+    scheduleMessage('30 20 * * *', 'Asia/Manila', '@everyone Guild bath is starting!<:Stare_erythrina:1238029119632048159>', "1237979376872718439");
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
+    scheduleMessage('40 20 * * *', 'Asia/Manila', '@everyone Guild boss is starting!<:Stare_erythrina:1238029119632048159>', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
+    scheduleMessage('0 21 * * *', 'Asia/Manila', '@everyone Guild war is starting!<:Erythrina_happy:1249365602397716540>', "1237979376872718439");
     scheduleRndmMessage('30 6 * * *', 'Asia/Manila', "1237979376872718439");
 
     //every 10 minutes
