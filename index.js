@@ -465,7 +465,6 @@ client.on('ready', async () => {
 
     //every 10 minutes
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
-    scheduleRemindersChannel('*/1 * * * *', 'Asia/Manila', "1237979377363320916");
     
      //Reminders of reminder channel
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439");
