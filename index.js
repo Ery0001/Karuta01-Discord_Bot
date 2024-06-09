@@ -428,13 +428,19 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
-    scheduleMessage('55 19 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439");
-    scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone It\'s time for the Guild bath in 5 minutes, folks. Join us or miss out, your loss!', "1237979376872718439");
+    scheduleMessage('0 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439");
+    scheduleMessage('20 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 10 minutes.', "1237979376872718439");
+    scheduleMessage('25 20 * * *', 'Asia/Manila', '@everyone Time for the Guild bath in 5 minutes. Join us or miss out, your loss!', "1237979376872718439");
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
     scheduleRndmMessage('30 6 * * *', 'Asia/Manila', "1237979376872718439");
-    scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
     
+
+    //every 10 minutes
+    //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
+     //Reminders of reminder channel
+    //scheduleMessage('0 12 * * *', 'Asia/Manila', '@everyone Reminders channel are over here: ${1249229369625546823.toString()}', "1237979376872718439");
+    scheduleMessage('*/1 * * * *', 'Asia/Manila', '@everyone Reminders channel are over here: ${1249229369625546823.toString()}', "1237979376872718439");
     // Schedule multiple embeds
     // Official{
      //Server Reset
