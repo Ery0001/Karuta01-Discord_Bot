@@ -1,4 +1,4 @@
-const express = require("express");
+    const express = require("express");
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const cron = require('node-cron');
@@ -440,7 +440,7 @@ client.on('ready', async () => {
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
      //Reminders of reminder channel
     //scheduleMessage('0 12 * * *', 'Asia/Manila', '@everyone Reminders channel are over here: ${1249229369625546823.toString()}', "1237979376872718439");
-    scheduleMessage('*/1 * * * *', 'Asia/Manila', '@everyone Reminders channel are over here: ${1249229369625546823.toString()}', "1237979376872718439");
+    scheduleMessage('*/1 * * * *', 'Asia/Manila', '@everyone Reminders channel are over here: <#1249229369625546823>.', "1237979376872718439");
     // Schedule multiple embeds
     // Official{
      //Server Reset
