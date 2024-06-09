@@ -37,7 +37,7 @@ for (file of commands) {
 }
 
 // Function to schedule messages
-const scheduleMessage = (cronTime, timezone, message, channelId) => {
+/*const scheduleMessage = (cronTime, timezone, message, channelId) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
@@ -49,7 +49,7 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
         scheduled: true,
         timezone: timezone
     });
-};
+};*/
 
 const scheduleRndmMessage = (cronTime, timezone, channelId) => {
     cron.schedule(cronTime, () => {
@@ -432,7 +432,13 @@ client.on('ready', async () => {
     scheduleMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439");
     scheduleMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439");
     scheduleRndmMessage('30 6 * * *', 'Asia/Manila',randomMorningCalls(), "1237979376872718439");
-    scheduleRndmMessage('58 1 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
+    scheduleRndmMessage('7 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
+    scheduleRndmMessage('10 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
+    scheduleRndmMessage('11 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
+    scheduleRndmMessage('12 2 * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
+
+    
+    scheduleRndmMessage('10 * * * *', 'Asia/Manila',randomMorningCalls(), "1237979377363320916");
 
     // Schedule multiple embeds
     // Official{
