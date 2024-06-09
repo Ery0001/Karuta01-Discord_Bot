@@ -439,8 +439,7 @@ client.on('ready', async () => {
     //every 10 minutes
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
      //Reminders of reminder channel
-    //scheduleMessage('0 12 * * *', 'Asia/Manila', '@everyone Reminders channel are over here: ${1249229369625546823.toString()}', "1237979376872718439");
-    scheduleMessage('*/1 * * * *', 'Asia/Manila', '@everyone Reminders channel are over here: <#1249229369625546823>.', "1237979376872718439");
+    scheduleMessage('0 12 * * *', 'Asia/Manila', '@everyone Reminders channel are over here: <#1249229369625546823>.', "1237979376872718439");
     // Schedule multiple embeds
     // Official{
      //Server Reset
