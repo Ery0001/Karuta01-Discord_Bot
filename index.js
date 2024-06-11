@@ -473,7 +473,7 @@ client.on('ready', async () => {
      //Reminders of reminder channel
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439");
     scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439");
-    scheduleRemindersChannel('0 21 * * *', 'Asia/Manila', "1237979376872718439");
+    scheduleRemindersChannel('30 21 * * *', 'Asia/Manila', "1237979376872718439");
     
     // Schedule multiple embeds
     // Official{
