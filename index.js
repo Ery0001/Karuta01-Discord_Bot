@@ -265,33 +265,37 @@ client.on("messageCreate", message => {
         
         if (messageContent.includes("morning")) {
             const response = `Good Morning <@!${message.author.id}>!`;
+            const channel = message.channel;
             channel.startTyping();
               setTimeout(() => {
-                message.channel.send(response);
+                channel.send(response);
                 channel.stopTyping(true);
               }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("afternoon")) {
             const response = `Good Afternoon <@!${message.author.id}>!`;
+            const channel = message.channel;
             channel.startTyping();
               setTimeout(() => {
-                message.channel.send(response);
+                channel.send(response);
                 channel.stopTyping(true);
               }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("evening")) {
             const response = `Good Evening <@!${message.author.id}>!`;
+            const channel = message.channel;
             channel.startTyping();
               setTimeout(() => {
-                message.channel.send(response);
+                channel.send(response);
                 channel.stopTyping(true);
               }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("night")) {
             const response = `Good Night <@!${message.author.id}>!`;
+            const channel = message.channel;
             channel.startTyping();
               setTimeout(() => {
-                message.channel.send(response);
+                channel.send(response);
                 channel.stopTyping(true);
               }, Math.random() * (100 - 20) + 20);
         }
