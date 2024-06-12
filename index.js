@@ -264,16 +264,24 @@ client.on("messageCreate", message => {
         const words = messageContent.split(" ");
         
         if (messageContent.includes("morning")) {
+            channel.startTyping();
             message.channel.send(`Good Morning <@!${message.author.id}>!`);
+            channel.stopTyping(true);
         }
         if (messageContent.includes("afternoon")) {
+            channel.startTyping();
             message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
+            channel.stopTyping(true);
         }
         if (messageContent.includes("evening")) {
+            channel.startTyping();
             message.channel.send(`Good Evening <@!${message.author.id}>!`);
+            channel.stopTyping(true);
         }
         if (messageContent.includes("night")) {
+            channel.startTyping();
             message.channel.send(`Good Night <@!${message.author.id}>!`);
+            channel.stopTyping(true);
         }
 
         const hasMention = words.some(word =>
