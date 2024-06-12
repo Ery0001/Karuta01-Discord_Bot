@@ -264,24 +264,36 @@ client.on("messageCreate", message => {
         const words = messageContent.split(" ");
         
         if (messageContent.includes("morning")) {
+            const response = `Good Morning <@!${message.author.id}>!`;
             channel.startTyping();
-            message.channel.send(`Good Morning <@!${message.author.id}>!`);
-            channel.stopTyping(true);
+              setTimeout(() => {
+                message.channel.send(response);
+                channel.stopTyping(true);
+              }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("afternoon")) {
+            const response = `Good Afternoon <@!${message.author.id}>!`;
             channel.startTyping();
-            message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
-            channel.stopTyping(true);
+              setTimeout(() => {
+                message.channel.send(response);
+                channel.stopTyping(true);
+              }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("evening")) {
+            const response = `Good Evening <@!${message.author.id}>!`;
             channel.startTyping();
-            message.channel.send(`Good Evening <@!${message.author.id}>!`);
-            channel.stopTyping(true);
+              setTimeout(() => {
+                message.channel.send(response);
+                channel.stopTyping(true);
+              }, Math.random() * (100 - 20) + 20);
         }
         if (messageContent.includes("night")) {
+            const response = `Good Night <@!${message.author.id}>!`;
             channel.startTyping();
-            message.channel.send(`Good Night <@!${message.author.id}>!`);
-            channel.stopTyping(true);
+              setTimeout(() => {
+                message.channel.send(response);
+                channel.stopTyping(true);
+              }, Math.random() * (100 - 20) + 20);
         }
 
         const hasMention = words.some(word =>
