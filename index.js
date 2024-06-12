@@ -491,10 +491,10 @@ client.on('ready', async () => {
 
     //every 10 minutes
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
-    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test1', "1237979376872718439",1000);
-    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test2', "1237979376872718439",2000);
-    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test3', "1237979376872718439",4000);
-    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test4', "1237979376872718439",1000);
+    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test1', "1237979377363320916",1000);
+    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test2', "1237979377363320916",2000);
+    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test3', "1237979377363320916",4000);
+    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test4', "1237979377363320916",1000);
     
      //Reminders of reminder channel
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439",3600000);
