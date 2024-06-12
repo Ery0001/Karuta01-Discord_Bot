@@ -51,6 +51,24 @@ const scheduleMessage = (cronTime, timezone, message, channelId) => {
     });
 };
 
+const scheduleTempMessage = (cronTime, timezone, message, channelId) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            channel.send(message).then(sentMessage => {
+                setTimeout(() => {
+                    sentMessage.delete().catch(console.error);
+                }, 1000); 
+            }).catch(console.error);
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
+
 const scheduleRndmMessage = (cronTime, timezone, channelId) => {
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
@@ -469,6 +487,7 @@ client.on('ready', async () => {
 
     //every 10 minutes
     //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
+    scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'TEST', '1237979377363320916');
     
      //Reminders of reminder channel
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439");
