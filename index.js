@@ -254,7 +254,7 @@ client.on("messageCreate", message => {
     }
     if (message.content === "OfficalAnnounce_0002_embed") {
         let embed = new Discord.MessageEmbed()
-            .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone All guild members must now change their Discord server nickname to match their in-game name.\nPlease update your nickname as soon as possible to ensure clear communication.\n\nThank you.")
+            .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone All guild members must now change their Discord server nickname to match their in-game name. Please update your nickname as soon as possible to ensure clear communication.\n\nThank you.")
             .setColor("#B76A82")
             .setImage("https://ik.imagekit.io/Zedi/20240622_001721.png?updatedAt=1718986723655")
             .setFooter("Noblese Guild")
