@@ -252,6 +252,15 @@ client.on("messageCreate", message => {
 
         message.channel.send({ embeds: [embed] })
     }
+    if (message.content === "OfficalAnnounce_0002_embed") {
+        let embed = new Discord.MessageEmbed()
+            .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone All guild members must now change their Discord server nickname to match their in-game name.\nPlease update your nickname as soon as possible to ensure clear communication.\n\nThank you.")
+            .setColor("#B76A82")
+            .setImage("https://ik.imagekit.io/Zedi/20240622_001721.png?updatedAt=1718986723655")
+            .setFooter("Noblese Guild")
+
+        message.channel.send({ embeds: [embed] })
+    }
 
     /*if (message.content === "Farm") {
         message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
@@ -546,16 +555,16 @@ client.on('ready', async () => {
     scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!', "1249229369625546823", 1);
     scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1249229369625546823", 1);
      // Scenic Quiz
-    scheduleEmbed('55 9 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting today from 9:00 to 23:00 (server time)!', "1249229369625546823", 1);
+    scheduleEmbed('5 10 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is starting today from 9:00 to 23:00 (server time)!', "1249229369625546823", 1);
      // Miru Party
-    scheduleEmbed('55 9 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting today from 9:00 to 23:00 (server time)!', "1249229369625546823", 1);
+    scheduleEmbed('5 10 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is starting today from 9:00 to 23:00 (server time)!', "1249229369625546823", 1);
      // Miru Marathon
     scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1249229369625546823", 1);
     scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1249229369625546823", 1);
     scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Third Wave is starting in 5 minutes!', "1249229369625546823", 1);
     scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Last Wave is starting in 5 minutes!', "1249229369625546823", 1);
      // Holy Fruit and Fog Island
-    scheduleEmbed('0 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available today from 9:00 to 23:00 (server time)!', "1249229369625546823", 0);
+    scheduleEmbed('5 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available today from 9:00 to 23:00 (server time)!', "1249229369625546823", 0);
      //TEST
     /*scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 0);
     scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 1);
