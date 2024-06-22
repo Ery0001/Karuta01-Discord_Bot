@@ -572,4 +572,18 @@ client.on('ready', async () => {
     //}
 });
 
+client.on('guildMemberAdd', member => {
+    if (member.user.bot) return;
+    const channelId = '1237979376872718439';
+
+
+    const channel = member.guild.channels.cache.get(channelId);
+    
+    if (channel) {
+        channel.send(`Welcome ${member.user.tag}. Please change your server nickname to your in-game name. Not like it matters to me.`);
+    } else {
+        console.error('Channel not found');
+    }
+});
+
 client.login(process.env.token);
