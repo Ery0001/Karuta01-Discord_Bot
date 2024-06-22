@@ -572,7 +572,7 @@ client.on('ready', async () => {
     //}
 });
 
-client.on('guildMemberAdd', member => {
+/*client.on('guildMemberAdd', member => {
     if (member.user.bot) return;
     const channelId = '1237979376872718439';
 
@@ -584,6 +584,6 @@ client.on('guildMemberAdd', member => {
     } else {
         console.error('Channel not found');
     }
-});
+});*/
 
 client.login(process.env.token);
