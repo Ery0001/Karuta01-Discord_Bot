@@ -237,9 +237,9 @@ client.on("messageCreate", message => {
     }
     if (message.content === "embed03") {
     let embed = new Discord.MessageEmbed()
-        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open if possible (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n- If they attack first, you are allowed to retaliate freely.\n\n**GUILD AUCTION:**\n- Revealing your bid in the guild chat is mandatory if you intend to participate in the bidding.\n- The qualification for bidding is reserved for those who have participated in guild events.\n- Give priority to those who have won the dice roll in the guild bath.\n- Once a bid has been placed, refrain from outbidding.\n\nIf someone violates said rules, kindly send a report at: <#1237979377862709265>.")
+        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n- If they attack first, you are allowed to retaliate freely.\n\n**GUILD AUCTION:**\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Qualification for bidding is reserved for those who have participated in guild events.\n- Give priority to those who have won the dice roll in the guild bath.\n- Once a bid has been placed, refrain from outbidding.")
         .setColor("#B76A82")
-        .setFooter("Noblese Guild")
+        .setFooter("If someone violates said rules, kindly send a report at: <#1237979377862709265>.")
 
     message.channel.send({ embeds: [embed] })
     }
