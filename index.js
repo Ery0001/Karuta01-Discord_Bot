@@ -225,7 +225,7 @@ client.on("messageCreate", message => {
         if (!command) return
         command.run(client, message, args)
     }
-    if (message.content === "embed02") {
+    if (message.content === "eryembed02") {
         let embed = new Discord.MessageEmbed()
             //.setTitle("EDICT OF UNITY")
             .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
@@ -235,7 +235,7 @@ client.on("messageCreate", message => {
 
         message.channel.send({ embeds: [embed] })
     }
-    if (message.content === "embed03") {
+    if (message.content === "eryembed03") {
     let embed = new Discord.MessageEmbed()
         .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- If they attack first, you are allowed to retaliate freely.\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n\n**GUILD AUCTION:**\n- Once a bid has been placed, refrain from outbidding.\n- Give priority to those who have won the dice roll in the guild bath.\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Qualification for bidding is reserved for those who have participated in guild events.\n\nIf someone violates said rules, kindly send a report at: <#1237979377862709265>.")
         .setColor("#B76A82")
@@ -253,7 +253,7 @@ client.on("messageCreate", message => {
     }
     if (message.content === "serverInfo_0001_embed") {
         let embed = new Discord.MessageEmbed()
-            .setDescription("## WELCOME TO NOBLESE!\nRemember to have fun and savor every moment in the game! If you need assistance with daily tasks, simply drop a message in the guild chat, and we'll be more than happy to lend a hand!!\n\n**JOIN US ON (SERVER TIME):**\n- Guild bath at 7:30pm\n- Guild boss at 7:40pm\n- Guild war at 8:00pm\n\n**AUCTION:**\nJust bid as you please, no permission needed")
+            .setDescription("## WELCOME TO NOBLESE!\nRemember to have fun and savor every moment in the game! If you need assistance with daily tasks, simply drop a message in the guild chat, and we'll be more than happy to lend a hand!!\n\n**JOIN US ON (SERVER TIME):**\n- Guild bath at 7:30pm\n- Guild boss at 7:40pm\n- Guild war at 8:00pm")
             .setColor("#B76A82")
             .setFooter("Noblese Guild")
 
