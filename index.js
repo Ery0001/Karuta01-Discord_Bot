@@ -237,7 +237,7 @@ client.on("messageCreate", message => {
     }
     if (message.content === "embed03") {
     let embed = new Discord.MessageEmbed()
-        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n- If they attack first, you are allowed to retaliate freely.\n\n**GUILD AUCTION:**\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Qualification for bidding is reserved for those who have participated in guild events.\n- Give priority to those who have won the dice roll in the guild bath.\n- Once a bid has been placed, refrain from outbidding.")
+        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- If they attack first, you are allowed to retaliate freely.\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n\n**GUILD AUCTION:**\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Give priority to those who have won the dice roll in the guild bath.\n- Once a bid has been placed, refrain from outbidding.\nQualification for bidding is reserved for those who have participated in guild events.")
         .setColor("#B76A82")
         .setFooter("If someone violates said rules, kindly send a report at: <#1237979377862709265>.")
 
