@@ -487,8 +487,8 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
-    scheduleTempMessage('0 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439",1000);
-    scheduleTempMessage('20 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 10 minutes.', "1237979376872718439",2000);
+    scheduleTempMessage('0 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439",300000);
+    scheduleTempMessage('20 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 10 minutes.', "1237979376872718439",300000);
     
     scheduleTempMessage('25 20 * * *', 'Asia/Manila', '@everyone Time for the Guild bath in 5 minutes. Join us or miss out, your loss!', "1237979376872718439",600000);
     scheduleTempMessage('30 20 * * *', 'Asia/Manila', 'Guild bath is starting!<:Stare_erythrina:1238029119632048159>', "1237979376872718439",300000);
