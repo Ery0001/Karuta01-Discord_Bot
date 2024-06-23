@@ -237,12 +237,11 @@ client.on("messageCreate", message => {
     }
     if (message.content === "embed03") {
     let embed = new Discord.MessageEmbed()
-        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- If they attack first, you are allowed to retaliate freely.\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n\n**GUILD AUCTION:**\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Give priority to those who have won the dice roll in the guild bath.\n- Once a bid has been placed, refrain from outbidding.\nQualification for bidding is reserved for those who have participated in guild events.")
+        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open (Miasma, Madness Raid, etc.).\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- If they attack first, you are allowed to retaliate freely.\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n\n**GUILD AUCTION:**\n- Once a bid has been placed, refrain from outbidding.\n- Give priority to those who have won the dice roll in the guild bath.\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Qualification for bidding is reserved for those who have participated in guild events.\n\nIf someone violates said rules, kindly send a report at: <#1237979377862709265>.")
         .setColor("#B76A82")
-        .setFooter("If someone violates said rules, kindly send a report at: <#1237979377862709265>.")
 
     message.channel.send({ embeds: [embed] })
-    }
+   }
     if (message.content === "OfficalAnnounce_0001_embed") {
         let embed = new Discord.MessageEmbed()
             .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone we are thrilled to share that on May 14, 2024, at 04:50 AM, the **Noblese  guild** will be merging with the esteemed **Overlord guild**. This exciting union marks a new chapter for both guilds as we welcome new members into our community. We look forward to the opportunities this combine will bring and the growth it will inspire. Let us extend our warmest welcome to all the new members!")
