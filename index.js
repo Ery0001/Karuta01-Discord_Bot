@@ -278,7 +278,8 @@ client.on("messageCreate", message => {
     if (!message.author.bot) {
         const messageContent = message.content.toLowerCase();
         const words = messageContent.split(" ");
-        
+
+        if (messageContent.length < 21) {
         if (messageContent.includes("morning")) {
             message.channel.send(`Good Morning <@!${message.author.id}>!`);
         }
@@ -290,6 +291,7 @@ client.on("messageCreate", message => {
         }
         if (messageContent.includes("night")) {
             message.channel.send(`Good Night <@!${message.author.id}>!`);
+        }
         }
 
         const hasMention = words.some(word =>
