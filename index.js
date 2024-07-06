@@ -425,6 +425,7 @@ client.on("messageCreate", message => {
         const hasAsk = words.includes("who");
         const hasInvite = words.includes("invite");
         const hasLink = words.includes("link");
+        const wordquite = words.includes("quite");
         if (hasGreet && hasMention) {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
@@ -462,8 +463,13 @@ client.on("messageCreate", message => {
             const randomReply = ErythinaRelpy[Math.floor(Math.random() * ErythinaRelpy.length)];
             message.reply(randomReply);
         }
+        if (hasMention && wordquite) {
+          if (messageContent.length < 21) {
+            message.reply(`You spelled "quiet" wrong<:catto_tf:1241438766137086084>`);
+          }
+        }
 
-/* if (hasMention && hasMentionSchedule) {
+/*if (hasMention && hasMentionSchedule) {
  later.date.localTime();
 
         const currentTime = moment().tz('Asia/Manila');
