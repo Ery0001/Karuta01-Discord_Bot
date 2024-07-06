@@ -391,7 +391,8 @@ client.on("messageCreate", message => {
             word === "shhhhhhhh" ||
             word === "sshhhhhhh" ||
             word === "sshhhhhh" ||
-            word.startsWith("annoying")
+            word.startsWith("annoying") ||
+            word.startsWith("loud")
         );
         const hasThanks = words.some(word =>
     word.startsWith("thanks") ||
