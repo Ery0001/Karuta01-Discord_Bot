@@ -558,6 +558,8 @@ client.on('ready', async () => {
     // Official{
      //Server Reset
     scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nServer events and activities have been reset.', "1249229369625546823", 0);
+     //Guild war weekly reward
+    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nWeekly guild reward is available.', "1249229369625546823", 0);
      // Guild Activity
     scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1249229369625546823", 1);
     scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Boss has started!', "1249229369625546823", 1);
