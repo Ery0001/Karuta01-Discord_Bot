@@ -369,8 +369,29 @@ client.on("messageCreate", message => {
             word.startsWith("ai") ||
             word.startsWith("a.i") ||
             word.toLowerCase() === "the" ||
-             word.toLowerCase() === "that" ||
+            word.toLowerCase() === "that" ||
             word.startsWith("this")
+        );
+
+        const hasSaidQuiet = words.some(word =>
+            word.startsWith("quiet") ||
+            word === "shat" ||
+            word === "shut" ||
+            word === "shap" ||
+            word === "stfu" ||
+            word === "stf" ||
+            word === "sh" ||
+            word === "shh" ||
+            word === "shh" ||
+            word === "shhh" ||
+            word === "shhhh" ||
+            word === "shhhhh" ||
+            word === "shhhhhh" ||
+            word === "shhhhhhh" ||
+            word === "shhhhhhhh" ||
+            word === "sshhhhhhh" ||
+            word === "sshhhhhh" ||
+            word.startsWith("annoying")
         );
         const hasThanks = words.some(word =>
     word.startsWith("thanks") ||
@@ -417,7 +438,7 @@ client.on("messageCreate", message => {
             const ErythinaRelpyCompliment = [
                 `Oh, thank you`,
                 `Oh, it was nothing.`,
-                `I know.`,
+                `I know.`
             ];
             const randomReplyCompliment = ErythinaRelpyCompliment[Math.floor(Math.random() * ErythinaRelpyCompliment.length)];
             message.reply(randomReplyCompliment);
@@ -432,7 +453,16 @@ client.on("messageCreate", message => {
             message.reply(`I was used by Cabala ancients to count the time.`);
         }
 
-if (hasMention && hasMentionSchedule) {
+        if (hasMention && hasSaidQuiet) {
+            const ErythinaRelpy = [
+                `eh?`,
+                `<:catto_tf:1241438766137086084>`
+            ];
+            const randomReply = ErythinaRelpy[Math.floor(Math.random() * ErythinaRelpy.length)];
+            message.reply(randomReply);
+        }
+
+/* if (hasMention && hasMentionSchedule) {
  later.date.localTime();
 
         const currentTime = moment().tz('Asia/Manila');
@@ -469,7 +499,7 @@ if (hasMention && hasMentionSchedule) {
         });
 
         message.channel.send({ embeds: [embed] });
-    }
+    }*/
 
 
     }
