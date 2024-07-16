@@ -317,10 +317,12 @@ client.on("messageCreate", message => {
         word.startsWith("hello") ||
         word.startsWith("helloo") ||
         word.startsWith("helllo") ||
-        word.startsWith("halo") ||
-        word.startsWith("helo") ||
+        word.toLowerCase() ==="halo" ||
+        word.toLowerCase() ==="helo" ||
+        word.toLowerCase() ==="elo" ||
+        word.toLowerCase() ==="alo" ||
         word.toLowerCase() === "hi" ||
-         word.toLowerCase() === "hey" ||
+        word.toLowerCase() === "hey" ||
         word.startsWith("greetings") ||
         word.startsWith("howdy") ||
         word.startsWith("hey there") ||
