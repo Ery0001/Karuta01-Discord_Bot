@@ -317,7 +317,8 @@ client.on("messageCreate", message => {
         word.startsWith("hello") ||
         word.startsWith("helloo") ||
         word.startsWith("helllo") ||
-        word.startsWith("Halo") ||
+        word.startsWith("halo") ||
+        word.startsWith("helo") ||
         word.toLowerCase() === "hi" ||
          word.toLowerCase() === "hey" ||
         word.startsWith("greetings") ||
