@@ -317,12 +317,12 @@ client.on("messageCreate", message => {
         word.startsWith("hello") ||
         word.startsWith("helloo") ||
         word.startsWith("helllo") ||
-        word.toLowerCase() ==="halo" ||
-        word.toLowerCase() ==="helo" ||
-        word.toLowerCase() ==="elo" ||
-        word.toLowerCase() ==="alo" ||
-        word.toLowerCase() === "hi" ||
-        word.toLowerCase() === "hey" ||
+        word === "halo" ||
+        word === "helo" ||
+        word === "elo" ||
+        word === "alo" ||
+        word === "hi" ||
+        word === "hey" ||
         word.startsWith("greetings") ||
         word.startsWith("howdy") ||
         word.startsWith("hey there") ||
@@ -337,9 +337,9 @@ client.on("messageCreate", message => {
         word.startsWith("annyeong") ||
         word.startsWith("zdravstvuyte") ||
         word.toLowerCase() === "hiya" ||
-        word.toLowerCase() === "hola" ||
-        word.toLowerCase() === "sup" ||
-        word.toLowerCase() === "yo"
+        word === "hola" ||
+        word === "sup" ||
+        word === "yo"
         );
         const hasCompliment1 = words.some(word =>
         word.startsWith("awesome") || 
