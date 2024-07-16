@@ -336,10 +336,11 @@ client.on("messageCreate", message => {
         word.startsWith("konnichiwa") ||
         word.startsWith("annyeong") ||
         word.startsWith("zdravstvuyte") ||
-        word.toLowerCase() === "hiya" ||
+        word.startsWith() === "hiya" ||
         word === "hola" ||
         word === "sup" ||
-        word === "yo"
+        word === "yo" ||
+        word.startsWith() === "yoo"
         );
         const hasCompliment1 = words.some(word =>
         word.startsWith("awesome") || 
@@ -376,7 +377,8 @@ client.on("messageCreate", message => {
             word.startsWith("a.i") ||
             word.toLowerCase() === "the" ||
             word.toLowerCase() === "that" ||
-            word.startsWith("this")
+            word.startsWith("this") ||
+            word === "is"
         );
 
         const hasSaidQuiet = words.some(word =>
@@ -450,6 +452,11 @@ client.on("messageCreate", message => {
             ];
             const randomReplyCompliment = ErythinaRelpyCompliment[Math.floor(Math.random() * ErythinaRelpyCompliment.length)];
             message.reply(randomReplyCompliment);
+        }
+        if (hasMention && hasCompliment1) {
+            if (messageContent.length < 21) {
+            message.reply(`<:catto_tf:1241438766137086084>`);
+         }
         }
         if (hasInvite && hasLink) {
             message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://bit.ly/Noblese`);
