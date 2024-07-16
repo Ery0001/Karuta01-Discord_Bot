@@ -315,6 +315,9 @@ client.on("messageCreate", message => {
 
         const hasGreet = words.some(word =>
         word.startsWith("hello") ||
+        word.startsWith("helloo") ||
+        word.startsWith("helllo") ||
+        word.startsWith("Halo") ||
         word.toLowerCase() === "hi" ||
          word.toLowerCase() === "hey" ||
         word.startsWith("greetings") ||
