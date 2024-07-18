@@ -292,6 +292,9 @@ client.on("messageCreate", message => {
         if (messageContent.includes("night")) {
             message.channel.send(`Good Night <@!${message.author.id}>!`);
         }
+        if (messageContent.includes("night")) {
+            message.channel.send(`Good Night <@!${message.author.id}>!`);
+        }
         }
 
         const hasMention = words.some(word =>
@@ -454,7 +457,7 @@ client.on("messageCreate", message => {
             message.reply(randomReplyCompliment);
         }
         if (hasMention && hasCompliment1) {
-            if (messageContent.length < 21) {
+            if (messageContent.length < 13) {
             message.reply(`<:catto_tf:1241438766137086084>`);
          }
         }
