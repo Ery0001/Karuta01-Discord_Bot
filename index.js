@@ -298,6 +298,7 @@ client.on("messageCreate", message => {
         }
 
         const hasMention = words.some(word =>
+        word.startsWith("@erythrina") ||
         word.startsWith("erythrina") ||
         word.startsWith("erythrin") ||
         word.startsWith("erythri") ||
