@@ -175,11 +175,18 @@ const ErythinaMorningPhrase = [
 ];
 
 const ErythinaRemindersChannelPhrase = [
+    "Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
+    "The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
+    "In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
+    "The reminders channel is over here: <#1249229369625546823>. Use it or don’t, up to you."
+];
+
+/*const ErythinaRemindersChannelPhrase = [
     "@everyone Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
     "@everyone The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
     "@everyone In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
     "@everyone The reminders channel is over here: <#1249229369625546823>. Use it or don’t, up to you."
-];
+];*/
 
 const schedules = [
     { time: '0 6 * * *', message: 'Reset Server events and activities' },
@@ -568,8 +575,8 @@ client.on('ready', async () => {
     
      //Reminders of reminder channel
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439",3600000);
-    scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439",3600000);
-    scheduleRemindersChannel('30 21 * * *', 'Asia/Manila', "1237979376872718439",3600000);
+    //scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439",3600000);
+    //scheduleRemindersChannel('30 21 * * *', 'Asia/Manila', "1237979376872718439",3600000);
     
     // Schedule multiple embeds
     // Official{
