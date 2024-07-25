@@ -286,7 +286,7 @@ client.on("messageCreate", message => {
         const messageContent = message.content.toLowerCase();
         const words = messageContent.split(" ");
 
-        if (messageContent.length < 21) {
+        if (messageContent.length <= 21) {
         if (messageContent.includes("morning")) {
             message.channel.send(`Good Morning <@!${message.author.id}>!`);
         }
