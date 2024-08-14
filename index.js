@@ -130,20 +130,18 @@ const scheduleEmbedTestinng = (cronTime, timezone, message, channelId, status) =
     cron.schedule(cronTime, () => {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
-            // Send the role mention as a separate message
-            channel.send("<@&1273121552438923435>").then(() => {
-                // Create the embed
-                let embed = new Discord.MessageEmbed()
-                    .setDescription(message)
-                    .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082");
-                    //.setFooter("Noblese Guild");
-                if (status == 2) {
-                    embed.setColor("#EE4E4E");  
-                } else if (status == 1) {
-                    embed.setColor("#A1DD70"); 
-                }
-                channel.send({ embeds: [embed] });
-            });
+            // Mention the role in the embed description
+            let embed = new Discord.MessageEmbed()
+                .setTitle("Notification")
+                .setDescription(`<@&1273121552438923435>\n\n${message}`) // Role mention included in the description
+                .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082");
+                //.setFooter("Noblese Guild");
+            if (status == 2) {
+                embed.setColor("#EE4E4E");  
+            } else if (status == 1) {
+                embed.setColor("#A1DD70"); 
+            }
+            channel.send({ embeds: [embed] });
         } else {
             console.log('Channel not found.');
         }
