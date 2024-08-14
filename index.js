@@ -126,6 +126,29 @@ const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
     });
 };
 
+const scheduleEmbedTestinng = (cronTime, timezone, message, channelId, status) => {
+    cron.schedule(cronTime, () => {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+            let embed = new Discord.MessageEmbed()
+                .setTitle("<@&1273121552438923435>")
+                .setDescription(message)
+                .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082")
+                /*.setFooter("Noblese Guild");*/
+                if (status == 2){
+                 embed.setColor("#EE4E4E")
+                } else if (status == 1){
+                 embed.setColor("#A1DD70")
+                }
+            channel.send({ embeds: [embed] });
+        } else {
+            console.log('Channel not found.');
+        }
+    }, {
+        scheduled: true,
+        timezone: timezone
+    });
+};
 
 const ErythinaMorningPhrase = [
     "Ugh, @everyone better snap outta dreamland and hustle up on those dailies! Like, pronto!",
@@ -577,7 +600,8 @@ client.on('ready', async () => {
     scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439",3600000);
     //scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439",3600000);
     //scheduleRemindersChannel('30 21 * * *', 'Asia/Manila', "1237979376872718439",3600000);
-    
+
+    scheduleEmbedTestinng('*/1 * * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST.', "1249229369625546823", 0);
     // Schedule multiple embeds
     // Official{
      //Server Reset
