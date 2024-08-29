@@ -275,6 +275,15 @@ client.on("messageCreate", message => {
 
         message.channel.send({ embeds: [embed] })
     }
+        if (message.content === "OfficalAnnounce_0003_embed") {
+        let embed = new Discord.MessageEmbed()
+            .setDescription("## OFFICIAL ANNOUNCEMENT:\nNoblese is joining forces with the ไซเจอร์นอส Guild! From now on, we’ll be united as a single, stronger guild under the new name **OLYMPUS**.")
+            .setColor("#B76A82")
+            .setImage("https://ik.imagekit.io/Zedi/20240513_234454.png?updatedAt=1715615188837")
+            .setFooter("Olympus Guild")
+
+        message.channel.send({ embeds: [embed] })
+    }
 
     /*if (message.content === "Farm") {
         message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
