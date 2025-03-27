@@ -476,115 +476,21 @@ function randomRemindersChannel() {
 }
 
 client.on('ready', async () => {
-    client.user.setStatus('idle');
-    console.log(`Logged in as ${client.user.tag}`)
-    client.user.setActivity({
-        name: `The Legend Of Neverland`,
-        type: 'PLAYING'
-    })
+    console.log(`Logged in as ${client.user.tag}`);
 
-    // Schedule multiple messages
-    // scheduleTempMessage('0 20 * * *', 'America/Halifax', '@everyone Guild activities are approaching in 30 mins.', "1237979376872718439",300000);
-    // scheduleTempMessage('20 20 * * *', 'America/Halifax', '@everyone Guild activities are approaching in 10 mins.', "1237979376872718439",300000);
-    
-    scheduleTempMessage('25 20 * * 1,3,5,7', 'America/Halifax', '@everyone Time for Guild Bath & Boss in 5 mins ~!!', "1292688019811336202",1200000);
-    scheduleTempMessage('25 20 * * 2,4,6', 'America/Halifax', '@everyone Time for Guild Bath & Boss & Wars in 5 mins ~!!', "1292688019811336202",1200000);
-
-    //scheduleTempMessage('25 20 * * *', 'America/Halifax', '@everyone Time for the Guild bath in 5 mins. Join us or miss out, your loss ~!!', "1292688019811336202",600000);
-    // scheduleTempMessage('30 20 * * *', 'America/Halifax', 'Guild bath starts!<:Stare_erythrina:1238029119632048159>', "1292688019811336202",300000);
-    //scheduleTempMessage('35 20 * * *', 'America/Halifax', "@everyone Get ready for the Guild boss battle in 5 mins! Don't slack off now, we need everyone ~!!", "1292688019811336202",600000);
-    // scheduleTempMessage('40 20 * * *', 'America/Halifax', 'Guild boss starts!<:Stare_erythrina:1238029119632048159>', "1292688019811336202",300000);
-    //scheduleTempMessage('55 20 * * 2,4,6', 'America/Halifax', '@everyone The Guild war is about to begin in 5 mins! Prepare yourself ~!!', "1292688019811336202",1200000);
-    // scheduleTempMessage('0 21 * * 2,4,6', 'America/Halifax', 'Guild war starts!<:Erythrina_happy:1249365602397716540>', "1292688019811336202",900000);
-    // scheduleRndmMessage('30 6 * * *', 'America/Halifax', "1237979376872718439");
-
-    //every 10 mins
-    //scheduleRndmMessage('*/10 * * * *', 'America/Halifax', '1237979377363320916');
-    // scheduleEmbed('*/1 * * * *', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1333656769175490560", 1);
-    scheduleEmbed('0 0 * * 1', 'America/Halifax', '# TROUBLESHOOTING\nToday is Monday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 2', 'America/Halifax', '# TROUBLESHOOTING\nToday is Tuesday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 3', 'America/Halifax', '# TROUBLESHOOTING\nToday is Wednesday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 4', 'America/Halifax', '# TROUBLESHOOTING\nToday is Thursday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 5', 'America/Halifax', '# TROUBLESHOOTING\nToday is Friday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 6', 'America/Halifax', '# TROUBLESHOOTING\nToday is Saturday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-    scheduleEmbed('0 0 * * 7', 'America/Halifax', '# TROUBLESHOOTING\nToday is Sunday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
-     //Reminders of reminder channel
-    // scheduleRemindersChannel('0 7 * * *', 'America/Halifax', "1237979376872718439",3600000);
-    //scheduleRemindersChannel('0 12 * * *', 'America/Halifax', "1237979376872718439",3600000);
-    //scheduleRemindersChannel('30 21 * * *', 'America/Halifax', "1237979376872718439",3600000);
-
-    // Schedule multiple embeds
-    // Official{
-     //Server Reset
-    scheduleEmbed('0 6 * * *', 'America/Halifax', '**ATTN: MELTIES**\nServer events and activities have been reset ~!!', "1347152454210420746", 0);
-     //Guild war weekly reward
-    // scheduleEmbed('0 22 * * 6', 'America/Halifax', '**ATTN: MELTIES** — Weekly guild reward is available ~!!', "1347152454210420746", 0);
-     // Guild Activity
-    scheduleEmbed('20 20 * * *', 'America/Halifax', '**ATTN: MELTIES**\nGuild Bath & Guild Boss starts in 10 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('40 20 * * *', 'America/Halifax', '**ATTN: MELTIES**\nGuild Boss has started ~!!', "1347152454210420746", 1);
-    scheduleEmbed('55 20 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nGuild War starts in 10 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('50 21 * * *', 'America/Halifax', '**ATTN: MELTIES** — Guild Auction has started ~!!', "1347152454210420746", 1);
-     // Instrumental Performance
-    // scheduleEmbed('0 6 * * 1', 'America/Halifax', '**ATTN: MELTIES** — Instrumental Performance EXP in Life has been refreshed ~!!', "1347152454210420746", 0);
-     // Special Quest of Tess
-    // scheduleEmbed('0 6 * * 1', 'America/Halifax', '**ATTN: MELTIES** — The special quest of Tess is available ~!!', "1347152454210420746", 0);
-     // Elemental Realm
-    // scheduleEmbed('0 6 * * *', 'America/Halifax', '**ATTN: MELTIES** — Elemental Realm has been reset ~!!', "1347152454210420746", 0);
-     // Madness Raid
-    // scheduleEmbed('55 9 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Madness Raid starts today from 9:00 to 21:30 (server time) ~!!', "1347152454210420746", 0);
-    // scheduleEmbed('30 23 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Madness Raid is closing ~!!', "1347152454210420746", 2);
-     // Abyss Ruin
-    // scheduleEmbed('0 6 * * 2,4,6,7', 'America/Halifax', '**ATTN: MELTIES** — Abyss Ruin is available ~!!', "1347152454210420746", 0);
-     // Time Trial 
-    // scheduleEmbed('0 6 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Time Trial is available ~!!', "1347152454210420746", 0);
-     // Disaster Crusade
-    //scheduleEmbed('50 20 * * 1', 'America/Halifax', '**ATTN: MELTIES**\nDisaster Crusade starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Burning Soul Battle
-    scheduleEmbed('20 20 * * 2,4,6,7', 'America/Halifax', '**ATTN: MELTIES**\nBurning Soul Battle starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Starleaf Garden
-    // scheduleEmbed('0 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — Starleaf Garden starts ~!!', "1237979376872718439", 1);
-    // scheduleEmbed('55 8 * * *', 'America/Halifax', '**ATTN: MELTIES** — Starleaf Garden is closing in 5 mins ~!!', "1237979376872718439", 2);
-     // Shrine Rivalry
-    scheduleEmbed('50 5 * * 3-5', 'America/Halifax', '**ATTN: MELTIES**\nShrine Rivalry starts in 10 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('30 5 * * 3-5', 'America/Halifax', '**ATTN: MELTIES** — Shrine Rivalry truce time is staring(4:30-5:00 server time) ~!!', "1347152454210420746", 0);
-    // scheduleEmbed('0 6 * * 3-5', 'America/Halifax', '**ATTN: MELTIES** — Shrine Rivalry truce time is closing ~!!', "1347152454210420746", 2);
-     // Shrine Peak
-    scheduleEmbed('50 21 * * 6', 'America/Halifax', '**ATTN: MELTIES**\nShrine Peak starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Uncharted Battlefield
-    scheduleEmbed('50 12 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 16 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 22 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 23 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Top League
-    scheduleEmbed('50 20 * * 3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nTop League starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Thunderroar Recess
-    scheduleEmbed('50 19 * * 1,3,5', 'America/Halifax', '**ATTN: MELTIES**\nThunderroar Recess starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 21 * * 1,3,5', 'America/Halifax', '**ATTN: MELTIES**\nThunderroar Recess starts in 10 mins ~!!', "1347152454210420746", 1);
-     // Crystal Battlefield
-    scheduleEmbed('50 12 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 16 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 22 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    scheduleEmbed('50 23 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
-    // Legion War
-    // scheduleEmbed('0 11 * * 1', 'America/Halifax', '**ATTN: MELTIES** — Legion Sciamachy starts in 10 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('55 0 * * 7', 'America/Halifax', '**ATTN: MELTIES** — Legion Sciamachy is closing in 10 mins ~!!', "1347152454210420746", 2);
-     // Scenic Quiz
-    // scheduleEmbed('5 10 * * 1,4', 'America/Halifax', '**ATTN: MELTIES** — Scenic Quiz is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
-     // Miru Party
-    // scheduleEmbed('5 10 * * 2,6', 'America/Halifax', '**ATTN: MELTIES** — Miru Party is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
-     // Miru Marathon
-    // scheduleEmbed('25 12 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('25 15 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('25 18 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
-    // scheduleEmbed('25 21 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
-     // Holy Fruit and Fog Island
-    // scheduleEmbed('5 10 * * 3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Holy Fruit and Fog Island is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
-     //TEST
-    /*scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 0);
-    scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 1);
-    scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 2);*/
-    //}
+    const updatePresence = () => {
+        client.user.setStatus('idle');
+        client.user.setActivity({
+            name: `Karuta Bot`,
+            type: 'STREAMING',
+            url: 'https://www.twitch.tv/karuta_official'
+        });
+    };
+    updatePresence();
+    // Refresh presence every 30 minutes
+    setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
 });
+
 
 /*client.on('guildMemberAdd', member => {
     if (member.user.bot) return;
@@ -600,19 +506,19 @@ client.on('ready', async () => {
     }
 });*/
 
-client.on('guildMemberAdd', member => {
-    if (member.user.bot) return; // Avoid greeting bots
+// client.on('guildMemberAdd', member => {
+//     if (member.user.bot) return; // Avoid greeting bots
     
-    const channelId = '1292688019811336202'; // Replace with the actual channel ID
-    const channel = client.channels.cache.get(channelId);
-    const welcomeMessage = `Hello, welcome <@${member.id}> to melty ~!!`;
+//     const channelId = '1292688019811336202'; // Replace with the actual channel ID
+//     const channel = client.channels.cache.get(channelId);
+//     const welcomeMessage = `Hello, welcome <@${member.id}>! this is the main karuta channel, enjoy your stay!`;
 
-    if (channel) {
-        channel.send(welcomeMessage).catch(console.error);
-    } else {
-        console.log('Welcome channel not found.');
-    }
-});
+//     if (channel) {
+//         channel.send(welcomeMessage).catch(console.error);
+//     } else {
+//         console.log('Welcome channel not found.');
+//     }
+// });
 
 
 client.login(process.env.token);
