@@ -232,16 +232,79 @@ client.on("messageCreate", message => {
         if (!command) return
         command.run(client, message, args)
     }
-    // if (message.content === "eryembed02") {
-    //     let embed = new Discord.MessageEmbed()
-    //         //.setTitle("EDICT OF UNITY")
-    //         .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:nnTerms of Service: https://discord.com/termsnGuidelines: https://discord.com/guidelines")
-    //         .setColor("#B76A82")
-    //         /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
-    //         .setFooter("Olympus Guild")
 
-    //     message.channel.send({ embeds: [embed] })
-    // }
+if (message.content === "embed_lianfaction_rulestart323235") {
+    let embed = new Discord.MessageEmbed()
+        //.setTitle("EDICT OF UNITY")
+        .setDescription(`\`\`\`js
+LIAN CLAN RULES
+\`\`\`
+1. **No KC-ing During Nodes**
+   - KC (Karuta Claim) during node sessions is strictly prohibited.
+2. **No KC-ing Outside of This Server**
+   - All KC activities must remain within the server. [Read More]
+3. **Complete Your Karuta Work (KW) Daily**
+4. **Maintain Appropriate Conduct**
+   - Avoid making excessively sexual comments or jokes.
+   - Absolutely no offensive explicit content (images, videos, GIFs, messages, or Karuta tags).
+   - This server includes underage members. Moderators will determine what qualifies as explicit content.
+5. **Be Respectful & Avoid Bullying**
+   - Treat all members with kindness and respect.
+   - Bullying, particularly regarding wishlists, is unacceptable.
+   - If asked to stop a behavior, comply immediately.
+   - The use of slurs is strictly prohibited.
+
+\`\`\`js
+CLAN RECRUITMENT AND LOYALTY
+\`\`\`
+- **No Poaching from Other Clans**
+  - Do not recruit members who are already in another clan.
+  - If you wish to recruit someone, speak to their current Shogun and inform the leadership.
+  - Use \`kcv\` to check if a player is in a clan.
+  - Do not attempt to steal followers from other clan members.
+
+\`\`\`js
+WISHLISTED CARD PROTECTION
+\`\`\`
+- **Rules for Wishlisted Cards in <#1255523729031692359>**
+  - If a player drops a wishlisted card and wants to save it for the wishlister, it is protected.
+  - Only the wishlister or the dropper may claim it within **40 seconds**.
+  - After **40 seconds**, the card is free for anyone to claim.
+  - **Server-wide drops** are open for anyone to take.
+  - The dropper should **ping the wishlister** to indicate their intention to save the card.
+  - Avoid grabbing a wishlisted card for someone else—most players prefer to claim it themselves for bonuses.
+
+\`\`\`js
+PUNISHMENTS FOR VIOLATIONS
+\`\`\`
+- **Attempting to grab a protected wishlisted card, even if unsuccessful, is punishable.**
+- **Violations are recorded in <#1255523729031692359>.**
+- **Strikes expire one by one every two weeks.**
+- **Punishments are cumulative and must be fully served.**
+
+| Offense      | Punishment |
+|-------------|------------------------------------------------|
+| **1st Offense** | 2-week giveaway ban + 2-week mass drop ban |
+| **2nd Offense** | Additional 1-month giveaway ban + 1-month mass drop ban + 2-week event ban |
+| **3rd Offense+** | 1-week mute |
+
+- **Event bans apply to any event starting during the punishment period, even if the punishment expires before the event ends.**
+- **All penalties will be enforced retroactively.**`)
+        .setColor("#FC7074")
+        .setImage("https://ik.imagekit.io/Zedi/Screenshot%202025-03-27%20190526.jpg");
+
+    message.channel.send({ embeds: [embed] });
+}
+    
+    if (message.content === "embed_lianfaction_rulesend324235") {
+        let embed = new Discord.MessageEmbed()
+            //.setTitle("EDICT OF UNITY")
+            .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:nnTerms of Service: https://discord.com/termsnGuidelines: https://discord.com/guidelines")
+            .setColor("#FC7074")
+            .setFooter("Lian Faction")
+
+        message.channel.send({ embeds: [embed] })
+    }
 
     /*if (message.content === "Farm") {
         message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
@@ -491,20 +554,6 @@ client.on('ready', async () => {
     setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
 });
 
-
-/*client.on('guildMemberAdd', member => {
-    if (member.user.bot) return;
-    const channelId = '1237979376872718439';
-
-
-    const channel = member.guild.channels.cache.get(channelId);
-    
-    if (channel) {
-        channel.send(`Welcome ${member.user.tag}. Please change your server nickname to your in-game name. Not like it matters to me.`);
-    } else {
-        console.error('Channel not found');
-    }
-});*/
 
 // client.on('guildMemberAdd', member => {
 //     if (member.user.bot) return; // Avoid greeting bots
