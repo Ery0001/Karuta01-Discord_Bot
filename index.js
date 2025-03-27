@@ -23,11 +23,11 @@ app.get("/", (req, res) => {
 const Discord = require("discord.js");
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const client = new Discord.Client({
-    intents: ["GUILDS", "GUILD_MESSAGES"],
+    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
 const fs = require("fs");
-const prefix = "c."
+const prefix = "h."
 client.commands = new Discord.Collection();
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"));
 for (file of commands) {
@@ -109,12 +109,12 @@ const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
         if (channel) {
             let embed = new Discord.MessageEmbed()
                 .setDescription(message)
-                .setImage("https://ik.imagekit.io/Zedi/20240518_042602.png?updatedAt=1715977625082")
+                .setImage("https://ik.imagekit.io/Zedi/20250128_193631.jpg?updatedAt=1738064631421")
                 /*.setFooter("Noblese Guild");*/
                 if (status == 2){
                  embed.setColor("#EE4E4E")
                 } else if (status == 1){
-                 embed.setColor("#A1DD70")
+                 embed.setColor("#F6D286")
                 }
             channel.send({ embeds: [embed] });
         } else {
@@ -175,17 +175,17 @@ const ErythinaMorningPhrase = [
 ];
 
 const ErythinaRemindersChannelPhrase = [
-    "Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
-    "The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
-    "In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
-    "The reminders channel is over here: <#1249229369625546823>. Use it or don’t, up to you."
+    "Reminders channel is over here: <#1347152454210420746>. Not that I care if you forget.",
+    "The reminders channel is right here: <#1347152454210420746>. Try not to miss it, okay?",
+    "In case you can’t figure it out, the reminders channel is here: <#1347152454210420746>.",
+    "The reminders channel is over here: <#1347152454210420746>. Use it or don’t, up to you."
 ];
 
 /*const ErythinaRemindersChannelPhrase = [
-    "@everyone Reminders channel is over here: <#1249229369625546823>. Not that I care if you forget.",
-    "@everyone The reminders channel is right here: <#1249229369625546823>. Try not to miss it, okay?",
-    "@everyone In case you can’t figure it out, the reminders channel is here: <#1249229369625546823>.",
-    "@everyone The reminders channel is over here: <#1249229369625546823>. Use it or don’t, up to you."
+    "@everyone Reminders channel is over here: <#1347152454210420746>. Not that I care if you forget.",
+    "@everyone The reminders channel is right here: <#1347152454210420746>. Try not to miss it, okay?",
+    "@everyone In case you can’t figure it out, the reminders channel is here: <#1347152454210420746>.",
+    "@everyone The reminders channel is over here: <#1347152454210420746>. Use it or don’t, up to you."
 ];*/
 
 const schedules = [
@@ -232,64 +232,22 @@ client.on("messageCreate", message => {
         if (!command) return
         command.run(client, message, args)
     }
-    if (message.content === "eryembed02") {
-        let embed = new Discord.MessageEmbed()
-            //.setTitle("EDICT OF UNITY")
-            .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
-            .setColor("#B76A82")
-            /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
-            .setFooter("Olympus Guild")
+    // if (message.content === "eryembed02") {
+    //     let embed = new Discord.MessageEmbed()
+    //         //.setTitle("EDICT OF UNITY")
+    //         .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:nnTerms of Service: https://discord.com/termsnGuidelines: https://discord.com/guidelines")
+    //         .setColor("#B76A82")
+    //         /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
+    //         .setFooter("Olympus Guild")
 
-        message.channel.send({ embeds: [embed] })
-    }
-    if (message.content === "eryembed03") {
-    let embed = new Discord.MessageEmbed()
-        .setDescription("**UNSAFE ZONE:**\n- Avoid attacking guildmates out of the open.\n\n**SHRINE PEAK:**\n- Avoid attacking guildmates unless on top rank list.\n\n**LADDER ARENA:**\n- If they attack first, you are allowed to retaliate freely.\n- Don't attack guildmates unless the skip button is on cooldown and you cannot defeat the opponent.\n\n**GUILD AUCTION:**\n- Once a bid has been placed, refrain from outbidding.\n- Give priority to those who have won the dice roll in the guild bath.\n- Revealing your bid in guild chat is mandatory if you intend to participate.\n- Qualification for bidding is reserved for those who have participated in guild events.\n\nIf someone violates said rules, kindly send a report at: <#1237979377862709265>.")
-        .setColor("#B76A82")
-
-    message.channel.send({ embeds: [embed] })
-   }
-    if (message.content === "OfficalAnnounce_0001_embed") {
-        let embed = new Discord.MessageEmbed()
-            .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone we are thrilled to share that on May 14, 2024, at 04:50 AM, the **Noblese  guild** will be merging with the esteemed **Overlord guild**. This exciting union marks a new chapter for both guilds as we welcome new members into our community. We look forward to the opportunities this combine will bring and the growth it will inspire. Let us extend our warmest welcome to all the new members!")
-            .setColor("#B76A82")
-            .setImage("https://ik.imagekit.io/Zedi/20240513_234454.png?updatedAt=1715615188837")
-            .setFooter("Noblese Guild")
-
-        message.channel.send({ embeds: [embed] })
-    }
-    if (message.content === "serverInfo_0001_embed") {
-        let embed = new Discord.MessageEmbed()
-            .setDescription("## WELCOME TO OLYMPUS!\nRemember to have fun and savor every moment in the game! If you need assistance with daily tasks, simply drop a message in the guild chat, and we'll be more than happy to lend a hand!!\n\n**JOIN US ON (SERVER TIME):**\n- Guild bath at 7:30pm\n- Guild boss at 7:40pm\n- Guild war at 8:00pm")
-            .setColor("#B76A82")
-            .setFooter("Olympus Guild")
-
-        message.channel.send({ embeds: [embed] })
-    }
-    if (message.content === "OfficalAnnounce_0002_embed") {
-        let embed = new Discord.MessageEmbed()
-            .setDescription("## OFFICIAL ANNOUNCEMENT:\n@everyone All guild members must now change their Discord server nickname to match their in-game name. Please update your nickname as soon as possible to ensure clear communication.\n\nThank you.")
-            .setColor("#B76A82")
-            .setImage("https://ik.imagekit.io/Zedi/20240622_001721.png?updatedAt=1718986723655")
-            .setFooter("Noblese Guild")
-
-        message.channel.send({ embeds: [embed] })
-    }
-        if (message.content === "OfficalAnnounce_0003_embed") {
-        let embed = new Discord.MessageEmbed()
-            .setDescription("## OFFICIAL ANNOUNCEMENT:\nNoblese is joining forces with the ไซเจอร์นอส Guild! From now on, we’ll be united as a single, stronger guild under the new name **OLYMPUS**.")
-            .setColor("#B76A82")
-            .setImage("https://ik.imagekit.io/Zedi/20240513_234454.png?updatedAt=1715615188837")
-            .setFooter("Olympus Guild")
-
-        message.channel.send({ embeds: [embed] })
-    }
+    //     message.channel.send({ embeds: [embed] })
+    // }
 
     /*if (message.content === "Farm") {
-        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
+        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
     }
     if (message.content === "farm") {
-        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do \n [!Farm] \n \n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
+        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
     }*/
     if (!message.author.bot) {
         const messageContent = message.content.toLowerCase();
@@ -314,15 +272,14 @@ client.on("messageCreate", message => {
         }
 
         const hasMention = words.some(word =>
-        word.startsWith("@erythrina") ||
-        word.startsWith("erythrina") ||
-        word.startsWith("erythrin") ||
-        word.startsWith("erythri") ||
-        word.startsWith("erythr") ||
-        word.startsWith("eryth") ||
-        word.startsWith("eryt") ||
-        word.startsWith("ery")
-        );
+  word.startsWith("@Hibiscus") ||
+  word.startsWith("Hibiscus") ||
+  word.startsWith("Hibiscu") ||
+  word.startsWith("Hibisc") ||
+  word.startsWith("Hibis") ||
+  word.startsWith("Hibi") ||
+  word.startsWith("Hib")
+);
 
         const hasMentionSchedule = words.some(word =>
         word.startsWith("schedules") ||
@@ -458,8 +415,8 @@ client.on("messageCreate", message => {
             const ErythinaRelpyGreetings = [
                 `Oh, you’re here. nice to meet you.`,
                 `Oh, it’s you. hello..`,
-                `Pretend that I am not here<:Stare_erythrina:1238029119632048159>`,
-                `Hi<:Stare_erythrina:1238029119632048159>`
+                `Pretend that I am not here`,
+                `Hi`
             ];
             const randomReplyGreeting = ErythinaRelpyGreetings[Math.floor(Math.random() * ErythinaRelpyGreetings.length)];
             message.reply(randomReplyGreeting);
@@ -475,72 +432,33 @@ client.on("messageCreate", message => {
         }
         if (hasMention && hasCompliment1) {
             if (messageContent.length < 13) {
-            message.reply(`<:catto_tf:1241438766137086084>`);
+            message.reply(`...`);
          }
         }
-        if (hasInvite && hasLink) {
-            message.reply(`take it then <:Stare_erythrina:1238029119632048159>\nhttps://bit.ly/Noblese`);
-        }
+        // if (hasInvite && hasLink) {
+        //     message.reply(`take it then <:Stare_erythrina:1238029119632048159>nhttps://bit.ly/Noblese`);
+        // }
         if (hasMention && hasThanks) {
-            message.reply(`you're welcome <@!${message.author.id}><:Stare_erythrina:1238029119632048159>`);
+            // message.reply(`you're welcome <@!${message.author.id}><:Stare_erythrina:1238029119632048159>`);
+            message.reply(`you're welcome <@!${message.author.id}>`);
         }
         if (hasMention && hasAsk) {
-            message.reply(`I was used by Cabala ancients to count the time.`);
+            message.reply(`Greetings, I am bot and my owner is <@894665274123513856>. Nice to meet you <@!${message.author.id}>!`);
         }
 
         if (hasMention && hasSaidQuiet) {
             const ErythinaRelpy = [
                 `eh?`,
-                `<:catto_tf:1241438766137086084>`
+                `meanie :<`
             ];
             const randomReply = ErythinaRelpy[Math.floor(Math.random() * ErythinaRelpy.length)];
             message.reply(randomReply);
         }
         if (hasMention && wordquite) {
           if (messageContent.length < 21) {
-            message.reply(`You spelled "quiet" wrong<:catto_tf:1241438766137086084>`);
-          }
+            message.reply(`You spelled "quiet" wrong>`);
+         }
         }
-
-/*if (hasMention && hasMentionSchedule) {
- later.date.localTime();
-
-        const currentTime = moment().tz('Asia/Manila');
-
-        const todayStart = currentTime.clone().startOf('day').add(2, 'hours');
-        const todayEnd = currentTime.clone().endOf('day').add(1, 'day').subtract(1, 'hours');
-
-        const todaysSchedules = schedules.map(schedule => {
-            const parsed = later.parse.cron(schedule.time, true);
-            const nextRun = later.schedule(parsed).next(1);
-            return {
-                nextRun,
-                message: schedule.message
-            };
-        }).filter(schedule => {
-            const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
-            const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
-            return adjustedScheduleTime.isBetween(todayStart, todayEnd, null, '[]');
-        }).sort((a, b) => a.nextRun - b.nextRun);
-
-        const embed = new MessageEmbed()
-            .setTitle('Today\'s Schedules')
-            .setColor('#B76A82');
-
-        todaysSchedules.forEach(schedule => {
-            const scheduleTime = moment.tz(schedule.nextRun, 'Asia/Manila');
-            const adjustedScheduleTime = scheduleTime.minute() === 0 ? scheduleTime.subtract(1, 'hour') : scheduleTime;
-            const timeFormatted = adjustedScheduleTime.format('MMM Do, HH:mm');
-            const statusField = adjustedScheduleTime.isBefore(currentTime) ? ':white_check_mark:' : '\u200B';
-
-            embed.addField('Time', timeFormatted, true);
-            embed.addField('Message', schedule.message, true);
-            embed.addField('Status', statusField, true);
-        });
-
-        message.channel.send({ embeds: [embed] });
-    }*/
-
 
     }
 });
@@ -566,90 +484,105 @@ client.on('ready', async () => {
     })
 
     // Schedule multiple messages
-    scheduleTempMessage('0 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 30 minutes.', "1237979376872718439",300000);
-    scheduleTempMessage('20 20 * * *', 'Asia/Manila', '@everyone Guild activities are approaching in 10 minutes.', "1237979376872718439",300000);
+    // scheduleTempMessage('0 20 * * *', 'America/Halifax', '@everyone Guild activities are approaching in 30 mins.', "1237979376872718439",300000);
+    // scheduleTempMessage('20 20 * * *', 'America/Halifax', '@everyone Guild activities are approaching in 10 mins.', "1237979376872718439",300000);
     
-    scheduleTempMessage('25 20 * * *', 'Asia/Manila', '@everyone Time for the Guild bath in 5 minutes. Join us or miss out, your loss!', "1237979376872718439",600000);
-    scheduleTempMessage('30 20 * * *', 'Asia/Manila', 'Guild bath is starting!<:Stare_erythrina:1238029119632048159>', "1237979376872718439",300000);
-    scheduleTempMessage('35 20 * * *', 'Asia/Manila', '@everyone Get ready for the Guild boss battle in 5 minutes! Don\'t slack off now, we need everyone!', "1237979376872718439",600000);
-    scheduleTempMessage('40 20 * * *', 'Asia/Manila', 'Guild boss is starting!<:Stare_erythrina:1238029119632048159>', "1237979376872718439",300000);
-    scheduleTempMessage('55 20 * * 2,4,6', 'Asia/Manila', '@everyone The Guild war is about to begin in 5 minutes! Prepare yourself!', "1237979376872718439",1200000);
-    scheduleTempMessage('0 21 * * 2,4,6', 'Asia/Manila', 'Guild war is starting!<:Erythrina_happy:1249365602397716540>', "1237979376872718439",900000);
-    scheduleRndmMessage('30 6 * * *', 'Asia/Manila', "1237979376872718439");
+    scheduleTempMessage('25 20 * * 1,3,5,7', 'America/Halifax', '@everyone Time for Guild Bath & Boss in 5 mins ~!!', "1292688019811336202",1200000);
+    scheduleTempMessage('25 20 * * 2,4,6', 'America/Halifax', '@everyone Time for Guild Bath & Boss & Wars in 5 mins ~!!', "1292688019811336202",1200000);
 
-    //every 10 minutes
-    //scheduleRndmMessage('*/10 * * * *', 'Asia/Manila', '1237979377363320916');
-    //scheduleTempMessage('*/1 * * * *', 'Asia/Manila', 'test1', "1237979377363320916",1000);
+    //scheduleTempMessage('25 20 * * *', 'America/Halifax', '@everyone Time for the Guild bath in 5 mins. Join us or miss out, your loss ~!!', "1292688019811336202",600000);
+    // scheduleTempMessage('30 20 * * *', 'America/Halifax', 'Guild bath starts!<:Stare_erythrina:1238029119632048159>', "1292688019811336202",300000);
+    //scheduleTempMessage('35 20 * * *', 'America/Halifax', "@everyone Get ready for the Guild boss battle in 5 mins! Don't slack off now, we need everyone ~!!", "1292688019811336202",600000);
+    // scheduleTempMessage('40 20 * * *', 'America/Halifax', 'Guild boss starts!<:Stare_erythrina:1238029119632048159>', "1292688019811336202",300000);
+    //scheduleTempMessage('55 20 * * 2,4,6', 'America/Halifax', '@everyone The Guild war is about to begin in 5 mins! Prepare yourself ~!!', "1292688019811336202",1200000);
+    // scheduleTempMessage('0 21 * * 2,4,6', 'America/Halifax', 'Guild war starts!<:Erythrina_happy:1249365602397716540>', "1292688019811336202",900000);
+    // scheduleRndmMessage('30 6 * * *', 'America/Halifax', "1237979376872718439");
 
-    
+    //every 10 mins
+    //scheduleRndmMessage('*/10 * * * *', 'America/Halifax', '1237979377363320916');
+    // scheduleEmbed('*/1 * * * *', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1333656769175490560", 1);
+    scheduleEmbed('0 0 * * 1', 'America/Halifax', '# TROUBLESHOOTING\nToday is Monday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 2', 'America/Halifax', '# TROUBLESHOOTING\nToday is Tuesday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 3', 'America/Halifax', '# TROUBLESHOOTING\nToday is Wednesday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 4', 'America/Halifax', '# TROUBLESHOOTING\nToday is Thursday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 5', 'America/Halifax', '# TROUBLESHOOTING\nToday is Friday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 6', 'America/Halifax', '# TROUBLESHOOTING\nToday is Saturday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
+    scheduleEmbed('0 0 * * 7', 'America/Halifax', '# TROUBLESHOOTING\nToday is Sunday\n\n\n-# ⓘ This is a test, kindly contact me if an issue occurs.', "1347160179065749504", 0);
      //Reminders of reminder channel
-    scheduleRemindersChannel('0 7 * * *', 'Asia/Manila', "1237979376872718439",3600000);
-    //scheduleRemindersChannel('0 12 * * *', 'Asia/Manila', "1237979376872718439",3600000);
-    //scheduleRemindersChannel('30 21 * * *', 'Asia/Manila', "1237979376872718439",3600000);
+    // scheduleRemindersChannel('0 7 * * *', 'America/Halifax', "1237979376872718439",3600000);
+    //scheduleRemindersChannel('0 12 * * *', 'America/Halifax', "1237979376872718439",3600000);
+    //scheduleRemindersChannel('30 21 * * *', 'America/Halifax', "1237979376872718439",3600000);
 
     // Schedule multiple embeds
     // Official{
      //Server Reset
-    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nServer events and activities have been reset.', "1249229369625546823", 0);
+    scheduleEmbed('0 6 * * *', 'America/Halifax', '**ATTN: MELTIES**\nServer events and activities have been reset ~!!', "1347152454210420746", 0);
      //Guild war weekly reward
-    scheduleEmbed('0 22 * * 6', 'Asia/Manila', '### [NOTICE]\nWeekly guild reward is available.', "1249229369625546823", 0);
+    // scheduleEmbed('0 22 * * 6', 'America/Halifax', '**ATTN: MELTIES** — Weekly guild reward is available ~!!', "1347152454210420746", 0);
      // Guild Activity
-    scheduleEmbed('30 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Bath has started!', "1249229369625546823", 1);
-    scheduleEmbed('40 20 * * *', 'Asia/Manila', '### [NOTICE]\nGuild Boss has started!', "1249229369625546823", 1);
-    scheduleEmbed('0 21 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nGuild War has started!', "1249229369625546823", 1);
+    scheduleEmbed('20 20 * * *', 'America/Halifax', '**ATTN: MELTIES**\nGuild Bath & Guild Boss starts in 10 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('40 20 * * *', 'America/Halifax', '**ATTN: MELTIES**\nGuild Boss has started ~!!', "1347152454210420746", 1);
+    scheduleEmbed('55 20 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nGuild War starts in 10 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('50 21 * * *', 'America/Halifax', '**ATTN: MELTIES** — Guild Auction has started ~!!', "1347152454210420746", 1);
      // Instrumental Performance
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nInstrumental Performance EXP in Life has been refreshed', "1249229369625546823", 0);
+    // scheduleEmbed('0 6 * * 1', 'America/Halifax', '**ATTN: MELTIES** — Instrumental Performance EXP in Life has been refreshed ~!!', "1347152454210420746", 0);
      // Special Quest of Tess
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nThe special quest of Tess is available.', "1249229369625546823", 0);
+    // scheduleEmbed('0 6 * * 1', 'America/Halifax', '**ATTN: MELTIES** — The special quest of Tess is available ~!!', "1347152454210420746", 0);
      // Elemental Realm
-    scheduleEmbed('0 6 * * *', 'Asia/Manila', '### [NOTICE]\nElemental Realm has been reset!', "1249229369625546823", 0);
+    // scheduleEmbed('0 6 * * *', 'America/Halifax', '**ATTN: MELTIES** — Elemental Realm has been reset ~!!', "1347152454210420746", 0);
      // Madness Raid
-    scheduleEmbed('55 9 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is starting today from 9:00 to 21:30 (server time)!', "1249229369625546823", 0);
-    scheduleEmbed('30 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nMadness Raid is closing!', "1249229369625546823", 2);
+    // scheduleEmbed('55 9 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Madness Raid starts today from 9:00 to 21:30 (server time) ~!!', "1347152454210420746", 0);
+    // scheduleEmbed('30 23 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Madness Raid is closing ~!!', "1347152454210420746", 2);
      // Abyss Ruin
-    scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nAbyss Ruin is available!', "1249229369625546823", 0);
+    // scheduleEmbed('0 6 * * 2,4,6,7', 'America/Halifax', '**ATTN: MELTIES** — Abyss Ruin is available ~!!', "1347152454210420746", 0);
      // Time Trial 
-    scheduleEmbed('0 6 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nTime Trial is available!', "1249229369625546823", 0);
+    // scheduleEmbed('0 6 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Time Trial is available ~!!', "1347152454210420746", 0);
      // Disaster Crusade
-    scheduleEmbed('0 6 * * 1', 'Asia/Manila', '### [NOTICE]\nDisaster Crusade has been reset!', "1249229369625546823", 0);
+    //scheduleEmbed('50 20 * * 1', 'America/Halifax', '**ATTN: MELTIES**\nDisaster Crusade starts in 10 mins ~!!', "1347152454210420746", 1);
      // Burning Soul Battle
-    scheduleEmbed('55 19 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nBurning Soul Battle is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('20 20 * * 2,4,6,7', 'America/Halifax', '**ATTN: MELTIES**\nBurning Soul Battle starts in 10 mins ~!!', "1347152454210420746", 1);
      // Starleaf Garden
-    /*scheduleEmbed('0 6 * * 2,4,6,7', 'Asia/Manila', '### [NOTICE]\nStarleaf Garden is starting!', "1237979376872718439", 1);*/
+    // scheduleEmbed('0 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — Starleaf Garden starts ~!!', "1237979376872718439", 1);
+    // scheduleEmbed('55 8 * * *', 'America/Halifax', '**ATTN: MELTIES** — Starleaf Garden is closing in 5 mins ~!!', "1237979376872718439", 2);
      // Shrine Rivalry
-    scheduleEmbed('0 6 * * 3-5', 'Asia/Manila', '### [NOTICE]\nShrine Rivalry is available!', "1249229369625546823", 0);
+    scheduleEmbed('50 5 * * 3-5', 'America/Halifax', '**ATTN: MELTIES**\nShrine Rivalry starts in 10 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('30 5 * * 3-5', 'America/Halifax', '**ATTN: MELTIES** — Shrine Rivalry truce time is staring(4:30-5:00 server time) ~!!', "1347152454210420746", 0);
+    // scheduleEmbed('0 6 * * 3-5', 'America/Halifax', '**ATTN: MELTIES** — Shrine Rivalry truce time is closing ~!!', "1347152454210420746", 2);
      // Shrine Peak
-    scheduleEmbed('55 21 * * 6', 'Asia/Manila', '### [NOTICE]\nShrine Peak is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('50 21 * * 6', 'America/Halifax', '**ATTN: MELTIES**\nShrine Peak starts in 10 mins ~!!', "1347152454210420746", 1);
      // Uncharted Battlefield
-    scheduleEmbed('55 12 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield First Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 16 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Second Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 22 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Third Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 23 * * 2,4,6', 'Asia/Manila', '### [NOTICE]\nUncharted Battlefield Last Wave is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('50 12 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 16 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 22 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 23 * * 2,4,6', 'America/Halifax', '**ATTN: MELTIES**\nUncharted Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
      // Top League
-    scheduleEmbed('55 20 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nTop League is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('50 20 * * 3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nTop League starts in 10 mins ~!!', "1347152454210420746", 1);
      // Thunderroar Recess
-    scheduleEmbed('55 19 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 21 * * 1,3,5', 'Asia/Manila', '### [NOTICE]\nThunderroar Recess is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('50 19 * * 1,3,5', 'America/Halifax', '**ATTN: MELTIES**\nThunderroar Recess starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 21 * * 1,3,5', 'America/Halifax', '**ATTN: MELTIES**\nThunderroar Recess starts in 10 mins ~!!', "1347152454210420746", 1);
      // Crystal Battlefield
-    scheduleEmbed('55 12 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield First Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 16 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Second Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 22 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Third Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('55 23 * * 1,3,5,7', 'Asia/Manila', '### [NOTICE]\nCrystal Battlefield Last Wave is starting in 5 minutes!', "1249229369625546823", 1);
+    scheduleEmbed('50 12 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 16 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 22 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    scheduleEmbed('50 23 * * 1,3,5,7', 'America/Halifax', '**ATTN: MELTIES**\nCrystal Battlefield starts in 10 mins ~!!', "1347152454210420746", 1);
+    // Legion War
+    // scheduleEmbed('0 11 * * 1', 'America/Halifax', '**ATTN: MELTIES** — Legion Sciamachy starts in 10 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('55 0 * * 7', 'America/Halifax', '**ATTN: MELTIES** — Legion Sciamachy is closing in 10 mins ~!!', "1347152454210420746", 2);
      // Scenic Quiz
-    scheduleEmbed('5 10 * * 1,4', 'Asia/Manila', '### [NOTICE]\nScenic Quiz is available today from 9:00 to 23:00 (server time)!', "1249229369625546823", 0);
+    // scheduleEmbed('5 10 * * 1,4', 'America/Halifax', '**ATTN: MELTIES** — Scenic Quiz is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
      // Miru Party
-    scheduleEmbed('5 10 * * 2,6', 'Asia/Manila', '### [NOTICE]\nMiru Party is available today from 9:00 to 23:00 (server time)!', "1249229369625546823", 0);
+    // scheduleEmbed('5 10 * * 2,6', 'America/Halifax', '**ATTN: MELTIES** — Miru Party is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
      // Miru Marathon
-    scheduleEmbed('25 12 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon First Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('25 15 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Second Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('25 18 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Third Wave is starting in 5 minutes!', "1249229369625546823", 1);
-    scheduleEmbed('25 21 * * *', 'Asia/Manila', '### [NOTICE]\nMiru Marathon Last Wave is starting in 5 minutes!', "1249229369625546823", 1);
+    // scheduleEmbed('25 12 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('25 15 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('25 18 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
+    // scheduleEmbed('25 21 * * *', 'America/Halifax', '**ATTN: MELTIES** — Miru Marathon starts in 5 mins ~!!', "1347152454210420746", 1);
      // Holy Fruit and Fog Island
-    scheduleEmbed('5 10 * * 3,5,7', 'Asia/Manila', '### [NOTICE]\nHoly Fruit and Fog Island is available today from 9:00 to 23:00 (server time)!', "1249229369625546823", 0);
+    // scheduleEmbed('5 10 * * 3,5,7', 'America/Halifax', '**ATTN: MELTIES** — Holy Fruit and Fog Island is available today from 9:00 to 23:00 (server time) ~!!', "1347152454210420746", 0);
      //TEST
-    /*scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 0);
-    scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 1);
-    scheduleEmbed('23 0 * * *', 'Asia/Manila', '### [NOTICE]\nTEST TEST TEST!', "1237979376872718439", 2);*/
+    /*scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 0);
+    scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 1);
+    scheduleEmbed('23 0 * * *', 'America/Halifax', '**ATTN: MELTIES** — TEST TEST TEST ~!!', "1237979376872718439", 2);*/
     //}
 });
 
@@ -666,5 +599,20 @@ client.on('ready', async () => {
         console.error('Channel not found');
     }
 });*/
+
+client.on('guildMemberAdd', member => {
+    if (member.user.bot) return; // Avoid greeting bots
+    
+    const channelId = '1292688019811336202'; // Replace with the actual channel ID
+    const channel = client.channels.cache.get(channelId);
+    const welcomeMessage = `Hello, welcome <@${member.id}> to melty ~!!`;
+
+    if (channel) {
+        channel.send(welcomeMessage).catch(console.error);
+    } else {
+        console.log('Welcome channel not found.');
+    }
+});
+
 
 client.login(process.env.token);
