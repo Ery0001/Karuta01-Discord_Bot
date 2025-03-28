@@ -555,7 +555,7 @@ client.on('messageCreate', message => {
         const userMessages = userMessageCounts.get(userId) || 0;
 
         if (userMessages >= MESSAGE_LIMIT) {
-            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}> or <#${MAIN_CHAT_CHANNELS[1]}>.`);
+            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
             userMessageCounts.set(userId, 0); // Reset count after notification
         } else {
             userMessageCounts.set(userId, userMessages + 1);
