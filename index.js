@@ -525,10 +525,21 @@ client.on('ready', async () => {
     updatePresence();
     // Refresh presence every 30 minutes
     setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
+
+    //FOR MESSAGE SPAM DETECTION LIMIT
+        setInterval(() => {
+        userMessageCounts.clear();
+        console.log('User message counts have been reset.');
+    }, 30 * 60 * 1000);
 });
 
 const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
 const EMOTE_ID = '<:customemote:1354789755979698217>';
+
+const MAIN_CHAT_CHANNELS = ['1354641347197407289', '1355021656728539276'];
+const userMessageCounts = new Collection();
+const MESSAGE_LIMIT = 20;
+const MESSAGE_LENGTH_THRESHOLD = 25;
 
 client.on('messageCreate', message => {
     if (message.author.bot) return;
@@ -537,6 +548,20 @@ client.on('messageCreate', message => {
     if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
         message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
     }
+
+        // Message spam detection (only count messages with over 25 characters)
+    if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
+        const userId = message.author.id;
+        const userMessages = userMessageCounts.get(userId) || 0;
+
+        if (userMessages >= MESSAGE_LIMIT) {
+            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}> or <#${MAIN_CHAT_CHANNELS[1]}>.`);
+            userMessageCounts.set(userId, 0); // Reset count after notification
+        } else {
+            userMessageCounts.set(userId, userMessages + 1);
+        }
+    }
+    
 });
 
 // client.on('guildMemberAdd', member => {
