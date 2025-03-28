@@ -235,61 +235,54 @@ client.on("messageCreate", message => {
 
 if (message.content === "embed_lianfaction_rulestart323235") {
     let embed = new Discord.MessageEmbed()
-        //.setTitle("EDICT OF UNITY")
         .setDescription(`\`\`\`js
 LIAN CLAN RULES
 \`\`\`
 1. **No KC-ing During Nodes**
-   - KC (Karuta Claim) during node sessions is strictly prohibited.
 2. **No KC-ing Outside of This Server**
-   - All KC activities must remain within the server. [Read More]
 3. **Complete Your Karuta Work (KW) Daily**
 4. **Maintain Appropriate Conduct**
-   - Avoid making excessively sexual comments or jokes.
-   - Absolutely no offensive explicit content (images, videos, GIFs, messages, or Karuta tags).
-   - This server includes underage members. Moderators will determine what qualifies as explicit content.
+   - No excessive sexual jokes or comments.
+   - No explicit content (images, videos, GIFs, messages, or Karuta tags).
+   - Moderators decide what qualifies as explicit.
 5. **Be Respectful & Avoid Bullying**
-   - Treat all members with kindness and respect.
-   - Bullying, particularly regarding wishlists, is unacceptable.
-   - If asked to stop a behavior, comply immediately.
-   - The use of slurs is strictly prohibited.
+   - No bullying, especially over wishlists.
+   - Stop when asked; slurs are strictly prohibited.
 
 \`\`\`js
 CLAN RECRUITMENT AND LOYALTY
 \`\`\`
-- **No Poaching from Other Clans**
-  - Do not recruit members who are already in another clan.
-  - If you wish to recruit someone, speak to their current Shogun and inform the leadership.
-  - Use \`kcv\` to check if a player is in a clan.
-  - Do not attempt to steal followers from other clan members.
+1. **No Poaching from Other Clans**
+2. **Speak to a Shogun Before Recruiting**
+3. **Use \`kcv\` to Check if a Player is in a Clan**
+4. **Do Not Steal Followers from Other Members**
 
 \`\`\`js
 WISHLISTED CARD PROTECTION
 \`\`\`
-- **Rules for Wishlisted Cards in <#1255523729031692359>**
-  - If a player drops a wishlisted card and wants to save it for the wishlister, it is protected.
-  - Only the wishlister or the dropper may claim it within **40 seconds**.
-  - After **40 seconds**, the card is free for anyone to claim.
-  - **Server-wide drops** are open for anyone to take.
-  - The dropper should **ping the wishlister** to indicate their intention to save the card.
-  - Avoid grabbing a wishlisted card for someone else—most players prefer to claim it themselves for bonuses.
+1. **Wishlisted Cards in <#1255523729031692359> are Protected**
+2. **Only the Wishlister or Dropper May Claim It Within 40 Seconds**
+3. **After 40 Seconds, It is Free for Anyone**
+4. **Server-Wide Drops are Open for All**
+5. **Dropper Should Ping the Wishlister**
+6. **Do Not Grab a Wishlisted Card for Someone Else**
 
 \`\`\`js
 PUNISHMENTS FOR VIOLATIONS
 \`\`\`
-- **Attempting to grab a protected wishlisted card, even if unsuccessful, is punishable.**
-- **Violations are recorded in <#1255523729031692359>.**
-- **Strikes expire one by one every two weeks.**
-- **Punishments are cumulative and must be fully served.**
+1. **Attempting to Grab a Protected Wishlisted Card is Punishable**
+2. **Violations are Recorded in <#1255523729031692359>**
+3. **Strikes Expire One by One Every Two Weeks**
+4. **Punishments are Cumulative & Must Be Fully Served**
 
-| Offense      | Punishment |
-|-------------|------------------------------------------------|
-| **1st Offense** | 2-week giveaway ban + 2-week mass drop ban |
-| **2nd Offense** | Additional 1-month giveaway ban + 1-month mass drop ban + 2-week event ban |
-| **3rd Offense+** | 1-week mute |
+| Offense          | Punishment                                     |
+|------------------|------------------------------------------------|
+| **1st Offense**  | 2-week giveaway + mass drop ban                |
+| **2nd Offense**  | 1-month giveaway + mass drop ban, 2-week event ban |
+| **3rd Offense+** | 1-week mute                                    |
 
-- **Event bans apply to any event starting during the punishment period, even if the punishment expires before the event ends.**
-- **All penalties will be enforced retroactively.**`)
+- Event bans apply to events starting during the punishment period.
+- All penalties are enforced retroactively.`)
         .setColor("#FC7074")
         .setImage("https://ik.imagekit.io/Zedi/Screenshot%202025-03-27%20190526.jpg");
 
