@@ -242,12 +242,12 @@ LIAN CLAN RULES
 2. No KC-ing Outside of This Server
 3. Complete Your Karuta Work (KW) Daily
 4. Maintain Appropriate Conduct
-   - No excessive sexual jokes or comments.
-   - No explicit content (images, videos, GIFs, messages, or Karuta tags).
-   - Moderators decide what qualifies as explicit.
+- No excessive sexual jokes or comments.
+- No explicit content (images, videos, GIFs, messages, or Karuta tags).
+- Moderators decide what qualifies as explicit.
 5. Be Respectful & Avoid Bullying
-   - No bullying, especially over wishlists.
-   - Stop when asked; slurs are strictly prohibited.
+- No bullying, especially over wishlists.
+- Stop when asked; slurs are strictly prohibited.
 
 \`\`\`js
 CLAN RECRUITMENT AND LOYALTY
