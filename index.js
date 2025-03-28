@@ -308,13 +308,13 @@ For the full main server rules, check <#1305705930926850119>.
         }
 
         const hasMention = words.some(word =>
-  word.startsWith("@Hibiscus") ||
-  word.startsWith("Hibiscus") ||
-  word.startsWith("Hibiscu") ||
-  word.startsWith("Hibisc") ||
-  word.startsWith("Hibis") ||
-  word.startsWith("Hibi") ||
-  word.startsWith("Hib")
+  word.startsWith("@Cheongmun") ||
+  word.startsWith("Cheongmun") ||
+  word.startsWith("Cheongmn") ||
+  word.startsWith("Cheongmu") ||
+  word.startsWith("Cheongun") ||
+  word.startsWith("Cheonmun") ||
+  word.startsWith("Cheong")
 );
 
         const hasMentionSchedule = words.some(word =>
@@ -479,7 +479,7 @@ For the full main server rules, check <#1305705930926850119>.
             message.reply(`you're welcome <@!${message.author.id}>`);
         }
         if (hasMention && hasAsk) {
-            message.reply(`Greetings, I am bot and my owner is <@894665274123513856>. Nice to meet you <@!${message.author.id}>!`);
+            message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
         }
 
         if (hasMention && hasSaidQuiet) {
