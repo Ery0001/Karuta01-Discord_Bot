@@ -238,47 +238,47 @@ if (message.content === "embed_lianfaction_rulestart323235") {
         .setDescription(`\`\`\`js
 LIAN CLAN RULES
 \`\`\`
-1. No KC-ing During Nodes
-2. No KC-ing Outside of This Server
-3. Complete Your Karuta Work (KW) Daily
-4. Maintain Appropriate Conduct
-- No excessive sexual jokes or comments.
-- No explicit content (images, videos, GIFs, messages, or Karuta tags).
-- Moderators decide what qualifies as explicit.
-5. Be Respectful & Avoid Bullying
-- No bullying, especially over wishlists.
-- Stop when asked; slurs are strictly prohibited.
+1. No KC-ing During Nodes  
+2. No KC-ing Outside of This Server  
+3. Complete Your Karuta Work (KW) Daily  
+4. Maintain Appropriate Conduct  
+   • No excessive sexual jokes or comments.  
+   • No explicit content (images, videos, GIFs, messages, or Karuta tags).  
+   • Moderators decide what qualifies as explicit.  
+5. Be Respectful & Avoid Bullying  
+   • No bullying, especially over wishlists.  
+   • Stop when asked; slurs are strictly prohibited.  
 
 \`\`\`js
 CLAN RECRUITMENT AND LOYALTY
 \`\`\`
-1. No Poaching from Other Clans
-2. Speak to a Shogun Before Recruiting
-3. Use \`kcv\` to Check if a Player is in a Clan
-4. Do Not Steal Followers from Other Members
+1. No Poaching from Other Clans  
+2. Speak to a Shogun Before Recruiting  
+3. Use \`kcv\` to Check if a Player is in a Clan  
+4. Do Not Steal Followers from Other Members  
 
 \`\`\`js
 WISHLISTED CARD PROTECTION
 \`\`\`
-1. Wishlisted Cards in <#1354641347197407290> are Protected
-2. Only the Wishlister or Dropper May Claim It Within 40 Seconds
-3. After 40 Seconds, It is Free for Anyone
-4. Server-Wide Drops are Open for All
-5. Dropper Should Ping the Wishlister
-6. Do Not Grab a Wishlisted Card for Someone Else
+1. Wishlisted Cards in <#1354641347197407290> are Protected  
+2. Only the Wishlister or Dropper May Claim It Within 40 Seconds  
+3. After 40 Seconds, It is Free for Anyone  
+4. Server-Wide Drops are Open for All  
+5. Dropper Should Ping the Wishlister  
+6. Do Not Grab a Wishlisted Card for Someone Else  
 
 \`\`\`js
 PUNISHMENTS FOR VIOLATIONS
 \`\`\`
-1. Attempting to grab a protected wishlisted card, even if unsuccessful, will result in punishment.
-2. Strikes expire one by one every two weeks.
-3. Punishments accumulate and must be fully served.
+1. Attempting to grab a protected wishlisted card, even if unsuccessful, will result in punishment.  
+2. Strikes expire one by one every two weeks.  
+3. Punishments accumulate and must be fully served.  
 
 **__First offense:__** 2-week ban from giveaways and mass drops.  
 **__Second offense:__** Additional 1-month ban from giveaways and mass drops, plus a 2-week event ban.  
 **__Third offense or more:__** 1-week mute.  
 
-Event bans apply to any event that starts during the punishment period, even if the ban expires before the event ends. All penalties are enforced retroactively.
+Event bans apply to any event that starts during the punishment period, even if the ban expires before the event ends. All penalties are enforced retroactively.  
 
 For the full main server rules, check <#1305705930926850119>.
 `)
@@ -288,6 +288,7 @@ For the full main server rules, check <#1305705930926850119>.
 
     message.channel.send({ embeds: [embed] });
 }
+
 
 
     
