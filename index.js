@@ -289,14 +289,12 @@ For the full main server rules, check <#1305705930926850119>.
     message.channel.send({ embeds: [embed] });
 }
 
-
-
-    
     if (message.content === "embed_lianfaction_rulesend324235") {
         let embed = new Discord.MessageEmbed()
             //.setTitle("EDICT OF UNITY")
-            .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:nnTerms of Service: https://discord.com/termsnGuidelines: https://discord.com/guidelines")
+            .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
             .setColor("#FC7074")
+            /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
             .setFooter("Lian Faction")
 
         message.channel.send({ embeds: [embed] })
