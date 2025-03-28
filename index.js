@@ -300,6 +300,37 @@ For the full main server rules, check <#1305705930926850119>.
         message.channel.send({ embeds: [embed] })
     }
 
+    if (message.content === "embed_lianfaction_info234876") {
+    let embed = new Discord.MessageEmbed()
+        .setDescription(
+            "## WELCOME TO LIAN FACTION!\n" +
+            "Lian Faction is a distinguished sub-clan under the dominion of **Violet Villa**, upholding its traditions while forging its own path. " +
+            "Led by its Shogun, <@1242447806086516841>, this faction stands on the pillars of **discipline, unity, and unwavering loyalty.**"
+        )
+        .addField("A Legacy of Honor", 
+            "As an extension of **Violet Villa**, Lian Faction follows the main clan’s edicts, ensuring order and stability within its ranks. " +
+            "The foundation of this faction rests upon the principles of **honor and respect**, where members are expected to uphold the integrity of the clan at all times."
+        )
+        .addField("The Code of Lian", 
+            "All rules and regulations originate from the **main clan server** and must be observed with absolute diligence. " +
+            "Violations will not be taken lightly, and enforcement will be **swift and just**. The path of a true warrior is one of responsibility, and all who walk it must **adhere to the laws** set forth by the leadership."
+        )
+        .addField("Strength in Unity", 
+            "Lian Faction is not merely a group—it is a **brotherhood** bound by shared purpose and strength. " +
+            "Loyalty is not just expected—it is **demanded**. Let this be a sanctuary for those who seek both **camaraderie and conquest**, " +
+            "where the legacy of **Violet Villa** is carried forth with pride."
+        )
+        .addField("The Path of the Warrior", 
+            "Heed the laws, **respect the hierarchy**, and forge your name in the annals of this faction. " +
+            "For in **Lian Faction, only the steadfast endure.**"
+        )
+        .setColor("#FC7074")
+        .setImage("https://ik.imagekit.io/Zedi/20250328_092838.png?updatedAt=1743125339723")
+        .setFooter("Lian Faction");
+
+    message.channel.send({ embeds: [embed] });
+}
+
     /*if (message.content === "Farm") {
         message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
     }
