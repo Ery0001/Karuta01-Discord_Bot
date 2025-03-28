@@ -188,42 +188,6 @@ const ErythinaRemindersChannelPhrase = [
     "@everyone The reminders channel is over here: <#1347152454210420746>. Use it or don’t, up to you."
 ];*/
 
-const schedules = [
-    { time: '0 6 * * *', message: 'Reset Server events and activities' },
-    { time: '30 20 * * *', message: 'Guild Bath.' },
-    { time: '40 20 * * *', message: 'Guild Boss.' },
-    { time: '0 21 * * 2,4,6', message: 'Guild War.' },
-    { time: '0 6 * * 1', message: ' Reset Instrumental Performance EXP in Life.' },
-    { time: '0 6 * * 1', message: 'The special quest of Tess.' },
-    { time: '0 6 * * *', message: 'Reset Elemental Realm.' },
-    { time: '30 23 * * 1,3,5,7', message: 'Madness Raid(9:00 to 21:30).' },
-    //{ time: '30 23 * * 1,3,5,7', message: 'End Madness Raid.' },
-    { time: '0 6 * * 2,4,6,7', message: 'Abyss Ruin.' },
-    { time: '0 6 * * 1,3,5,7', message: 'Time Trial.' },
-    { time: '0 6 * * 1', message: 'Disaster Crusade reset.' },
-    { time: '0 20 * * 2,4,6,7', message: 'Burning Soul Battle.' },
-    { time: '0 6 * * 3-5', message: 'Shrine Rivalry.' },
-    { time: '0 22 * * 6', message: 'Shrine Peak.' },
-    { time: '0 13 * * 2,4,6', message: 'Uncharted Battlefield First Wave.' },
-    { time: '0 17 * * 2,4,6', message: 'Uncharted Battlefield Second Wave.' },
-    { time: '0 23 * * 2,4,6', message: 'Uncharted Battlefield Third Wave.' },
-    { time: '0 24 * * 2,4,6', message: 'Uncharted Battlefield Last Wave.' },
-    { time: '0 21 * * 3,5,7', message: 'Top League.' },
-    { time: '0 22 * * 1,3,5', message: 'Thunderroar Recess (19:00 to 21:00).' },
-    //{ time: '55 21 * * 1,3,5', message: 'Thunderroar Recess.' },
-    { time: '0 13 * * 1,3,5,7', message: 'Crystal Battlefield First Wave.' },
-    { time: '0 17 * * 1,3,5,7', message: 'Crystal Battlefield Second Wave.' },
-    { time: '0 23 * * 1,3,5,7', message: 'Crystal Battlefield Third Wave.' },
-    { time: '0 0 * * 1,3,5,7', message: 'Crystal Battlefield Last Wave.' },
-    { time: '0 0 * * 1,4', message: 'Scenic Quiz today (9:00 to 23:00).' },
-    { time: '0 0 * * 2,6', message: 'Miru Party today (9:00 to 23:00).' },
-    { time: '30 12 * * *', message: 'Miru Marathon First Wave.' },
-    { time: '30 15 * * *', message: 'Miru Marathon Second Wave.' },
-    { time: '30 18 * * *', message: 'Miru Marathon Third Wave.' },
-    { time: '30 21 * * *', message: 'Miru Marathon Last Wave.' },
-    { time: '0 10 * * 3,5,7', message: 'Holy Fruit and Fog Island (9:00 to 23:00).' },
-];
-
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -563,6 +527,17 @@ client.on('ready', async () => {
     setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
 });
 
+const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
+const EMOTE_ID = '<:customemote:1354789755979698217>';
+
+client.on('messageCreate', message => {
+    if (message.author.bot) return;
+    
+    const triggerWords = ['kd', 'k!d', 'k!drop'];
+    if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
+        message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
+    }
+});
 
 // client.on('guildMemberAdd', member => {
 //     if (member.user.bot) return; // Avoid greeting bots
