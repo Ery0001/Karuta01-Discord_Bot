@@ -278,11 +278,10 @@ PUNISHMENTS FOR VIOLATIONS
 **__Second offense:__** Additional 1-month ban from giveaways and mass drops, plus a 2-week event ban.  
 **__Third offense or more:__** 1-week mute.  
 
-Event bans apply to any event that starts during the punishment period, even if the ban expires before the event ends. All penalties are enforced retroactively.
-\`\`\``)
+Event bans apply to any event that starts during the punishment period, even if the ban expires before the event ends. All penalties are enforced retroactively.`)
         .setColor("#FC7074")
         .setImage("https://ik.imagekit.io/Zedi/Screenshot%202025-03-27%20190526.jpg")
-        .setFooter("Rules and regulations are all from the main clan server");
+        .setFooter("Rules and regulations are all from the main clan server. Refer to <#1305705930926850119> for the full main server rules.");
 
     message.channel.send({ embeds: [embed] });
 }
