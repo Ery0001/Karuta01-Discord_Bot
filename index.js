@@ -304,7 +304,7 @@ For the full main server rules, check <#1305705930926850119>.
     let embed = new Discord.MessageEmbed()
         .setDescription(
             "## WELCOME TO LIAN FACTION\n\n" +
-            "Lian Faction is a sub-clan of Violet Villa, led by <@1242447806086516841>. We follow the rules and structure of the main clan while managing our own operations." +
+            "Lian Faction is a sub-clan of Violet Villa, led by <@1242447806086516841>. We follow the rules and structure of the main clan while managing our own operations.\n\n" +
             "This faction serves as an extension of Violet Villa, providing a space for members to grow, collaborate, and contribute to the overall strength of the clan. While maintaining independence in management, we uphold the same standards and values as the main clan." +
             "Decisions made here align with the greater goals of Violet Villa, ensuring stability and order. All members are expected to engage actively, support each other, and maintain the integrity of the faction."
         )
