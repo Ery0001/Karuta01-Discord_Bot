@@ -294,7 +294,7 @@ For the full main server rules, check <#1305705930926850119>.
             //.setTitle("EDICT OF UNITY")
             .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
             .setColor("#FC7074")
-            /*.setImage("https://ik.imagekit.io/Zedi/20240504_215923.jpg?updatedAt=1714831268770")*/
+            .setImage("https://ik.imagekit.io/Zedi/20250328_092838.png?updatedAt=1743125339723")
             .setFooter("Lian Faction")
 
         message.channel.send({ embeds: [embed] })
