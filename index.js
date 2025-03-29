@@ -230,7 +230,7 @@ client.on("messageCreate", async (message) => {
 
     try {
         await message.react(REACT_EMOJI);
-        const nextPageReaction = await message.react(NEXT_PAGE_EMOJI);
+        // const nextPageReaction = await message.react(NEXT_PAGE_EMOJI);
         console.log("Reactions added!");
     } catch (error) {
         console.error("Failed to react:", error);
