@@ -33,13 +33,17 @@ const client = new Client({
 });
 const fs = require("fs");
 const prefix = "h."
-client.commands = new Discord.Collection();
+// client.commands = new Discord.Collection();
+const { Collection } = require("discord.js");
+client.commands = new Collection();
+
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"));
 for (file of commands) {
     const commandName = file.split(".")[0]
     const command = require(`./Commands/${commandName}`)
     client.commands.set(commandName, command)
 }
+
 
 // Function to schedule messages
 const scheduleMessage = (cronTime, timezone, message, channelId) => {
