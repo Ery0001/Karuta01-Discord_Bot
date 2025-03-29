@@ -13,9 +13,13 @@ module.exports.run = (client, message, args) => {
         return message.channel.send("Please use quotes around the message and optional parameters.");
     }
 
-    const announcementText = matches[0].replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+    const announcementText = matches[0].replace(/\n/g, '\n').replace(/\t/g, '\t');
     const imageUrl = matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null;
     const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
+
+    // Check if the user attached a file
+    const attachment = message.attachments.first();
+    const fileUrl = attachment ? attachment.url : imageUrl; // Prioritize attachment
 
     const announcementChannel = client.channels.cache.get(channelId);
     if (!announcementChannel) {
@@ -27,8 +31,8 @@ module.exports.run = (client, message, args) => {
         .setColor("#FC7074")
         .setFooter(`- ${message.author.username}`);
 
-    if (imageUrl) {
-        embed.setImage(imageUrl);
+    if (fileUrl) {
+        embed.setImage(fileUrl); // Use attachment or image URL
     }
 
     const content = roleId ? `<@&${roleId}>` : null;
