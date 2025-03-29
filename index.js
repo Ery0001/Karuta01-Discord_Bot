@@ -541,15 +541,38 @@ const userMessageCounts = new Collection();
 const MESSAGE_LIMIT = 20;
 const MESSAGE_LENGTH_THRESHOLD = 25;
 
-client.on('messageCreate', message => {
-    if (message.author.bot) return;
+// client.on('messageCreate', message => {
+//     if (message.author.bot) return;
     
-    const triggerWords = ['kd', 'k!d', 'k!drop'];
+//     const triggerWords = ['kd', 'k!d', 'k!drop'];
+//     if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
+//         message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
+//     }
+
+//         // Message spam detection (only count messages with over 25 characters)
+//     if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
+//         const userId = message.author.id;
+//         const userMessages = userMessageCounts.get(userId) || 0;
+
+//         if (userMessages >= MESSAGE_LIMIT) {
+//             message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
+//             userMessageCounts.set(userId, 0); // Reset count after notification
+//         } else {
+//             userMessageCounts.set(userId, userMessages + 1);
+//         }
+//     }
+    
+// });
+
+client.on("messageCreate", async (message) => {
+    if (message.author.bot) return;
+
+    const triggerWords = ["kd", "k!d", "k!drop"];
     if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
         message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
     }
 
-        // Message spam detection (only count messages with over 25 characters)
+    // Message spam detection (only count messages with over 25 characters)
     if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
         const userId = message.author.id;
         const userMessages = userMessageCounts.get(userId) || 0;
@@ -561,8 +584,59 @@ client.on('messageCreate', message => {
             userMessageCounts.set(userId, userMessages + 1);
         }
     }
-    
+
+    // Karuta Clan Contribution Listener
+    if (message.author.id === KARUTA_ID && message.embeds.length) {
+        const embed = message.embeds[0];
+        if (!embed.title || embed.title !== "Clan Contribution" || !embed.fields.length) return;
+
+        await message.react(REACT_EMOJI);
+        await message.react("➡️");
+
+        const filter = (reaction, user) =>
+            ["➡️", REACT_EMOJI].includes(reaction.emoji.name) &&
+            message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+        const collected = await message.awaitReactions({ filter, max: 1, time: 120000, errors: ["time"] }).catch(() => null);
+
+        if (!collected) return message.reactions.cache.get(REACT_EMOJI)?.remove();
+
+        const reaction = collected.first();
+        if (!reaction) return;
+
+        if (reaction.emoji.name === "➡️") {
+            await message.channel.send("✅ Read page. Go ahead and continue.");
+            return;
+        }
+
+        // Extract zero contribution members
+        const lazyMembers = [];
+        const membersList = embed.fields[0].value.split("\n");
+
+        for (const line of membersList) {
+            const parts = line.split(" ");
+            if (parts.length < 5) continue;
+
+            const mention = parts[2]; // Third word is usually the mention
+            const contribution = parts[4]; // Fifth word should be the contribution
+
+            if (contribution.startsWith("**0**/")) {
+                lazyMembers.push(mention);
+            }
+        }
+
+        if (lazyMembers.length > 0) {
+            const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+            if (notifyChannel) {
+                await notifyChannel.send(
+                    `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
+                    `**The following members have not contributed:**\n${lazyMembers.join(", ")}`
+                );
+            }
+        }
+    }
 });
+
 
 // client.on('guildMemberAdd', member => {
 //     if (member.user.bot) return; // Avoid greeting bots
