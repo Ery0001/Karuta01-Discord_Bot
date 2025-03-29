@@ -269,8 +269,9 @@ client.on("messageCreate", async (message) => {
 });
 
 async function processContributionEmbed(embed, message) {
-    const contributionField = embed.fields[0].value;
-    if (!contributionField) return;
+    if (!embed.fields.length) return;
+    const contributionField = embed.fields[0]?.value;
+    if (!contributionField || contributionField.trim() === "") return;
 
     let lazyWorkers = [];
     const lines = contributionField.split("\n");
@@ -279,9 +280,9 @@ async function processContributionEmbed(embed, message) {
         if (parts.length < 5) continue;
 
         const mention = parts[2];
-        const contribution = parts[4].split("/")[0];
+        const contribution = parts[4].split("/")[0].replace("**", "").replace("**", "");
 
-        if (contribution.replace("**", "") === "0") {
+        if (contribution === "0") {
             lazyWorkers.push(mention);
         }
     }
