@@ -216,7 +216,7 @@ const MESSAGE_LENGTH_THRESHOLD = 25;
 const KARUTA_ID = "646937666251915264";
 const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
 const NOTIFY_CHANNEL_ID = "1355431839640322158";
-const REACT_EMOJI = "\u2699"; // "⚙" emoji
+const REACT_EMOJI = "⚙";
 const NEXT_PAGE_EMOJI = "➡️";
 
 client.on("messageCreate", async (message) => {
@@ -242,7 +242,6 @@ client.on("messageCreate", async (message) => {
 
     // Karuta Clan Contribution Listener
     if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
-
     const embed = message.embeds[0];
     if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
 
