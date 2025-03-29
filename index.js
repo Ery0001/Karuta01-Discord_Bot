@@ -23,7 +23,14 @@ app.get("/", (req, res) => {
 const Discord = require("discord.js");
 const { Client, Intents, MessageEmbed, Collection } = require('discord.js');
 const client = new Discord.Client({
-    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
+    intents: [
+        Intents.FLAGS.GUILDS, // Required to detect guild-related events
+        Intents.FLAGS.GUILD_MESSAGES, // Required to detect messages in the server
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS, // Required to detect reactions on messages
+        Intents.FLAGS.GUILD_MEMBERS, // Required to fetch user role data
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, // Required for emoji interactions
+        Intents.FLAGS.MESSAGE_CONTENT // Required to read message content (if enabled in Discord Developer Portal)
+    ],
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
 const fs = require("fs");
