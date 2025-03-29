@@ -28,8 +28,7 @@ const client = new Discord.Client({
         "GUILD_MESSAGES", 
         "GUILD_MESSAGE_REACTIONS",
         "GUILD_MEMBERS",
-        "GUILD_EMOJIS_AND_STICKERS", 
-        "MESSAGE_CONTENT" 
+        "GUILD_EMOJIS_AND_STICKERS"
     ],
     // intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
