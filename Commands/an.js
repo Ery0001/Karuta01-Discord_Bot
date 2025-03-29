@@ -6,16 +6,18 @@ module.exports.run = (client, message, args) => {
         return message.channel.send("You need to provide a message for the announcement.");
     }
 
-    const matches = message.content.match(/"([\s\S]*?)"/g);
-    if (!matches || matches.length < 1) {
-        return message.channel.send("Please use quotes around the message and optional image URL.");
+    const regex = /"([^"]*)"/g;
+    const matches = [...message.content.matchAll(regex)].map(m => m[1]);
+
+    if (matches.length < 1) {
+        return message.channel.send("Please use quotes around the message and optional parameters.");
     }
 
-    const announcementText = matches[0].replace(/"/g, '').replace(/\\n/g, '\n').replace(/\\t/g, '\t'); // Extract, clean, and format message text
-    const imageUrl = matches.length > 1 ? matches[1].replace(/"/g, '') : null; // Extract and clean image URL if present
-    const roleId = matches.length > 2 ? matches[2].replace(/"/g, '') : null; // Extract role ID if provided
-    const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
+    const announcementText = matches[0].replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+    const imageUrl = matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null;
+    const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
 
+    const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
     if (!announcementChannel) {
         return message.channel.send("Announcement channel not found.");
     }
@@ -24,14 +26,14 @@ module.exports.run = (client, message, args) => {
         .setDescription(announcementText)
         .setColor("#FC7074")
         .setFooter(`- ${message.author.username}`);
-    
+
     if (imageUrl) {
         embed.setImage(imageUrl);
     }
 
-    const content = roleId ? `<@&${roleId}>` : null; // Fix: Use null instead of an empty string
+    const content = roleId ? `<@&${roleId}>` : null;
     announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
-    message.delete().catch(console.error); // Prevent errors from crashing the bot
+    message.delete().catch(console.error);
 };
 
 module.exports.name = "an";
