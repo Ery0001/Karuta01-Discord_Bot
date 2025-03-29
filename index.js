@@ -43,97 +43,6 @@ for (file of commands) {
     client.commands.set(commandName, command)
 }
 
-
-// Function to schedule messages
-const scheduleMessage = (cronTime, timezone, message, channelId) => {
-    cron.schedule(cronTime, () => {
-        const channel = client.channels.cache.get(channelId);
-        if (channel) {
-            channel.send(message);
-        } else {
-            console.log('Channel not found.');
-        }
-    }, {
-        scheduled: true,
-        timezone: timezone
-    });
-};
-
-const scheduleTempMessage = (cronTime, timezone, message, channelId, duration) => {
-    cron.schedule(cronTime, () => {
-        const channel = client.channels.cache.get(channelId);
-        if (channel) {
-            channel.send(message).then(sentMessage => {
-                setTimeout(() => {
-                    sentMessage.delete().catch(console.error);
-                }, duration); 
-            }).catch(console.error);
-        } else {
-            console.log('Channel not found.');
-        }
-    }, {
-        scheduled: true,
-        timezone: timezone
-    });
-};
-
-const scheduleRndmMessage = (cronTime, timezone, channelId) => {
-    cron.schedule(cronTime, () => {
-        const channel = client.channels.cache.get(channelId);
-        if (channel) {
-            const randomMessage = randomMorningCalls();
-            channel.send(randomMessage);
-        } else {
-            console.log('Channel not found.');
-        }
-    }, {
-        scheduled: true,
-        timezone: timezone
-    });
-};
-
-const scheduleRemindersChannel = (cronTime, timezone, channelId, duration) => {
-    cron.schedule(cronTime, () => {
-        const channel = client.channels.cache.get(channelId);
-        if (channel) {
-            const randomMessage = randomRemindersChannel();
-            channel.send(randomMessage).then(sentMessage => {
-                setTimeout(() => {
-                    sentMessage.delete().catch(console.error);
-                }, duration); 
-            }).catch(console.error);
-        } else {
-            console.log('Channel not found.');
-        }
-    }, {
-        scheduled: true,
-        timezone: timezone
-    });
-};
-
-const scheduleEmbed = (cronTime, timezone, message, channelId, status) => {
-    cron.schedule(cronTime, () => {
-        const channel = client.channels.cache.get(channelId);
-        if (channel) {
-            let embed = new Discord.MessageEmbed()
-                .setDescription(message)
-                .setImage("https://ik.imagekit.io/Zedi/20250128_193631.jpg?updatedAt=1738064631421")
-                /*.setFooter("Noblese Guild");*/
-                if (status == 2){
-                 embed.setColor("#EE4E4E")
-                } else if (status == 1){
-                 embed.setColor("#F6D286")
-                }
-            channel.send({ embeds: [embed] });
-        } else {
-            console.log('Channel not found.');
-        }
-    }, {
-        scheduled: true,
-        timezone: timezone
-    });
-};
-
 client.on("messageCreate", message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -224,35 +133,15 @@ For the full main server rules, check <#1305705930926850119>.
 
     message.channel.send({ embeds: [embed] });
 }
-
-    /*if (message.content === "Farm") {
-        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
-    }
-    if (message.content === "farm") {
-        message.channel.send(`${message.author.username}  Hello if you're interested on our Pw farms do n [!Farm] n n Follow exactly if the command has capitalize letters to ensure the command works. have a good day :>`);
-    }*/
     if (!message.author.bot) {
         const messageContent = message.content.toLowerCase();
         const words = messageContent.split(" ");
 
         if (messageContent.length <= 21) {
-        if (messageContent.includes("morning")) {
-            message.channel.send(`Good Morning <@!${message.author.id}>!`);
+        // if (messageContent.includes("morning")) {
+        //     message.channel.send(`Good Morning <@!${message.author.id}>!`);
+        // }
         }
-        if (messageContent.includes("afternoon")) {
-            message.channel.send(`Good Afternoon <@!${message.author.id}>!`);
-        }
-        if (messageContent.includes("evening")) {
-            message.channel.send(`Good Evening <@!${message.author.id}>!`);
-        }
-        if (messageContent.includes("night")) {
-            message.channel.send(`Good Night <@!${message.author.id}>!`);
-        }
-        if (messageContent.includes("night")) {
-            message.channel.send(`Good Night <@!${message.author.id}>!`);
-        }
-        }
-
         const hasMention = words.some(word =>
         word.startsWith("@Cheongmun") ||
         word.startsWith("Cheongmun") ||
@@ -264,28 +153,12 @@ For the full main server rules, check <#1305705930926850119>.
         );
 
         const hasAsk = words.includes("who");
-        const hasInvite = words.includes("invite");
-        const hasLink = words.includes("link");
-        const wordquite = words.includes("quite");
-        
         if (hasMention && hasAsk) {
             message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
         }
         
     }
 });
-
-function randomMorningCalls() {
-    if (ErythinaMorningPhrase.length > 0) {
-        return ErythinaMorningPhrase[Math.floor(Math.random() * ErythinaMorningPhrase.length)];
-    }
-}
-
-function randomRemindersChannel() {
-    if (ErythinaRemindersChannelPhrase.length > 0) {
-        return ErythinaRemindersChannelPhrase[Math.floor(Math.random() * ErythinaRemindersChannelPhrase.length)];
-    }
-}
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
