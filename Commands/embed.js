@@ -14,7 +14,8 @@ module.exports.run = (client, message, args) => {
     }
 
     const announcementText = matches[0].replace(/\n/g, '\n').replace(/\t/g, '\t');
-    const imageUrl = matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null;
+    // const imageUrl = matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null;
+    const imageUrl = message.attachments.size > 0 ? message.attachments.first().url : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
     const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
 
     // Check if the user attached a file
