@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const ANNOUNCEMENT_CHANNEL_ID = '1354658803693518918';
 
