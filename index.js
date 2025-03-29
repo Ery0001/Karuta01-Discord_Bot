@@ -289,7 +289,7 @@ async function processContributionEmbed(embed, message, channel) {
 
     if (lazyWorkers.length > 0) {
         const confirmationMessage = await channel.send(
-            `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
+            `The following members have not contributed:\n${lazyWorkers.join(", ")}\n` +
             "Do you want to proceed with the announcement?"
         );
         
@@ -302,11 +302,11 @@ async function processContributionEmbed(embed, message, channel) {
 
         const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
         
-        confirmCollector.on("collect", async () => {
+        confirmCollector.on("collect", async (reaction, user) => {
             const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
             if (notifyChannel) {
                 await notifyChannel.send(
-                    "Dear clan members of Lian faction, please contribute to the clan treasury.\n\n" +
+                    `Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n` +
                     `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
                 );
             }
