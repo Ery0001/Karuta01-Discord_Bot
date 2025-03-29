@@ -1,16 +1,22 @@
-const Discord = require("discord.js")
-exports.run = (client, message, args) => {
- const commands = client.commands.map(command => command.name).join(", ")
-  const embed = new Discord.MessageEmbed()
-  .setTitle(`Total Commands⋟ ${client.commands.size}`)
-  .setDescription(commands)
-  .setImage ("https://i.ibb.co/26DkQbz/20220814-232233.jpg")
-  .setColor ("#FE0000") 
-  .setFooter("My prefix is h.")
-  message.channel.send({embeds:[embed]})
-message.delete(1000);
+const Discord = require("discord.js");
 
-  
-}
+module.exports.run = (client, message, args) => {
+    const embed = new Discord.MessageEmbed()
+        .setTitle("COMMAND HELP")
+        .setColor("#FE0000")
+        .setDescription(
+            "Here are the available commands and their syntaxes:\n\n" +
+            "\u200B\n**__Announcement Command__**\n```\n.an \"message\" \"image_url (optional)\" \"role_id (optional)\"```\n" +
+            "- Sends an announcement to a fixed channel.\n" +
+            "- Example: `.an \"Hello everyone!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n\n" +
+            "\u200B\n**__Embed Command__**\n```\n.embed channel_id \"message\" \"image_url (optional)\" \"role_id (optional)\"```\n" +
+            "- Sends an embed to a specific channel.\n" +
+            "- Example: `.embed 123456789012345678 \"Important Update!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`"
+        )
+        .setFooter("Use quotes for multi-word messages and optional parameters.");
+    
+    message.channel.send({ embeds: [embed] });
+    // message.delete();
+};
 
-exports.name = "help"
+module.exports.name = "help";
