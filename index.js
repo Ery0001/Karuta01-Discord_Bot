@@ -230,70 +230,58 @@ client.on("messageCreate", async (message) => {
 
     try {
         await message.react(REACT_EMOJI);
-        // const nextPageReaction = await message.react(NEXT_PAGE_EMOJI);
-        console.log("Reactions added!");
+        console.log("Reaction added!");
     } catch (error) {
         console.error("Failed to react:", error);
     }
 
-    const filter = (reaction, user) =>
-        [NEXT_PAGE_EMOJI, REACT_EMOJI].includes(reaction.emoji.name) &&
-        message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+    if (!message.reactions.cache.has(NEXT_PAGE_EMOJI)) {
+        processContributionEmbed(embed, message);
+    }
+});
 
-    const collector = message.createReactionCollector({ filter, time: 120000 });
+async function processContributionEmbed(embed, message) {
+    const contributionField = embed.fields[0].value;
+    if (!contributionField) return;
+
     let lazyWorkers = [];
+    const lines = contributionField.split("\n");
+    for (const line of lines) {
+        const parts = line.split(" ");
+        if (parts.length < 5) continue;
 
-    collector.on("collect", async (reaction, user) => {
-        console.log(`Reaction ${reaction.emoji.name} collected from ${user.username}`);
+        const mention = parts[2];
+        const contribution = parts[4].split("/")[0];
 
-        if (reaction.emoji.name === NEXT_PAGE_EMOJI) {
-            await message.channel.send("✅ Read page. Go ahead and continue.");
-            return;
+        if (contribution.replace("**", "") === "0") {
+            lazyWorkers.push(mention);
         }
+    }
 
-        const contributionField = embed.fields[0].value;
-        if (!contributionField) return;
+    if (lazyWorkers.length > 0) {
+        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+        if (notifyChannel) {
+            const confirmationMessage = await notifyChannel.send(
+                `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
+                "Do you want to proceed with the announcement?"
+            );
+            
+            await confirmationMessage.react(CHECK_EMOJI);
 
-        const lines = contributionField.split("\n");
-        for (const line of lines) {
-            const parts = line.split(" ");
-            if (parts.length < 5) continue;
+            const confirmFilter = (reaction, user) => 
+                reaction.emoji.name === CHECK_EMOJI && 
+                message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
 
-            const mention = parts[2];
-            const contribution = parts[4].split("/")[0];
-
-            if (contribution.replace("**", "") === "0") {
-                lazyWorkers.push(mention);
-            }
-        }
-    });
-
-    collector.on("end", async () => {
-        if (lazyWorkers.length > 0) {
-            const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-            if (notifyChannel) {
-                const confirmationMessage = await notifyChannel.send(
-                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
-                    "Do you want to proceed with the announcement?"
+            const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
+            
+            confirmCollector.on("collect", async () => {
+                await notifyChannel.send(
+                    "Dear clan members of Lian faction, please contribute to the clan treasury.\n\n" +
+                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
                 );
-                
-                await confirmationMessage.react(CHECK_EMOJI);
-
-                const confirmFilter = (reaction, user) => 
-                    reaction.emoji.name === CHECK_EMOJI && 
-                    message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-                const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
-                
-                confirmCollector.on("collect", async () => {
-                    await notifyChannel.send(
-                        "Dear clan members of Lian faction, please contribute to the clan treasury.\n\n" +
-                        `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
-                    );
-                });
-            }
+            });
         }
-    });
+    }
     
     if (message.author.bot) return;
     const triggerWords = ["kd", "k!d", "k!drop"];
