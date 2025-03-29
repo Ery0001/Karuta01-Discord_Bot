@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const ANNOUNCEMENT_CHANNEL_ID = '1354658803693518918';
 
 module.exports.run = (client, message, args) => {
     if (args.length < 1) {
@@ -16,8 +15,12 @@ module.exports.run = (client, message, args) => {
     const announcementText = matches[0].replace(/\\n/g, '\n').replace(/\\t/g, '\t');
     const imageUrl = matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null;
     const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
+    
+    // Check if the user attached a file
+    const attachment = message.attachments.first();
+    const fileUrl = attachment ? attachment.url : imageUrl; // Prioritize attachment
 
-    const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
+    const announcementChannel = client.channels.cache.get("1239586188092768348"); // Change this for embed.js
     if (!announcementChannel) {
         return message.channel.send("Announcement channel not found.");
     }
@@ -27,8 +30,8 @@ module.exports.run = (client, message, args) => {
         .setColor("#FC7074")
         .setFooter(`- ${message.author.username}`);
 
-    if (imageUrl) {
-        embed.setImage(imageUrl);
+    if (fileUrl) {
+        embed.setImage(fileUrl); // Use attachment or image URL
     }
 
     const content = roleId ? `<@&${roleId}>` : null;
@@ -36,4 +39,4 @@ module.exports.run = (client, message, args) => {
     message.delete().catch(console.error);
 };
 
-module.exports.name = "an";
+module.exports.name = "an"; // Change this to "embed" for embed.js
