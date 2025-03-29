@@ -572,9 +572,10 @@ const MESSAGE_LENGTH_THRESHOLD = 25;
 // });
 
 const KARUTA_ID = "646937666251915264";
-const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
+const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883"];
 const NOTIFY_CHANNEL_ID = "1355431839640322158";
 const REACT_EMOJI = "\u2699"; // "⚙" emoji
+const NEXT_PAGE_EMOJI = "➡️";
 
 client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
@@ -598,55 +599,53 @@ client.on("messageCreate", async (message) => {
     }
 
     // Karuta Clan Contribution Listener
-    if (message.author.id === KARUTA_ID && message.embeds.length) {
-        const embed = message.embeds[0];
-        if (!embed.title || embed.title !== "Clan Contribution" || !embed.fields.length) return;
+    if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
+    
+    const embed = message.embeds[0];
+    if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
+    
+    await message.react(REACT_EMOJI);
+    await message.react(NEXT_PAGE_EMOJI);
+    
+    const filter = (reaction, user) =>
+        [NEXT_PAGE_EMOJI, REACT_EMOJI].includes(reaction.emoji.name) &&
+        message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
 
-        await message.react(REACT_EMOJI);
-        await message.react("➡️");
-
-        const filter = (reaction, user) =>
-            ["➡️", REACT_EMOJI].includes(reaction.emoji.name) &&
-            message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-        const collected = await message.awaitReactions({ filter, max: 1, time: 120000, errors: ["time"] }).catch(() => null);
-
-        if (!collected) return message.reactions.cache.get(REACT_EMOJI)?.remove();
-
-        const reaction = collected.first();
-        if (!reaction) return;
-
-        if (reaction.emoji.name === "➡️") {
+    const collector = message.createReactionCollector({ filter, time: 120000 });
+    
+    collector.on("collect", async (reaction, user) => {
+        if (reaction.emoji.name === NEXT_PAGE_EMOJI) {
             await message.channel.send("✅ Read page. Go ahead and continue.");
             return;
         }
 
-        // Extract zero contribution members
-        const lazyMembers = [];
-        const membersList = embed.fields[0].value.split("\n");
+        const contributionField = embed.fields[0].value;
+        if (!contributionField) return;
 
-        for (const line of membersList) {
+        let lazyWorkers = [];
+        const lines = contributionField.split("\n");
+        for (const line of lines) {
             const parts = line.split(" ");
             if (parts.length < 5) continue;
-
-            const mention = parts[2]; // Third word is usually the mention
-            const contribution = parts[4]; // Fifth word should be the contribution
-
-            if (contribution.startsWith("**0**/")) {
-                lazyMembers.push(mention);
+            
+            const mention = parts[2];
+            const contribution = parts[4].split("/")[0];
+            
+            if (contribution.replace("**", "") === "0") {
+                lazyWorkers.push(mention);
             }
         }
 
-        if (lazyMembers.length > 0) {
+        if (lazyWorkers.length > 0) {
             const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
             if (notifyChannel) {
-                await notifyChannel.send(
+                notifyChannel.send(
                     `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
-                    `**The following members have not contributed:**\n${lazyMembers.join(", ")}`
+                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
                 );
             }
         }
-    }
+    });
 });
 
 
