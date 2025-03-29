@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const ANNOUNCEMENT_CHANNEL_ID = '1239586188092768348';
+const ANNOUNCEMENT_CHANNEL_ID = '1354658803693518918';
 
 module.exports.run = (client, message, args) => {
     if (args.length < 1) {
