@@ -242,16 +242,14 @@ client.on("messageCreate", async (message) => {
 
     // Karuta Clan Contribution Listener
     if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
-    
-    console.log("Detected a Karuta embed!");  // Debugging Log
 
     const embed = message.embeds[0];
     if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
-    
+
     try {
         await message.react(REACT_EMOJI);
         await message.react(NEXT_PAGE_EMOJI);
-        console.log("Reactions added!");  // Debugging Log
+        console.log("Reactions added!");
     } catch (error) {
         console.error("Failed to react:", error);
     }
@@ -278,10 +276,10 @@ client.on("messageCreate", async (message) => {
         for (const line of lines) {
             const parts = line.split(" ");
             if (parts.length < 5) continue;
-            
+
             const mention = parts[2];
             const contribution = parts[4].split("/")[0];
-            
+
             if (contribution.replace("**", "") === "0") {
                 lazyWorkers.push(mention);
             }
