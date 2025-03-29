@@ -601,19 +601,28 @@ client.on("messageCreate", async (message) => {
     // Karuta Clan Contribution Listener
     if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
     
+    console.log("Detected a Karuta embed!");  // Debugging Log
+
     const embed = message.embeds[0];
     if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
     
-    await message.react(REACT_EMOJI);
-    await message.react(NEXT_PAGE_EMOJI);
-    
+    try {
+        await message.react(REACT_EMOJI);
+        await message.react(NEXT_PAGE_EMOJI);
+        console.log("Reactions added!");  // Debugging Log
+    } catch (error) {
+        console.error("Failed to react:", error);
+    }
+
     const filter = (reaction, user) =>
-        [NEXT_PAGE_EMOJI, REACT_EMOJI].includes(reaction.emoji.name) &&
+        [NEXT_PAGE_EMOJI, REACT_EMOJI].includes(reaction.emoji.name || reaction.emoji.toString()) &&
         message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
 
     const collector = message.createReactionCollector({ filter, time: 120000 });
-    
+
     collector.on("collect", async (reaction, user) => {
+        console.log(`Reaction ${reaction.emoji.name} collected from ${user.username}`);
+
         if (reaction.emoji.name === NEXT_PAGE_EMOJI) {
             await message.channel.send("✅ Read page. Go ahead and continue.");
             return;
