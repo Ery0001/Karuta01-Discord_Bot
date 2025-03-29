@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 const Discord = require("discord.js");
 const { Client, Intents, MessageEmbed, Collection } = require('discord.js');
 const client = new Discord.Client({
-    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_MESSAGE_REACTIONS", "MESSAGE_CONTENT"],
+    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_MESSAGE_REACTIONS"],
     // intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
