@@ -36,8 +36,6 @@ const prefix = "h."
 // client.commands = new Discord.Collection();
 client.commands = new Collection();
 
-const collector = message.createReactionCollector({ filter, time: 120000 });
-
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"));
 for (file of commands) {
     const commandName = file.split(".")[0]
