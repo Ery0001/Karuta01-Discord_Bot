@@ -237,11 +237,13 @@ client.on("messageCreate", async (message) => {
 
     const filter = (reaction, user) => 
         reaction.emoji.name === REACT_EMOJI &&
+        !user.bot &&
         message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
 
-    const collector = message.createReactionCollector({ filter, time: 60000, max: 1 });
+    const collector = message.createReactionCollector({ filter, time: 60000 });
 
-    collector.on("collect", async () => {
+    collector.on("collect", async (reaction, user) => {
+        console.log(`Reaction collected from ${user.username}`);
         processContributionEmbed(embed, message);
     });
 
@@ -296,6 +298,7 @@ async function processContributionEmbed(embed, message) {
 
             const confirmFilter = (reaction, user) => 
                 reaction.emoji.name === CHECK_EMOJI && 
+                !user.bot &&
                 message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
 
             const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
@@ -309,5 +312,6 @@ async function processContributionEmbed(embed, message) {
         }
     }
 }
+
 
 client.login(process.env.token);
