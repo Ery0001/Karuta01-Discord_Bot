@@ -16,8 +16,8 @@ module.exports.run = (client, message, args) => {
     }
 
     const embed = new EmbedBuilder()
-        .setDescription(announcementText)
         .setColor(0xffcc00)
+        .setDescription(announcementText)
         .setFooter({ text: `- ${message.author.username}` });
 
     if (imageUrl) {
