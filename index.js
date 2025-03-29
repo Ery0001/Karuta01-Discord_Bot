@@ -268,7 +268,7 @@ client.on("messageCreate", async (message) => {
     }
 });
 
-async function processContributionEmbed(embed, message, channel) {
+async function processContributionEmbed(embed, channel, message) {
     if (!embed.fields.length) return;
     const contributionField = embed.fields[0]?.value;
     if (!contributionField || contributionField.trim() === "") return;
@@ -302,12 +302,12 @@ async function processContributionEmbed(embed, message, channel) {
 
         const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
         
-        confirmCollector.on("collect", async (reaction, user) => {
+        confirmCollector.on("collect", async () => {
             const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
             if (notifyChannel) {
                 await notifyChannel.send(
                     `Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n` +
-                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
+                    `The following members have not contributed:\n${lazyWorkers.join(", ")}`
                 );
             }
         });
