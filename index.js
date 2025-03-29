@@ -238,6 +238,26 @@ client.on("messageCreate", async (message) => {
     if (!message.reactions.cache.has(NEXT_PAGE_EMOJI)) {
         processContributionEmbed(embed, message);
     }
+
+    //sdfffff
+    if (message.author.bot) return;
+    const triggerWords = ["kd", "k!d", "k!drop"];
+    if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
+        message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
+    }
+
+    // Message spam detection (only count messages with over 25 characters)
+    if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
+        const userId = message.author.id;
+        const userMessages = userMessageCounts.get(userId) || 0;
+
+        if (userMessages >= MESSAGE_LIMIT) {
+            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
+            userMessageCounts.set(userId, 0); // Reset count after notification
+        } else {
+            userMessageCounts.set(userId, userMessages + 1);
+        }
+    }
 });
 
 async function processContributionEmbed(embed, message) {
@@ -282,25 +302,6 @@ async function processContributionEmbed(embed, message) {
             });
         }
     }
-    
-    if (message.author.bot) return;
-    const triggerWords = ["kd", "k!d", "k!drop"];
-    if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
-        message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
-    }
-
-    // Message spam detection (only count messages with over 25 characters)
-    if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
-        const userId = message.author.id;
-        const userMessages = userMessageCounts.get(userId) || 0;
-
-        if (userMessages >= MESSAGE_LIMIT) {
-            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
-            userMessageCounts.set(userId, 0); // Reset count after notification
-        } else {
-            userMessageCounts.set(userId, userMessages + 1);
-        }
-    }
-});
+}
 
 client.login(process.env.token);
