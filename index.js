@@ -20,14 +20,14 @@ app.get("/", (req, res) => {
     res.send("Erythina is Online! (i think)");
 })
 
-const Discord = require("discord.js");
-const { Client, GatewayIntentBits, MessageEmbed, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.MessageContent // Add this to read messages
+        GatewayIntentBits.MessageContent // Required to read message content
     ],
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
