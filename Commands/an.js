@@ -1,5 +1,4 @@
-const { MessageEmbed } = require('discord.js');
-
+const Discord = require('discord.js');
 const ANNOUNCEMENT_CHANNEL_ID = '1354658803693518918';
 
 module.exports.run = (client, message, args) => {
@@ -9,21 +8,21 @@ module.exports.run = (client, message, args) => {
 
     const announcementText = args[0];
     const imageUrl = args.length > 1 ? args[1] : null;
-    const announcementChannel = message.guild.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
+    const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
 
     if (!announcementChannel) {
         return message.channel.send("Announcement channel not found.");
     }
 
-    const embed = new EmbedBuilder()
-        .setColor(0xffcc00)
+    let embed = new Discord.MessageEmbed()
         .setDescription(announcementText)
-        .setFooter({ text: `- ${message.author.username}` });
-
+        .setColor("#FC7074")
+        .setFooter(`- ${message.author.username}`);
+    
     if (imageUrl) {
         embed.setImage(imageUrl);
     }
-
+    
     announcementChannel.send({ embeds: [embed] });
     message.delete(); // Delete the command message for cleanliness
 };
