@@ -235,9 +235,15 @@ client.on("messageCreate", async (message) => {
         console.error("Failed to react:", error);
     }
 
-    if (!message.reactions.cache.has(NEXT_PAGE_EMOJI)) {
+    const filter = (reaction, user) => 
+        reaction.emoji.name === REACT_EMOJI &&
+        message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+    const collector = message.createReactionCollector({ filter, time: 60000, max: 1 });
+
+    collector.on("collect", async () => {
         processContributionEmbed(embed, message);
-    }
+    });
 
     //sdfffff
     if (message.author.bot) return;
