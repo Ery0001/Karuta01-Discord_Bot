@@ -6,8 +6,13 @@ module.exports.run = (client, message, args) => {
         return message.channel.send("You need to provide a message for the announcement.");
     }
 
-    const announcementText = args[0];
-    const imageUrl = args.length > 1 ? args[1] : null;
+    const matches = message.content.match(/\"(.*?)\"/g);
+    if (!matches || matches.length < 1) {
+        return message.channel.send("Please use quotes around the message and optional image URL.");
+    }
+
+    const announcementText = matches[0].replace(/\"/g, ''); // Extract and clean message text
+    const imageUrl = matches.length > 1 ? matches[1].replace(/\"/g, '') : null; // Extract and clean image URL if present
     const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID);
 
     if (!announcementChannel) {
