@@ -20,7 +20,8 @@ app.get("/", (req, res) => {
     res.send("Erythina is Online! (i think)");
 })
 
-const { Client, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, MessageEmbed, Collection } = require("discord.js");
+client.commands = new Collection();
 
 const client = new Client({
     intents: [
@@ -35,7 +36,9 @@ const fs = require("fs");
 const prefix = "h."
 // client.commands = new Discord.Collection();
 const { Collection } = require("discord.js");
-client.commands = new Collection();
+
+
+const collector = message.createReactionCollector({ filter, time: 120000, dispose: true });
 
 const commands = fs.readdirSync("./Commands").filter(file => file.endsWith(".js"));
 for (file of commands) {
