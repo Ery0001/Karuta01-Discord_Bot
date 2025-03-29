@@ -21,7 +21,6 @@ app.get("/", (req, res) => {
 })
 
 const { Client, GatewayIntentBits, MessageEmbed, Collection } = require("discord.js");
-client.commands = new Collection();
 
 const client = new Client({
     intents: [
@@ -35,8 +34,7 @@ const client = new Client({
 const fs = require("fs");
 const prefix = "h."
 // client.commands = new Discord.Collection();
-const { Collection } = require("discord.js");
-
+client.commands = new Collection();
 
 const collector = message.createReactionCollector({ filter, time: 120000, dispose: true });
 
