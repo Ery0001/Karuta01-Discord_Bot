@@ -29,9 +29,9 @@ module.exports.run = (client, message, args) => {
         embed.setImage(imageUrl);
     }
     
-    const content = roleId ? `<@&${roleId}>` : "";
-    announcementChannel.send({ content, embeds: [embed] });
-    message.delete(); // Delete the command message for cleanliness
+    const content = roleId ? `<@&${roleId}>` : null; // Fix: Use null instead of an empty string
+    announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
+    message.delete().catch(console.error); // Delete the command message for cleanliness
 };
 
 module.exports.name = "embed";
