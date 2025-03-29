@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setTitle("COMMAND HELP")
-        .setColor("#FE0000")
+        .setColor("#c0c0c0")
         .setDescription(
             "Here are the available commands and their syntaxes:\n\n" +
             "\u200B\n**__Announcement Command__**\n```\n.an \"message\" \"image_url (optional)\" \"role_id (optional)\"```\n" +
