@@ -6,6 +6,7 @@ module.exports.run = (client, message, args) => {
     }
 
     const channelId = args.shift(); // Extract the channel ID
+    const roleId = '1354641345762955341'; // Role ID to mention
     const matches = message.content.match(/"([\s\S]*?)"/g);
     if (!matches || matches.length < 1) {
         return message.channel.send("Please use quotes around the message and optional image URL.");
@@ -28,7 +29,7 @@ module.exports.run = (client, message, args) => {
         embed.setImage(imageUrl);
     }
     
-    announcementChannel.send({ embeds: [embed] });
+    announcementChannel.send({ content: `<@&${roleId}>`, embeds: [embed] });
     message.delete(); // Delete the command message for cleanliness
 };
 
