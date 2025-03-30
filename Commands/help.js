@@ -20,7 +20,7 @@ module.exports = {
             .setDescription(
                 "Syntax: `channel_id` `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
                 "Usage: `h.embed 135465880... \"Hello\" \"https://img.jpg\" \"135464134...\"`\n\n" +
-                "Make Sure to Use Quotation Marks: '" "'\n" +
+                "Make Sure to Use Quotation Marks: '" "' **Except** channel_id\n" +
                 "For images, it is recommended to use a public URL."
             )
             .setFooter({ text: "Sends an embed to the specified channel." });
