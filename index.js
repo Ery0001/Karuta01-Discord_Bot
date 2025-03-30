@@ -343,34 +343,34 @@ async function processContributionEmbed(embed, message) {
     }
 }
 
-client.on('guildMemberAdd', async (member) => {
-    console.log(`${member.user.tag} joined!`);
+// client.on('guildMemberAdd', async (member) => {
+//     console.log(`${member.user.tag} joined!`);
 
-    if (member.user.bot) return;
+//     if (member.user.bot) return;
 
-    const channelId = '1354694726296797274';
-    const channel = client.channels.cache.get(channelId);
+//     const channelId = '1354694726296797274';
+//     const channel = client.channels.cache.get(channelId);
 
-    if (!channel) {
-        console.log('Channel not found.');
-        return;
-    }
+//     if (!channel) {
+//         console.log('Channel not found.');
+//         return;
+//     }
 
-    // Check if the user was in the server before
-    const joinedAt = member.joinedTimestamp;
-    const isReturning = joinedAt && (Date.now() - joinedAt < 1000 * 60 * 60 * 24); // Less than 24 hours ago
+//     // Check if the user was in the server before
+//     const joinedAt = member.joinedTimestamp;
+//     const isReturning = joinedAt && (Date.now() - joinedAt < 1000 * 60 * 60 * 24); // Less than 24 hours ago
 
-    try {
-        let welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
-        if (isReturning) {
-            welcomeMessage = `Welcome back to Lian Faction <@${member.id}>. Please wait here.`;
-        }
-        const sentMessage = await channel.send(welcomeMessage);
-        await sentMessage.react(REACT_EMOJI);
-        console.log('Welcome message sent and reacted!');
-    } catch (error) {
-        console.error('Error sending message or adding reaction:', error);
-    }
-});
+//     try {
+//         let welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
+//         if (isReturning) {
+//             welcomeMessage = `Welcome back to Lian Faction <@${member.id}>. Please wait here.`;
+//         }
+//         const sentMessage = await channel.send(welcomeMessage);
+//         await sentMessage.react(REACT_EMOJI);
+//         console.log('Welcome message sent and reacted!');
+//     } catch (error) {
+//         console.error('Error sending message or adding reaction:', error);
+//     }
+// });
 
 client.login(process.env.token);
