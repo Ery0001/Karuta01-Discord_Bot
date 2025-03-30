@@ -337,6 +337,7 @@ async function processContributionEmbed(embed, message) {
 }
 
 client.on('guildMemberAdd', async (member) => {
+     console.log(`${member.user.tag} joined!`);
     if (member.user.bot) return; 
 
     const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
