@@ -191,9 +191,6 @@ For the full main server rules, check <#1305705930926850119>.
     }
 });
 
-const DELCHANNEL_ID = '1354694726296797274'; 
-const TIME_ZONE = 'America/New_York'; 
-
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
 
@@ -214,30 +211,6 @@ client.on('ready', async () => {
         userMessageCounts.clear();
         console.log('User message counts have been reset.');
     }, 30 * 60 * 1000);
-
-    //DELETE MESSAGE EVERY 12 HOUR IN QUEUE
-    const deleteMessages = async () => {
-        const channel = client.channels.cache.get(DELCHANNEL_ID);
-        if (!channel) {
-            console.log('Channel not found.');
-            return;
-        }
-
-        try {
-            let messages;
-            do {
-                messages = await channel.messages.fetch({ limit: 100 });
-                await channel.bulkDelete(messages, true);
-            } while (messages.size >= 2);
-
-            console.log('Messages deleted successfully.');
-        } catch (error) {
-            console.error('Error deleting messages:', error);
-        }
-    };
-
-    const job = new CronJob('0 0,12 * * *', deleteMessages, null, true, TIME_ZONE);
-    job.start();
 });
 
 const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
