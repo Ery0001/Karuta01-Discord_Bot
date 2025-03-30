@@ -327,33 +327,5 @@ async function processContributionEmbed(embed, message) {
         await message.reply("It seems like there are no lazy workers.");
     }
 }
-        // if (lazyWorkers.length > 0) {
-    //     const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-    //     const notifyChannels = message.guild.channels.cache.get(CONFIMATION_CHANNEL_ID);
-    //     if (notifyChannels) {
-    //         const confirmationMessage = await notifyChannels.send(
-    //             `The following members have not contributed:\n${lazyWorkers.join(", ")}\n` +
-    //             "Do you want to proceed with the announcement?"
-    //         );
-            
-    //         await confirmationMessage.react(CHECK_EMOJI);
-
-    //         const confirmFilter = (reaction, user) => 
-    //             reaction.emoji.name === CHECK_EMOJI && 
-    //             !user.bot &&
-    //             message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-    //         const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
-            
-    //         confirmCollector.on("collect", async () => {
-    //             await notifyChannel.send(
-    //                 "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
-    //                 `The following members have not contributed:\n${lazyWorkers.join(", ")}`
-    //             );
-    //         });
-    //     }
-    // } else{
-
-    // }
 
 client.login(process.env.token);
