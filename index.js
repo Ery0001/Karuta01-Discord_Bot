@@ -318,10 +318,11 @@ async function processContributionEmbed(embed, message) {
     // }
 
     if (lazyWorkers.length > 0) {
+        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
         const indexedLazyWorkers = lazyWorkers.map((user, index) => `${index + 1}. ${user}`).join("\n");
         
         const embedMessage = new EmbedBuilder()
-            .setColor("#FF0000")
+            .setColor("#FC7074")
             .setTitle("Lazy Workers Detected")
             .setDescription("The following members have not contributed:")
             .addFields(
@@ -330,7 +331,7 @@ async function processContributionEmbed(embed, message) {
             .setFooter({ text: `Total: ${lazyWorkers.length}` });
         
         const confirmationEmbed = new EmbedBuilder()
-            .setColor("#FFFF00")
+            .setColor("#c0c0c0")
             .setDescription("Do you want to proceed with the announcement?");
         
         const confirmationMessage = await message.channel.send({ embeds: [embedMessage, confirmationEmbed] });
