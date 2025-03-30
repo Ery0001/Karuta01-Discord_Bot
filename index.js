@@ -293,7 +293,7 @@ async function processContributionEmbed(embed, message) {
         const notifyChannels = message.guild.channels.cache.get(CONFIMATION_CHANNEL_ID);
         if (notifyChannels) {
             const confirmationMessage = await notifyChannels.send(
-                `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
+                `The following members have not contributed:\n${lazyWorkers.join(", ")}\n` +
                 "Do you want to proceed with the announcement?"
             );
             
@@ -308,8 +308,8 @@ async function processContributionEmbed(embed, message) {
             
             confirmCollector.on("collect", async () => {
                 await notifyChannel.send(
-                    "Dear clan members of Lian faction, please contribute to the clan treasury.\n\n" +
-                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
+                    "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n" +
+                    `The following members have not contributed:\n${lazyWorkers.join(", ")}`
                 );
             });
         }
