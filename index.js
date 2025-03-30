@@ -269,6 +269,11 @@ client.on("messageCreate", async (message) => {
 });
 
 async function processContributionEmbed(embed, user, channel) {
+    if (!channel) {
+        console.error("Channel is undefined!");
+        return;
+    }
+    
     if (!embed.fields.length) return;
     const contributionField = embed.fields[0]?.value;
     if (!contributionField || contributionField.trim() === "") return;
@@ -304,12 +309,14 @@ async function processContributionEmbed(embed, user, channel) {
         
         confirmCollector.on("collect", async () => {
             const notifyChannel = channel.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-            if (notifyChannel) {
-                await notifyChannel.send(
-                    `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
-                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
-                );
+            if (!notifyChannel) {
+                console.error("Notify channel is undefined!");
+                return;
             }
+            await notifyChannel.send(
+                `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
+                `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
+            );
         });
     }
 }
