@@ -7,21 +7,21 @@ module.exports = {
             .setTitle("Command: Announcement")
             .setColor("#c0c0c0")
             .setDescription(
-                "Funtion: `\"message\"` `\"image_url(opt)\"` `\"role_id(optional)\"`\n" +
-                "- Sends an announcement to a fixed channel.\n" +
-                "- Example: `h.an \"Hello everyone!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n" +
-                "- If no image is attached, you can use an image URL instead."
-            );
+                "Options: `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
+                "Usage: `\"h.\"` `\"Hello\"` `\"https://img.jpg\"` `\"135464134...\"`\n\n" +
+                "For Image, It is recommended to use a public url." +
+            )
+            .setFooter({ text: `Sends an announcement to a fixed channel.`});
 
         const embedEmbed = new EmbedBuilder()
             .setTitle("EMBED COMMAND")
             .setColor("#c0c0c0")
             .setDescription(
-                "`h.embed channel_id \"message\" \"image_url (optional)\" \"role_id (optional)\"`\n" +
-                "- Sends an embed to a specific channel.\n" +
-                "- Example: `h.embed 123456789012345678 \"Important Update!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n" +
-                "- If no image is attached, you can use an image URL instead."
-            );
+                "Options: `\channel_id\` `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
+                "Usage: `\"h.\"` `\135465880..\` `\"Hello\"` `\"https://img.jpg\"` `\"135464134...\"`\n\n" +
+                "For Image, It is recommended to use a public url." +
+            )
+            .setFooter({ text: `Sends an embed to stated channel.`});
 
         message.channel.send({ embeds: [announcementEmbed, embedEmbed] });
     }
