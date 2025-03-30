@@ -268,7 +268,7 @@ client.on("messageCreate", async (message) => {
     }
 });
 
-async function processContributionEmbed(embed, channel, message) {
+async function processContributionEmbed(embed, user, message) {
     if (!embed.fields.length) return;
     const contributionField = embed.fields[0]?.value;
     if (!contributionField || contributionField.trim() === "") return;
@@ -288,17 +288,17 @@ async function processContributionEmbed(embed, channel, message) {
     }
 
     if (lazyWorkers.length > 0) {
-        const confirmationMessage = await channel.send(
-            `The following members have not contributed:\n${lazyWorkers.join(", ")}\n` +
+        const confirmationMessage = await user.send(
+            `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
             "Do you want to proceed with the announcement?"
         );
         
         await confirmationMessage.react(CHECK_EMOJI);
 
-        const confirmFilter = (reaction, user) => 
+        const confirmFilter = (reaction, reactingUser) => 
             reaction.emoji.name === CHECK_EMOJI && 
-            !user.bot &&
-            message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+            !reactingUser.bot &&
+            reactingUser.id === user.id;
 
         const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
         
@@ -306,12 +306,11 @@ async function processContributionEmbed(embed, channel, message) {
             const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
             if (notifyChannel) {
                 await notifyChannel.send(
-                    `Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n` +
-                    `The following members have not contributed:\n${lazyWorkers.join(", ")}`
+                    `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
+                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
                 );
             }
         });
     }
-}
 
 client.login(process.env.token);
