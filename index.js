@@ -318,9 +318,11 @@ async function processContributionEmbed(embed, message) {
     // }
 
     if (lazyWorkers.length > 0) {
+        const indexedLazyWorkers = lazyWorkers.map((user, index) => `${index + 1}. ${user}`).join("\n");
+        const totalCount = `Total: ${lazyWorkers.length}`;
+        
         const confirmationMessage = await message.channel.send(
-            `The following members have not contributed:\n\n${lazyWorkers.join("\n")}\n\n` +
-            "Do you want to proceed with the announcement?"
+            `The following members have not contributed:\n\n${indexedLazyWorkers}\n\n${totalCount}\n\nDo you want to proceed with the announcement?`
         );
         await confirmationMessage.react(CHECK_EMOJI);
 
