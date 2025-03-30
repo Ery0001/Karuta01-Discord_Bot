@@ -236,14 +236,17 @@ client.on("messageCreate", async (message) => {
         console.error("Failed to react:", error);
     }
 
-    const filter = (reaction, user) => 
-        reaction.emoji.name === REACT_EMOJI &&
-        !user.bot &&
-        message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-    const collector = message.createReactionCollector({ filter, time: 60000 });
-
+    const collector = message.createReactionCollector({ time: 60000 });
     collector.on("collect", async (reaction, user) => {
+        if (user.bot) return; // Ignore bot reactions
+
+        const member = message.guild.members.cache.get(user.id);
+        const hasPermission = member?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+        if (!hasPermission) {
+            await message.reply(`${user}, you don't have permission to do that.`);
+            return;
+        }
         console.log(`Reaction collected from ${user.username}`);
         processContributionEmbed(embed, message);
     });
