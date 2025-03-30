@@ -103,7 +103,8 @@ For the full main server rules, check <#1305705930926850119>.
 `)
         .setColor("#FC7074")
         .setImage("https://ik.imagekit.io/Zedi/Screenshot%202025-03-27%20190526.jpg")
-        .setFooter("Rules and regulations are all from the main clan server.");
+        .setFooter({ text: "Rules and regulations are all from the main clan server." });
+    
 
     message.channel.send({ embeds: [embed] });
 }
@@ -114,7 +115,7 @@ For the full main server rules, check <#1305705930926850119>.
             .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
             .setColor("#FC7074")
             .setImage("https://ik.imagekit.io/Zedi/20250328_092838.png?updatedAt=1743125339723")
-            .setFooter("Lian Faction")
+            .setFooter({ text: "Lian Faction" });
 
         message.channel.send({ embeds: [embed] })
     }
@@ -129,7 +130,7 @@ For the full main server rules, check <#1305705930926850119>.
         )
         .setColor("#FC7074")
         // .setImage("https://ik.imagekit.io/Zedi/20250328_092838.png?updatedAt=1743125339723")
-        .setFooter("Lian Faction")
+        .setFooter({ text: "Lian Faction" });
 
     message.channel.send({ embeds: [embed] });
 }
