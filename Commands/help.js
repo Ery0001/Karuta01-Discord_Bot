@@ -4,10 +4,10 @@ module.exports = {
     name: "help",
     run: (client, message, args) => {
         const announcementEmbed = new EmbedBuilder()
-            .setTitle("ANNOUNCEMENT COMMAND")
+            .setTitle("Command: Announcement")
             .setColor("#c0c0c0")
             .setDescription(
-                "`h.an \"message\" \"image_url (optional)\" \"role_id (optional)\"`\n" +
+                "Funtion: `\"message\"` `\"image_url(opt)\"` `\"role_id(optional)\"`\n" +
                 "- Sends an announcement to a fixed channel.\n" +
                 "- Example: `h.an \"Hello everyone!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n" +
                 "- If no image is attached, you can use an image URL instead."
