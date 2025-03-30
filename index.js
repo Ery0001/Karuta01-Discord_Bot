@@ -268,8 +268,8 @@ client.on("messageCreate", async (message) => {
     }
 });
 
-async function processContributionEmbed(embed, user, channel) {
-    if (!channel) {
+async function processContributionEmbed(embed, user, message) {
+    if (!message.channel) {
         console.error("Channel is undefined!");
         return;
     }
@@ -293,7 +293,7 @@ async function processContributionEmbed(embed, user, channel) {
     }
 
     if (lazyWorkers.length > 0) {
-        const confirmationMessage = await channel.send(
+        const confirmationMessage = await message.reply(
             `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
             "Do you want to proceed with the announcement?"
         );
@@ -308,7 +308,7 @@ async function processContributionEmbed(embed, user, channel) {
         const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
         
         confirmCollector.on("collect", async () => {
-            const notifyChannel = channel.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+            const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
             if (!notifyChannel) {
                 console.error("Notify channel is undefined!");
                 return;
