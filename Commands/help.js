@@ -7,9 +7,10 @@ module.exports = {
             .setTitle("Command: Announcement")
             .setColor("#c0c0c0")
             .setDescription(
-                "Options: `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
+                "Syntax: `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
                 "Usage: `h.an \"Hello\" \"https://img.jpg\" \"135464134...\"`\n\n" +
-                "For images, it is recommended to use a public URL."
+                "Make Sure to Use Quotation Marks: '" "'\n" +
+                "For images, it is recommended to use a public URL." 
             )
             .setFooter({ text: "Sends an announcement to a fixed channel." });
 
@@ -17,8 +18,9 @@ module.exports = {
             .setTitle("Command: Embed")
             .setColor("#c0c0c0")
             .setDescription(
-                "Options: `channel_id` `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
+                "Syntax: `channel_id` `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
                 "Usage: `h.embed 135465880... \"Hello\" \"https://img.jpg\" \"135464134...\"`\n\n" +
+                "Make Sure to Use Quotation Marks: '" "'\n" +
                 "For images, it is recommended to use a public URL."
             )
             .setFooter({ text: "Sends an embed to the specified channel." });
