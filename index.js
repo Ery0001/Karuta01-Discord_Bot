@@ -186,52 +186,10 @@ For the full main server rules, check <#1305705930926850119>.
           }
         }
         reactToMessage();
-        }
-        
+        }   
     }
-});
 
-client.on('ready', async () => {
-    console.log(`Logged in as ${client.user.tag}`);
-
-    const updatePresence = () => {
-        client.user.setStatus('idle');
-        client.user.setActivity({
-            name: `Karuta Bot`,
-            type: 1,
-            url: 'https://www.twitch.tv/karuta_official'
-        });
-    };
-    updatePresence();
-    // Refresh presence every 30 minutes
-    setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
-
-    //FOR MESSAGE SPAM DETECTION LIMIT
-        setInterval(() => {
-        userMessageCounts.clear();
-        console.log('User message counts have been reset.');
-    }, 30 * 60 * 1000);
-});
-
-const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
-const EMOTE_ID = '<:customemote:1354789755979698217>';
-
-const MAIN_CHAT_CHANNELS = ['1354641347197407289', '1355021656728539276'];
-const userMessageCounts = new Collection();
-const MESSAGE_LIMIT = 20;
-const MESSAGE_LENGTH_THRESHOLD = 25;
-
-const KARUTA_ID = "646937666251915264";
-const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
-const NOTIFY_CHANNEL_ID = "1355431839640322158";
-const CONFIMATION_CHANNEL_ID = "1355021656728539276";
-const REACT_EMOJI = "⚙";
-const NEXT_PAGE_EMOJI = "➡️";
-const CHECK_EMOJI = "✅";
-
-client.on("messageCreate", async (message) => {
-
-     // Karuta Clan Contribution Listener
+    // Karuta Clan Contribution Listener
     if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
     
     const embed = message.embeds[0];
@@ -279,6 +237,49 @@ client.on("messageCreate", async (message) => {
         }
     }
 });
+
+client.on('ready', async () => {
+    console.log(`Logged in as ${client.user.tag}`);
+
+    const updatePresence = () => {
+        client.user.setStatus('idle');
+        client.user.setActivity({
+            name: `Karuta Bot`,
+            type: 1,
+            url: 'https://www.twitch.tv/karuta_official'
+        });
+    };
+    updatePresence();
+    // Refresh presence every 30 minutes
+    setInterval(updatePresence, 30 * 60 * 1000); // 30 minutes
+
+    //FOR MESSAGE SPAM DETECTION LIMIT
+        setInterval(() => {
+        userMessageCounts.clear();
+        console.log('User message counts have been reset.');
+    }, 30 * 60 * 1000);
+});
+
+const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
+const EMOTE_ID = '<:customemote:1354789755979698217>';
+
+const MAIN_CHAT_CHANNELS = ['1354641347197407289', '1355021656728539276'];
+const userMessageCounts = new Collection();
+const MESSAGE_LIMIT = 20;
+const MESSAGE_LENGTH_THRESHOLD = 25;
+
+const KARUTA_ID = "646937666251915264";
+const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
+const NOTIFY_CHANNEL_ID = "1355431839640322158";
+const CONFIMATION_CHANNEL_ID = "1355021656728539276";
+const REACT_EMOJI = "⚙";
+const NEXT_PAGE_EMOJI = "➡️";
+const CHECK_EMOJI = "✅";
+
+// client.on("messageCreate", async (message) => {
+
+    
+// });
 
 async function processContributionEmbed(embed, message) {
     if (!embed.fields.length) return;
