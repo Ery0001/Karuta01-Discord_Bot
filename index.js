@@ -319,17 +319,22 @@ async function processContributionEmbed(embed, message) {
 
     if (lazyWorkers.length > 0) {
         const indexedLazyWorkers = lazyWorkers.map((user, index) => `${index + 1}. ${user}`).join("\n");
-        const totalCount = `Total: ${lazyWorkers.length}`;
         
         const embedMessage = new EmbedBuilder()
             .setColor("#FF0000")
             .setTitle("Lazy Workers Detected")
-            .setDescription(`The following members have not contributed:`)
-            .addField("Members:", indexedLazyWorkers)
-            .addField("Total Count:", totalCount)
-            .setFooter("Do you want to proceed with the announcement?");
+            .setDescription("The following members have not contributed:")
+            .addFields(
+                { name: "Members:", value: indexedLazyWorkers }
+            )
+            .setFooter({ text: `Total: ${lazyWorkers.length}` });
         
-        const confirmationMessage = await message.channel.send({ embeds: [embedMessage] });
+        const confirmationEmbed = new EmbedBuilder()
+            .setColor("#FFFF00")
+            .setDescription("Do you want to proceed with the announcement?");
+        
+        const confirmationMessage = await message.channel.send({ embeds: [embedMessage, confirmationEmbed] });
+
         //sdfsdfsdfdsf
         await confirmationMessage.react(CHECK_EMOJI);
 
