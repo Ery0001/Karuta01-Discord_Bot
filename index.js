@@ -319,10 +319,9 @@ async function processContributionEmbed(embed, message) {
 
     if (lazyWorkers.length > 0) {
         const confirmationMessage = await message.channel.send(
-            `The following members have not contributed:\n${lazyWorkers.join(", ")}\n` +
+            `The following members have not contributed:\n\n${lazyWorkers.join("\n")}\n\n` +
             "Do you want to proceed with the announcement?"
         );
-
         await confirmationMessage.react(CHECK_EMOJI);
 
         const confirmFilter = (reaction, user) => 
