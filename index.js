@@ -43,51 +43,7 @@ for (file of commands) {
     client.commands.set(commandName, command)
 }
 
-const KARUTA_ID = "646937666251915264";
-const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
-const NOTIFY_CHANNEL_ID = "1355431839640322158";
-const CONFIMATION_CHANNEL_ID = "1355021656728539276";
-const REACT_EMOJI = "⚙";
-const NEXT_PAGE_EMOJI = "➡️";
-const CHECK_EMOJI = "✅";
-
 client.on("messageCreate", message => {
-    // Karuta Clan Contribution Listener
-   if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
-
-    const embed = message.embeds[0];
-    if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
-
-    // React to the message
-    message.react(REACT_EMOJI)
-        .then(() => console.log("Reaction added!"))
-        .catch(error => console.error("Failed to react:", error));
-
-    // Create reaction collector
-    const collector = message.createReactionCollector({ time: 60000 });
-
-    collector.on("collect", (reaction, user) => {
-        if (user.bot) return; // Ignore bot reactions
-
-        message.guild.members.fetch(user.id) // Fetch up-to-date member info
-            .then(member => {
-                const hasPermission = member.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-                if (!hasPermission) {
-                    message.reply(`${user}, you don't have permission to do that.`)
-                        .catch(error => console.error("Failed to send reply:", error));
-                    return;
-                }
-
-                console.log(`Reaction collected from ${user.username}`);
-
-                processContributionEmbed(embed, message)
-                    .catch(error => console.error("Error processing contribution embed:", error));
-            })
-            .catch(error => console.error("Error fetching member:", error));
-    });
-
-    //end
     if (message.content.startsWith(prefix)) {
         const args = message.content.slice(prefix.length).trim().split(/ +/g)
         const commandName = args.shift()
@@ -219,38 +175,19 @@ For the full main server rules, check <#1305705930926850119>.
         }
 
         if (reactTheseWords) {
-        const REACT_EMOJIw = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
 
         async function reactToMessage() {
         try {
-             await message.react(REACT_EMOJIw);
+             await message.react(REACT_EMOJI);
              console.log("Reaction added!");
          } catch (error) {
             console.error("Failed to react:", error);
           }
         }
         reactToMessage();
-        }   
-    }
-
-    //sdfffff
-    if (message.author.bot) return;
-    const triggerWords = ["kd", "k!d", "k!drop"];
-    if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
-        message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
-    }
-
-    // Message spam detection (only count messages with over 25 characters)
-    if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
-        const userId = message.author.id;
-        const userMessages = userMessageCounts.get(userId) || 0;
-
-        if (userMessages >= MESSAGE_LIMIT) {
-            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
-            userMessageCounts.set(userId, 0); // Reset count after notification
-        } else {
-            userMessageCounts.set(userId, userMessages + 1);
         }
+        
     }
 });
 
@@ -277,15 +214,71 @@ client.on('ready', async () => {
 });
 
 const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
-const EMOTE_ID = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+const EMOTE_ID = '<:customemote:1354789755979698217>';
 
 const MAIN_CHAT_CHANNELS = ['1354641347197407289', '1355021656728539276'];
 const userMessageCounts = new Collection();
 const MESSAGE_LIMIT = 20;
 const MESSAGE_LENGTH_THRESHOLD = 25;
 
-// client.on("messageCreate", async (message) => {
-// });
+const KARUTA_ID = "646937666251915264";
+const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
+const NOTIFY_CHANNEL_ID = "1355431839640322158";
+const CONFIMATION_CHANNEL_ID = "1355021656728539276";
+const REACT_EMOJI = "⚙";
+const NEXT_PAGE_EMOJI = "➡️";
+const CHECK_EMOJI = "✅";
+
+client.on("messageCreate", async (message) => {
+
+     // Karuta Clan Contribution Listener
+    if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
+    
+    const embed = message.embeds[0];
+    if (embed.title !== "Clan Contribution" || !embed.fields.length) return;
+
+    try {
+        await message.react(REACT_EMOJI);
+        console.log("Reaction added!");
+    } catch (error) {
+        console.error("Failed to react:", error);
+    }
+
+    const collector = message.createReactionCollector({ time: 60000 });
+    collector.on("collect", async (reaction, user) => {
+        if (user.bot) return; // Ignore bot reactions
+
+        const member = message.guild.members.cache.get(user.id);
+        const hasPermission = member?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+        if (!hasPermission) {
+            await message.reply(`${user}, you don't have permission to do that.`);
+            return;
+        }
+        console.log(`Reaction collected from ${user.username}`);
+        processContributionEmbed(embed, message);
+    });
+
+    //sdfffff
+    if (message.author.bot) return;
+    const triggerWords = ["kd", "k!d", "k!drop"];
+    if (triggerWords.includes(message.content.toLowerCase()) && message.channel.id !== DROP_CARDS_CHANNEL_ID) {
+        message.reply(`The place for drawing cards is <#${DROP_CARDS_CHANNEL_ID}>. Head there to continue. ${EMOTE_ID}`);
+    }
+
+    // Message spam detection (only count messages with over 25 characters)
+    if (!MAIN_CHAT_CHANNELS.includes(message.channel.id) && message.content.length > MESSAGE_LENGTH_THRESHOLD) {
+        const userId = message.author.id;
+        const userMessages = userMessageCounts.get(userId) || 0;
+
+        if (userMessages >= MESSAGE_LIMIT) {
+            message.reply(`You're quite active! If you’d like to continue chatting, the main discussion happens here: <#${MAIN_CHAT_CHANNELS[0]}>.`);
+            userMessageCounts.set(userId, 0); // Reset count after notification
+        } else {
+            userMessageCounts.set(userId, userMessages + 1);
+        }
+    }
+});
 
 async function processContributionEmbed(embed, message) {
     if (!embed.fields.length) return;
@@ -342,35 +335,5 @@ async function processContributionEmbed(embed, message) {
         await message.reply("It seems like there are no lazy workers.");
     }
 }
-
-// client.on('guildMemberAdd', async (member) => {
-//     console.log(`${member.user.tag} joined!`);
-
-//     if (member.user.bot) return;
-
-//     const channelId = '1354694726296797274';
-//     const channel = client.channels.cache.get(channelId);
-
-//     if (!channel) {
-//         console.log('Channel not found.');
-//         return;
-//     }
-
-//     // Check if the user was in the server before
-//     const joinedAt = member.joinedTimestamp;
-//     const isReturning = joinedAt && (Date.now() - joinedAt < 1000 * 60 * 60 * 24); // Less than 24 hours ago
-
-//     try {
-//         let welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
-//         if (isReturning) {
-//             welcomeMessage = `Welcome back to Lian Faction <@${member.id}>. Please wait here.`;
-//         }
-//         const sentMessage = await channel.send(welcomeMessage);
-//         await sentMessage.react(REACT_EMOJI);
-//         console.log('Welcome message sent and reacted!');
-//     } catch (error) {
-//         console.error('Error sending message or adding reaction:', error);
-//     }
-// });
 
 client.login(process.env.token);
