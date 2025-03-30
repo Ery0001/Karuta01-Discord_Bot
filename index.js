@@ -200,22 +200,6 @@ const REACT_EMOJI = "⚙";
 const NEXT_PAGE_EMOJI = "➡️";
 const CHECK_EMOJI = "✅";
 
- const reactTheseWords = words.some(word =>
-        word.startsWith("thank") ||
-        word.startsWith("thanks") ||
-        word.startsWith("salamat") ||
-        word.startsWith("Salamats") ||
-        word === "ty" ||
-        word.startsWith("thachu") ||
-        word.startsWith("thanku") ||
-        word === "tank" ||
-        word.startsWith("welcome") ||
-        word.startsWith("welcomes") ||
-        word.startsWith("welc") ||
-        word === "wc" ||
-        word === "wcs"
-);
-
 client.on("messageCreate", async (message) => {
 
      // Karuta Clan Contribution Listener
@@ -265,6 +249,22 @@ client.on("messageCreate", async (message) => {
             userMessageCounts.set(userId, userMessages + 1);
         }
     }
+
+    const reactTheseWords = words.some(word =>
+        word.startsWith("thank") ||
+        word.startsWith("thanks") ||
+        word.startsWith("salamat") ||
+        word.startsWith("Salamats") ||
+        word === "ty" ||
+        word.startsWith("thachu") ||
+        word.startsWith("thanku") ||
+        word === "tank" ||
+        word.startsWith("welcome") ||
+        word.startsWith("welcomes") ||
+        word.startsWith("welc") ||
+        word === "wc" ||
+        word === "wcs"
+    );
 
       if (reactTheseWords) {
         const REACT_EMOJIG = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
