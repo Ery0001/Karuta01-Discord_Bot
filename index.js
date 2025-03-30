@@ -312,5 +312,6 @@ async function processContributionEmbed(embed, user, message) {
             }
         });
     }
+ }
 
 client.login(process.env.token);
