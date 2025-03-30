@@ -175,11 +175,11 @@ For the full main server rules, check <#1305705930926850119>.
         }
 
         if (reactTheseWords) {
-        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+        const REACT_EMOJIw = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
 
         async function reactToMessage() {
         try {
-             await message.react(REACT_EMOJI);
+             await message.react(REACT_EMOJIw);
              console.log("Reaction added!");
          } catch (error) {
             console.error("Failed to react:", error);
@@ -190,6 +190,8 @@ For the full main server rules, check <#1305705930926850119>.
     }
 
     // Karuta Clan Contribution Listener
+    const REACT_EMOJI = "⚙";
+    const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
     if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
     
     const embed = message.embeds[0];
@@ -261,7 +263,7 @@ client.on('ready', async () => {
 });
 
 const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
-const EMOTE_ID = '<:customemote:1354789755979698217>';
+const EMOTE_ID = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
 
 const MAIN_CHAT_CHANNELS = ['1354641347197407289', '1355021656728539276'];
 const userMessageCounts = new Collection();
@@ -342,7 +344,6 @@ client.on('guildMemberAdd', async (member) => {
 
     if (member.user.bot) return;
 
-    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
     const channelId = '1354694726296797274';
     const channel = client.channels.cache.get(channelId);
 
