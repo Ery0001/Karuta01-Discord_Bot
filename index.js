@@ -216,6 +216,7 @@ const MESSAGE_LENGTH_THRESHOLD = 25;
 const KARUTA_ID = "646937666251915264";
 const TRACKED_ROLES = ["1354641345905561884", "1354641345905561883", "1354641345762955338"];
 const NOTIFY_CHANNEL_ID = "1355431839640322158";
+const CONFIMATION_CHANNEL_ID = "1355021656728539276";
 const REACT_EMOJI = "⚙";
 const NEXT_PAGE_EMOJI = "➡️";
 const CHECK_EMOJI = "✅";
@@ -268,12 +269,7 @@ client.on("messageCreate", async (message) => {
     }
 });
 
-async function processContributionEmbed(embed, user, channel) {
-    if (!channel) {
-        console.error("Channel is undefined!");
-        return;
-    }
-    
+async function processContributionEmbed(embed, message) {
     if (!embed.fields.length) return;
     const contributionField = embed.fields[0]?.value;
     if (!contributionField || contributionField.trim() === "") return;
@@ -293,31 +289,30 @@ async function processContributionEmbed(embed, user, channel) {
     }
 
     if (lazyWorkers.length > 0) {
-        const confirmationMessage = await channel.send(
-            `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
-            "Do you want to proceed with the announcement?"
-        );
-        
-        await confirmationMessage.react(CHECK_EMOJI);
-
-        const confirmFilter = (reaction, reactingUser) => 
-            reaction.emoji.name === CHECK_EMOJI && 
-            !reactingUser.bot &&
-            reactingUser.id === user.id;
-
-        const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
-        
-        confirmCollector.on("collect", async () => {
-            const notifyChannel = channel.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-            if (!notifyChannel) {
-                console.error("Notify channel is undefined!");
-                return;
-            }
-            await notifyChannel.send(
-                `Dear clan members of Lian faction, please contribute to the clan treasury.\n\n` +
-                `**The following members have not contributed:**\n${lazyWorkers.join(", ")} `
+        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+        const notifyChannels = message.guild.channels.cache.get(CONFIMATION_CHANNEL_ID);
+        if (notifyChannels) {
+            const confirmationMessage = await notifyChannels.send(
+                `**The following members have not contributed:**\n${lazyWorkers.join(", ")}\n\n` +
+                "Do you want to proceed with the announcement?"
             );
-        });
+            
+            await confirmationMessage.react(CHECK_EMOJI);
+
+            const confirmFilter = (reaction, user) => 
+                reaction.emoji.name === CHECK_EMOJI && 
+                !user.bot &&
+                message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+            const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
+            
+            confirmCollector.on("collect", async () => {
+                await notifyChannel.send(
+                    "Dear clan members of Lian faction, please contribute to the clan treasury.\n\n" +
+                    `**The following members have not contributed:**\n${lazyWorkers.join(", ")}`
+                );
+            });
+        }
     }
 }
 
