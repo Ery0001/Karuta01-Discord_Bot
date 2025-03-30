@@ -161,7 +161,12 @@ For the full main server rules, check <#1305705930926850119>.
         word === "ty" ||
         word.startsWith("thachu") ||
         word.startsWith("thanku") ||
-        word === "tank"
+        word === "tank" ||
+        word.startsWith("welcome") ||
+        word.startsWith("welcomes") ||
+        word.startsWith("welc") ||
+        word === "wc" ||
+        word === "wcs"
         );
 
         const hasAsk = words.includes("who");
