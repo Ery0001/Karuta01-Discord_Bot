@@ -53,7 +53,7 @@ client.on("messageCreate", message => {
     }
 
 if (message.content === "embed_lianfaction_rulestart323235") {
-    let embed = new Discord.EmbedBuilder()
+    let embed = new EmbedBuilder()
         .setDescription(`\`\`\`js
 LIAN CLAN RULES
 \`\`\`
@@ -110,7 +110,7 @@ For the full main server rules, check <#1305705930926850119>.
 }
 
     if (message.content === "embed_lianfaction_rulesend324235") {
-        let embed = new Discord.EmbedBuilder()
+        let embed = new EmbedBuilder()
             //.setTitle("EDICT OF UNITY")
             .setDescription("We strictly request your adherence to Discord's Terms of Service and guidelines, which can be found at the following links:\n\nTerms of Service: https://discord.com/terms\nGuidelines: https://discord.com/guidelines")
             .setColor("#FC7074")
@@ -121,7 +121,7 @@ For the full main server rules, check <#1305705930926850119>.
     }
 
     if (message.content === "embed_lianfaction_info234876") {
-    let embed = new Discord.EmbedBuilder()
+    let embed = new EmbedBuilder()
         .setDescription(
             "## WELCOME TO LIAN FACTION\n\n" +
             "Lian Faction is a sub-clan of Violet Villa, led by <@1242447806086516841>. We follow the rules and structure of the main clan while managing our own operations.\n\n" +
