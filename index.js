@@ -153,41 +153,12 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("Cheong")
         );
 
-        const reactTheseWords = words.some(word =>
-        word.startsWith("thank") ||
-        word.startsWith("thanks") ||
-        word.startsWith("salamat") ||
-        word.startsWith("Salamats") ||
-        word === "ty" ||
-        word.startsWith("thachu") ||
-        word.startsWith("thanku") ||
-        word === "tank" ||
-        word.startsWith("welcome") ||
-        word.startsWith("welcomes") ||
-        word.startsWith("welc") ||
-        word === "wc" ||
-        word === "wcs"
-        );
+       
 
         const hasAsk = words.includes("who");
         if (hasMention && hasAsk) {
             message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
-        }
-
-        if (reactTheseWords) {
-        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
-
-        async function reactToMessage() {
-        try {
-             await message.react(REACT_EMOJI);
-             console.log("Reaction added!");
-         } catch (error) {
-            console.error("Failed to react:", error);
-          }
-        }
-        reactToMessage();
-        }
-        
+        }        
     }
 });
 
@@ -228,6 +199,22 @@ const CONFIMATION_CHANNEL_ID = "1355021656728539276";
 const REACT_EMOJI = "⚙";
 const NEXT_PAGE_EMOJI = "➡️";
 const CHECK_EMOJI = "✅";
+
+ const reactTheseWords = words.some(word =>
+        word.startsWith("thank") ||
+        word.startsWith("thanks") ||
+        word.startsWith("salamat") ||
+        word.startsWith("Salamats") ||
+        word === "ty" ||
+        word.startsWith("thachu") ||
+        word.startsWith("thanku") ||
+        word === "tank" ||
+        word.startsWith("welcome") ||
+        word.startsWith("welcomes") ||
+        word.startsWith("welc") ||
+        word === "wc" ||
+        word === "wcs"
+);
 
 client.on("messageCreate", async (message) => {
 
@@ -278,6 +265,16 @@ client.on("messageCreate", async (message) => {
             userMessageCounts.set(userId, userMessages + 1);
         }
     }
+
+      if (reactTheseWords) {
+        const REACT_EMOJIG = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
+        try {
+             await message.react(REACT_EMOJIG);
+             console.log("Reaction added!");
+         } catch (error) {
+            console.error("Failed to react:", error);
+          }
+        }
 });
 
 async function processContributionEmbed(embed, message) {
