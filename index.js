@@ -328,7 +328,7 @@ async function processContributionEmbed(embed, message) {
             .addFields(
                 { name: "Members:", value: indexedLazyWorkers }
             )
-            .setFooter({ text: `Total: ${lazyWorkers.length}` });
+            .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
         
         const confirmationEmbed = new EmbedBuilder()
             .setColor("#c0c0c0")
