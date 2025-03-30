@@ -153,9 +153,30 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("Cheong")
         );
 
+        const reactTheseWords = words.some(word =>
+        word.startsWith("thank") ||
+        word.startsWith("thanks") ||
+        word.startsWith("salamat") ||
+        word.startsWith("Salamats") ||
+        word === "ty" ||
+        word.startsWith("thachu") ||
+        word.startsWith("thanku") ||
+        word === "tank"
+        );
+
         const hasAsk = words.includes("who");
         if (hasMention && hasAsk) {
             message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
+        }
+
+        if (reactTheseWords){
+            const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
+            try {
+              await message.react(REACT_EMOJI);
+               console.log("Reaction added!");
+            } catch (error) {
+               console.error("Failed to react:", error);
+            }
         }
         
     }
