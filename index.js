@@ -175,7 +175,7 @@ For the full main server rules, check <#1305705930926850119>.
         }
 
         if (reactTheseWords) {
-        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
+        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
 
         async function reactToMessage() {
         try {
@@ -190,6 +190,9 @@ For the full main server rules, check <#1305705930926850119>.
         
     }
 });
+
+const DELCHANNEL_ID = '1354694726296797274'; 
+const TIME_ZONE = 'America/New_York'; 
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
@@ -211,6 +214,30 @@ client.on('ready', async () => {
         userMessageCounts.clear();
         console.log('User message counts have been reset.');
     }, 30 * 60 * 1000);
+
+    //DELETE MESSAGE EVERY 12 HOUR IN QUEUE
+    const deleteMessages = async () => {
+        const channel = client.channels.cache.get(DELCHANNEL_ID);
+        if (!channel) {
+            console.log('Channel not found.');
+            return;
+        }
+
+        try {
+            let messages;
+            do {
+                messages = await channel.messages.fetch({ limit: 100 });
+                await channel.bulkDelete(messages, true);
+            } while (messages.size >= 2);
+
+            console.log('Messages deleted successfully.');
+        } catch (error) {
+            console.error('Error deleting messages:', error);
+        }
+    };
+
+    const job = new CronJob('0 0,12 * * *', deleteMessages, null, true, TIME_ZONE);
+    job.start();
 });
 
 const DROP_CARDS_CHANNEL_ID = '1354641347197407290';
@@ -335,5 +362,25 @@ async function processContributionEmbed(embed, message) {
         await message.reply("It seems like there are no lazy workers.");
     }
 }
+
+client.on('guildMemberAdd', async (member) => {
+    if (member.user.bot) return; 
+
+    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+    const channelId = '1354694726296797274'; // Replace with the actual channel ID
+    const channel = client.channels.cache.get(channelId);
+    const welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
+
+    if (channel) {
+        try {
+            const sentMessage = await channel.send(welcomeMessage); // Send the message
+            await sentMessage.react(REACT_EMOJI); // React to its own message
+        } catch (error) {
+            console.error('Error sending message or adding reaction:', error);
+        }
+    } else {
+        console.log('Welcome channel not found.');
+    }
+});
 
 client.login(process.env.token);
