@@ -174,14 +174,18 @@ For the full main server rules, check <#1305705930926850119>.
             message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
         }
 
-        if (reactTheseWords){
-            const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
-            try {
-              await message.react(REACT_EMOJI);
-               console.log("Reaction added!");
-            } catch (error) {
-               console.error("Failed to react:", error);
-            }
+        if (reactTheseWords) {
+        const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
+
+        async function reactToMessage() {
+        try {
+             await message.react(REACT_EMOJI);
+             console.log("Reaction added!");
+         } catch (error) {
+            console.error("Failed to react:", error);
+          }
+        }
+        reactToMessage();
         }
         
     }
