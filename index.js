@@ -288,7 +288,43 @@ async function processContributionEmbed(embed, message) {
         }
     }
 
-    // if (lazyWorkers.length > 0) {
+    if (lazyWorkers.length > 0) {
+        const indexedLazyWorkers = lazyWorkers.map((user, index) => `${index + 1}. ${user}`).join("\n");
+
+        const embedMessage = new EmbedBuilder()
+            .setColor("#FC7074")
+            .setTitle("Lazy Workers Detected")
+            .setDescription("The following members have not contributed:")
+            .addFields({ name: "Members:", value: indexedLazyWorkers })
+            .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
+
+        const confirmationEmbed = new EmbedBuilder()
+            .setColor("#c86781")
+            .setDescription("Do you want to proceed with the announcement?");
+
+        const confirmationMessage = await message.reply({ embeds: [embedMessage, confirmationEmbed] });
+
+        await confirmationMessage.react(CHECK_EMOJI);
+
+        const confirmFilter = (reaction, user) =>
+            reaction.emoji.name === CHECK_EMOJI &&
+            !user.bot &&
+            message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
+
+        const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
+
+        confirmCollector.on("collect", async (reaction, user) => {
+            const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+            await notifyChannel.send({
+                content: "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
+                    `The following members have not contributed:\n${lazyWorkers.join(", ")}`
+            });
+        });
+    } else {
+        await message.reply("It seems like there are no lazy workers.");
+    }
+}
+        // if (lazyWorkers.length > 0) {
     //     const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
     //     const notifyChannels = message.guild.channels.cache.get(CONFIMATION_CHANNEL_ID);
     //     if (notifyChannels) {
@@ -316,47 +352,5 @@ async function processContributionEmbed(embed, message) {
     // } else{
 
     // }
-
-    if (lazyWorkers.length > 0) {
-        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-        const indexedLazyWorkers = lazyWorkers.map((user, index) => `${index + 1}. ${user}`).join("\n");
-        
-        const embedMessage = new EmbedBuilder()
-            .setColor("#FC7074")
-            .setTitle("Lazy Workers Detected")
-            .setDescription("The following members have not contributed:")
-            .addFields(
-                { name: "Members:", value: indexedLazyWorkers }
-            )
-            .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
-        
-        const confirmationEmbed = new EmbedBuilder()
-            .setColor("#c0c0c0")
-            .setDescription("Do you want to proceed with the announcement?");
-        
-        const confirmationMessage = await message.channel.send({ embeds: [embedMessage, confirmationEmbed] });
-
-        //sdfsdfsdfdsf
-        await confirmationMessage.react(CHECK_EMOJI);
-
-        const confirmFilter = (reaction, user) => 
-            reaction.emoji.name === CHECK_EMOJI && 
-            !user.bot &&
-            message.guild.members.cache.get(user.id)?.roles.cache.some(role => TRACKED_ROLES.includes(role.id));
-
-        const confirmCollector = confirmationMessage.createReactionCollector({ filter: confirmFilter, time: 60000, max: 1 });
-
-        confirmCollector.on("collect", async (reaction, user) => {
-            const userChannel = reaction.message.channel;
-            await notifyChannel.send(
-                "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
-                `The following members have not contributed:\n${lazyWorkers.join(", ")}`
-            );
-        });
-    } else {
-        await message.channel.send("It seems like there are no lazy workers.");
-    }
-        
-}
 
 client.login(process.env.token);
