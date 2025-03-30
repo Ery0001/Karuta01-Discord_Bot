@@ -153,12 +153,11 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("Cheong")
         );
 
-       
-
         const hasAsk = words.includes("who");
         if (hasMention && hasAsk) {
             message.reply(`Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`);
-        }        
+        }
+        
     }
 });
 
@@ -249,32 +248,6 @@ client.on("messageCreate", async (message) => {
             userMessageCounts.set(userId, userMessages + 1);
         }
     }
-
-    const reactTheseWords = words.some(word =>
-        word.startsWith("thank") ||
-        word.startsWith("thanks") ||
-        word.startsWith("salamat") ||
-        word.startsWith("Salamats") ||
-        word === "ty" ||
-        word.startsWith("thachu") ||
-        word.startsWith("thanku") ||
-        word === "tank" ||
-        word.startsWith("welcome") ||
-        word.startsWith("welcomes") ||
-        word.startsWith("welc") ||
-        word === "wc" ||
-        word === "wcs"
-    );
-
-      if (reactTheseWords) {
-        const REACT_EMOJIG = "<:Mount_Hua_Sect_Symbol:1354789652606750950>"; // Replace with actual emoji ID
-        try {
-             await message.react(REACT_EMOJIG);
-             console.log("Reaction added!");
-         } catch (error) {
-            console.error("Failed to react:", error);
-          }
-        }
 });
 
 async function processContributionEmbed(embed, message) {
