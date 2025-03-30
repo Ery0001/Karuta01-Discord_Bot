@@ -167,7 +167,7 @@ client.on('ready', async () => {
         client.user.setStatus('idle');
         client.user.setActivity({
             name: `Karuta Bot`,
-            type: '1',
+            type: 1,
             url: 'https://www.twitch.tv/karuta_official'
         });
     };
