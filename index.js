@@ -308,7 +308,7 @@ async function processContributionEmbed(embed, message) {
             
             confirmCollector.on("collect", async () => {
                 await notifyChannel.send(
-                    "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n" +
+                    "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
                     `The following members have not contributed:\n${lazyWorkers.join(", ")}`
                 );
             });
