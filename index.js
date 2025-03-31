@@ -251,23 +251,6 @@ const REACT_EMOJI = "⚙";
 const NEXT_PAGE_EMOJI = "➡️";
 const CHECK_EMOJI = "✅";
 
-const reactTheseWords = words.some(
-    (word) =>
-      word.startsWith("thank") ||
-      word.startsWith("thanks") ||
-      word.startsWith("salamat") ||
-      word.startsWith("Salamats") ||
-      word === "ty" ||
-      word.startsWith("thachu") ||
-      word.startsWith("thanku") ||
-      word === "tank" ||
-      word.startsWith("welcome") ||
-      word.startsWith("welcomes") ||
-      word.startsWith("welc") ||
-      word === "wc" ||
-      word === "wcs"
-  );
-
 client.on("messageCreate", async (message) => {
   // Karuta Clan Contribution Listener
   if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
@@ -299,14 +282,35 @@ client.on("messageCreate", async (message) => {
     processContributionEmbed(embed, message);
   });
 
-  if (message.author.bot) return;
-  if (reactTheseWords) {
-    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
-    try {
-      await message.react(REACT_EMOJI);
-      console.log("Reaction added!");
-    } catch (error) {
-      console.error("Failed to react:", error);
+  if (!message.author.bot) {
+    const messageContent = message.content.toLowerCase();
+    const words = messageContent.split(" ");
+
+    const reactTheseWords = words.some(
+        (word) =>
+          word.startsWith("thank") ||
+          word.startsWith("thanks") ||
+          word.startsWith("salamat") ||
+          word.startsWith("Salamats") ||
+          word === "ty" ||
+          word.startsWith("thachu") ||
+          word.startsWith("thanku") ||
+          word === "tank" ||
+          word.startsWith("welcome") ||
+          word.startsWith("welcomes") ||
+          word.startsWith("welc") ||
+          word === "wc" ||
+          word === "wcs"
+      );
+
+    if (reactTheseWords) {
+      const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
+      try {
+        await message.react(REACT_EMOJI);
+        console.log("Reaction added!");
+      } catch (error) {
+        console.error("Failed to react:", error);
+      }
     }
   }
 });
