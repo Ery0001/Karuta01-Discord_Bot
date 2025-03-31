@@ -1,4 +1,4 @@
-import { prefix } from '../index.js';
+const { prefix } = require('../index.js');
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
