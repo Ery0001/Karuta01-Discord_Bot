@@ -155,12 +155,7 @@ For the full main server rules, check <#1305705930926850119>.
     const DROP_CARDS_CHANNEL_ID = "1354641347197407290";
     const EMOTE_ID = "<:customemote:1354789755979698217>";
 
-    const MAIN_CHAT_CHANNELS = ["1354641347197407289", "1355021656728539276"];
-    const userMessageCounts = new Collection();
-    const MESSAGE_LIMIT = 20;
-    const MESSAGE_LENGTH_THRESHOLD = 25;
-    //sdfffff
-    // if (message.author.bot) return;
+    //Prevents users from using different channel for k!d
     const triggerWords = ["kd", "k!d", "k!drop"];
     if (
       triggerWords.includes(message.content.toLowerCase()) &&
@@ -172,6 +167,11 @@ For the full main server rules, check <#1305705930926850119>.
     }
 
     // Message spam detection (only count messages with over 25 characters)
+    const MAIN_CHAT_CHANNELS = ["1354641347197407289", "1355021656728539276"];
+    const userMessageCounts = new Collection();
+    const MESSAGE_LIMIT = 20;
+    const MESSAGE_LENGTH_THRESHOLD = 25;
+
     if (
       !MAIN_CHAT_CHANNELS.includes(message.channel.id) &&
       message.content.length > MESSAGE_LENGTH_THRESHOLD
@@ -281,6 +281,34 @@ client.on("messageCreate", async (message) => {
     console.log(`Reaction collected from ${user.username}`);
     processContributionEmbed(embed, message);
   });
+
+  const reactTheseWords = words.some(
+    (word) =>
+      word.startsWith("thank") ||
+      word.startsWith("thanks") ||
+      word.startsWith("salamat") ||
+      word.startsWith("Salamats") ||
+      word === "ty" ||
+      word.startsWith("thachu") ||
+      word.startsWith("thanku") ||
+      word === "tank" ||
+      word.startsWith("welcome") ||
+      word.startsWith("welcomes") ||
+      word.startsWith("welc") ||
+      word === "wc" ||
+      word === "wcs"
+  );
+
+  if (message.author.bot) return;
+  if (reactTheseWords) {
+    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
+    try {
+      await message.react(REACT_EMOJI);
+      console.log("Reaction added!");
+    } catch (error) {
+      console.error("Failed to react:", error);
+    }
+  }
 });
 
 async function processContributionEmbed(embed, message) {
