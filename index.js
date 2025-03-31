@@ -32,7 +32,7 @@ const client = new Client({
     allowedMentions: { parse: ['users', 'roles', 'everyone'] }
 });
 const fs = require("fs");
-const prefix = "h."
+export const prefix = "h."
 // client.commands = new Discord.Collection();
 client.commands = new Collection();
 
