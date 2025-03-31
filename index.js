@@ -290,8 +290,10 @@ client.on("messageCreate", async (message) => {
         (word) =>
           word.startsWith("thank") ||
           word.startsWith("thanks") ||
+          word.startsWith("thank you") ||
+          word.startsWith("thank u") ||
           word.startsWith("salamat") ||
-          word.startsWith("Salamats") ||
+          word.startsWith("salamats") ||
           word === "ty" ||
           word.startsWith("thachu") ||
           word.startsWith("thanku") ||
@@ -304,7 +306,7 @@ client.on("messageCreate", async (message) => {
       );
 
     if (reactTheseWords) {
-      const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:>";
+      const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
       try {
         await message.react(REACT_EMOJI);
         console.log("Reaction added!");
