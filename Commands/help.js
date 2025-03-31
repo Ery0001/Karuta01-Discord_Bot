@@ -1,3 +1,4 @@
+import { prefix } from '/';
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
