@@ -1,27 +1,31 @@
-const Discord = require("discord.js");
+const { prefix } = require('../index.js'); // Import prefix
+const { EmbedBuilder } = require("discord.js");
 
-module.exports.run = (client, message, args) => {
-    const announcementEmbed = new Discord.MessageEmbed()
-        .setTitle("ANNOUNCEMENT COMMAND")
-        .setColor("#c0c0c0")
-        .setDescription(
-            "`h.an \"message\" \"image_url (optional)\" \"role_id (optional)\"`\n" +
-            "- Sends an announcement to a fixed channel.\n" +
-            "- Example: `h.an \"Hello everyone!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n" +
-            "- If no image is attached, you can use an image URL instead."
-        );
+module.exports = {
+    name: "help",
+    run: (client, message, args) => {
+        const announcementEmbed = new EmbedBuilder()
+            .setTitle("Command: Announcement")
+            .setColor("#c0c0c0")
+            .setDescription(
+                `Usages: \`"message"\` \`"image_url(opt)"\` \`"role_id(opt)"\`\n` +
+                `Syntax: \`${prefix}an "Hello" "https://img.jpg" "135464134..."\`\n\n` +
+                `Make Sure to Use Quotation Marks: \`" "\`\n` +
+                `For images, it is recommended to use a public URL.`
+            )
+            .setFooter({ text: "Sends an announcement to a fixed channel." });
 
-    const embedEmbed = new Discord.MessageEmbed()
-        .setTitle("EMBED COMMAND")
-        .setColor("#c0c0c0")
-        .setDescription(
-            "`h.embed channel_id \"message\" \"image_url (optional)\" \"role_id (optional)\"`\n" +
-            "- Sends an embed to a specific channel.\n" +
-            "- Example: `h.embed 123456789012345678 \"Important Update!\" \"https://example.com/image.jpg\" \"1354641345762955341\"`\n" +
-            "- If no image is attached, you can use an image URL instead."
-        );
+        const embedEmbed = new EmbedBuilder()
+            .setTitle("Command: Embed")
+            .setColor("#c0c0c0")
+            .setDescription(
+                `Usages: \`channel_id\` \`"message"\` \`"image_url(opt)"\` \`"role_id(opt)"\`\n` +
+                `Syntax: \`${prefix}embed 1354... "Hello" "https://img.jpg" "1354..."\`\n\n` +
+                `Make Sure to Use Quotation Marks: \`" "\`, Except \`channel_id\`\n` +
+                `For images, it is recommended to use a public URL.`
+            )
+            .setFooter({ text: "Sends an embed to the specified channel." });
 
-    message.channel.send({ embeds: [announcementEmbed, embedEmbed] });
+        message.channel.send({ embeds: [announcementEmbed, embedEmbed] });
+    }
 };
-
-module.exports.name = "help";
