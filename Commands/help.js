@@ -1,4 +1,4 @@
-const { prefix } = require('../index.js');
+const { prefix } = require('../index.js'); // Import prefix
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
@@ -8,10 +8,10 @@ module.exports = {
             .setTitle("Command: Announcement")
             .setColor("#c0c0c0")
             .setDescription(
-                "Usages: `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
-                "Syntax: `${prefix}an \"Hello\" \"https://img.jpg\" \"135464134...\"`\n\n" +
-                "Make Sure to Use Quotation Marks: `\" \"`\n" +
-                "For images, it is recommended to use a public URL." 
+                `Usages: \`"message"\` \`"image_url(opt)"\` \`"role_id(opt)"\`\n` +
+                `Syntax: \`${prefix}an "Hello" "https://img.jpg" "135464134..."\`\n\n` +
+                `Make Sure to Use Quotation Marks: \`" "\`\n` +
+                `For images, it is recommended to use a public URL.`
             )
             .setFooter({ text: "Sends an announcement to a fixed channel." });
 
@@ -19,10 +19,10 @@ module.exports = {
             .setTitle("Command: Embed")
             .setColor("#c0c0c0")
             .setDescription(
-                "Usages: `channel_id` `\"message\"` `\"image_url(opt)\"` `\"role_id(opt)\"`\n" +
-                "Syntax: `${prefix}embed 1354... \"Hello\" \"https://img.jpg\" \"1354...\"`\n\n" +
-                "Make Sure to Use Quotation Marks: `\" \"`, Except `channel_id`\n" +
-                "For images, it is recommended to use a public URL."
+                `Usages: \`channel_id\` \`"message"\` \`"image_url(opt)"\` \`"role_id(opt)"\`\n` +
+                `Syntax: \`${prefix}embed 1354... "Hello" "https://img.jpg" "1354..."\`\n\n` +
+                `Make Sure to Use Quotation Marks: \`" "\`, Except \`channel_id\`\n` +
+                `For images, it is recommended to use a public URL.`
             )
             .setFooter({ text: "Sends an embed to the specified channel." });
 
