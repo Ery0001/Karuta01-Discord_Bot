@@ -188,7 +188,7 @@ For the full main server rules, check <#1305705930926850119>.
     const words = messageContent.split(/\s+/);
     const hasMention = words.some(
       (word) =>
-        word.startsWith("@Cheongmun") ||
+        word.startsWith("Cheongmuns") ||
         word.startsWith("Cheongmun") ||
         word.startsWith("Cheongmn") ||
         word.startsWith("Cheongmu") ||
@@ -221,7 +221,15 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("welcomes") ||
         word.startsWith("welc") ||
         word === "wc" ||
-        word === "wcs"
+        word === "wcs" ||
+        word.startsWith("nice") ||
+        word.startsWith("nize") ||
+        word.startsWith("niceu") ||
+        word.startsWith("nices") ||
+        word.startsWith("niczy") ||
+        word === "nc" ||
+        word === "wow" ||
+        word === "w" ||
     );
 
     if (reactTheseWords) {
@@ -235,7 +243,7 @@ For the full main server rules, check <#1305705930926850119>.
           console.error("Failed to react:", error);
         });
     }
-    
+
   }
 });
 
