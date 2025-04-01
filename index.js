@@ -167,11 +167,6 @@ For the full main server rules, check <#1305705930926850119>.
     }
 
     // Message spam detection (only count messages with over 25 characters)
-    const MAIN_CHAT_CHANNELS = ["1354641347197407289", "1355021656728539276"];
-    const userMessageCounts = new Collection();
-    const MESSAGE_LIMIT = 20;
-    const MESSAGE_LENGTH_THRESHOLD = 25;
-
     if (
       !MAIN_CHAT_CHANNELS.includes(message.channel.id) &&
       message.content.length > MESSAGE_LENGTH_THRESHOLD
@@ -217,6 +212,11 @@ For the full main server rules, check <#1305705930926850119>.
   }
 });
 
+const MAIN_CHAT_CHANNELS = ["1354641347197407289", "1355021656728539276"];
+const userMessageCounts = new Collection();
+const MESSAGE_LIMIT = 20;
+const MESSAGE_LENGTH_THRESHOLD = 25;
+
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
@@ -246,9 +246,7 @@ const TRACKED_ROLES = [
   "1354641345762955338",
 ];
 const NOTIFY_CHANNEL_ID = "1355431839640322158";
-const CONFIMATION_CHANNEL_ID = "1355021656728539276";
 const REACT_EMOJI = "⚙";
-const NEXT_PAGE_EMOJI = "➡️";
 const CHECK_EMOJI = "✅";
 
 client.on("messageCreate", async (message) => {
@@ -287,23 +285,23 @@ client.on("messageCreate", async (message) => {
     const words = messageContent.split(" ");
 
     const reactTheseWords = words.some(
-        (word) =>
-          word.startsWith("thank") ||
-          word.startsWith("thanks") ||
-          word.startsWith("thank you") ||
-          word.startsWith("thank u") ||
-          word.startsWith("salamat") ||
-          word.startsWith("salamats") ||
-          word === "ty" ||
-          word.startsWith("thachu") ||
-          word.startsWith("thanku") ||
-          word === "tank" ||
-          word.startsWith("welcome") ||
-          word.startsWith("welcomes") ||
-          word.startsWith("welc") ||
-          word === "wc" ||
-          word === "wcs"
-      );
+      (word) =>
+        word.startsWith("thank") ||
+        word.startsWith("thanks") ||
+        word.startsWith("thank you") ||
+        word.startsWith("thank u") ||
+        word.startsWith("salamat") ||
+        word.startsWith("salamats") ||
+        word === "ty" ||
+        word.startsWith("thachu") ||
+        word.startsWith("thanku") ||
+        word === "tank" ||
+        word.startsWith("welcome") ||
+        word.startsWith("welcomes") ||
+        word.startsWith("welc") ||
+        word === "wc" ||
+        word === "wcs"
+    );
 
     if (reactTheseWords) {
       const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
