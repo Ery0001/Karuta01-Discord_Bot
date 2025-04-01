@@ -229,7 +229,7 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("niczy") ||
         word === "nc" ||
         word === "wow" ||
-        word === "w" ||
+        word === "w"
     );
 
     if (reactTheseWords) {
