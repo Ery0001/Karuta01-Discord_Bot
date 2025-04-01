@@ -185,13 +185,7 @@ For the full main server rules, check <#1305705930926850119>.
     }
 
     const messageContent = message.content.toLowerCase();
-    const words = messageContent.split(" ");
-
-    if (messageContent.length <= 21) {
-      // if (messageContent.includes("morning")) {
-      //     message.channel.send(`Good Morning <@!${message.author.id}>!`);
-      // }
-    }
+    const words = messageContent.split(/\s+/);
     const hasMention = words.some(
       (word) =>
         word.startsWith("@Cheongmun") ||
@@ -204,11 +198,44 @@ For the full main server rules, check <#1305705930926850119>.
     );
 
     const hasAsk = words.includes("who");
+
     if (hasMention && hasAsk) {
       message.reply(
-        `Greetings, I am Cheongmun, developed by <@894665274123513856>, And one of the previous sect leader of mount hua sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`
+        `Greetings, I am Cheongmun, developed by <@894665274123513856>, and one of the previous sect leaders of Mount Hua Sect.\nRead here to know more about me: https://return-of-the-blossoming-blade.fandom.com/wiki/Cheongmun`
       );
     }
+
+    const reactTheseWords = words.some(
+      (word) =>
+        word.startsWith("thank") ||
+        word.startsWith("thanks") ||
+        word.startsWith("thank you") ||
+        word.startsWith("thank u") ||
+        word.startsWith("salamat") ||
+        word.startsWith("salamats") ||
+        word === "ty" ||
+        word.startsWith("thachu") ||
+        word.startsWith("thanku") ||
+        word === "tank" ||
+        word.startsWith("welcome") ||
+        word.startsWith("welcomes") ||
+        word.startsWith("welc") ||
+        word === "wc" ||
+        word === "wcs"
+    );
+
+    if (reactTheseWords) {
+      const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+      message
+        .react(REACT_EMOJI)
+        .then(() => {
+          console.log("Reaction added!");
+        })
+        .catch((error) => {
+          console.error("Failed to react:", error);
+        });
+    }
+    
   }
 });
 
@@ -279,40 +306,6 @@ client.on("messageCreate", async (message) => {
     console.log(`Reaction collected from ${user.username}`);
     processContributionEmbed(embed, message);
   });
-
-  if (!message.author.bot) {
-    const messageContent = message.content.toLowerCase();
-    const words = messageContent.split(" ");
-
-    const reactTheseWords = words.some(
-      (word) =>
-        word.startsWith("thank") ||
-        word.startsWith("thanks") ||
-        word.startsWith("thank you") ||
-        word.startsWith("thank u") ||
-        word.startsWith("salamat") ||
-        word.startsWith("salamats") ||
-        word === "ty" ||
-        word.startsWith("thachu") ||
-        word.startsWith("thanku") ||
-        word === "tank" ||
-        word.startsWith("welcome") ||
-        word.startsWith("welcomes") ||
-        word.startsWith("welc") ||
-        word === "wc" ||
-        word === "wcs"
-    );
-
-    if (reactTheseWords) {
-      const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
-      try {
-        await message.react(REACT_EMOJI);
-        console.log("Reaction added!");
-      } catch (error) {
-        console.error("Failed to react:", error);
-      }
-    }
-  }
 });
 
 async function processContributionEmbed(embed, message) {
