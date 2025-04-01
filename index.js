@@ -7,7 +7,7 @@ const later = require("later");
 const moment = require("moment-timezone");
 const app = express();
 const someFunc = () => {
-  console.log("The ability to freeze the time? Interesting question.");
+  console.log("May you find and peace. Mount Hua is there to guide you ~");
   setTimeout(someFunc, 3000);
 };
 
