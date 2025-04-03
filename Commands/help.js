@@ -20,7 +20,7 @@ module.exports = {
             .setColor("#c0c0c0")
             .setDescription(
                 `Usages: \`channel_id\` \`"message"\` \`"image_url(opt)"\` \`"role_id(opt)"\`\n` +
-                `Syntax: \`${prefix}embed 1354... "Hello" "https://img.jpg" "1354..."\`\n\n` +
+                `Syntax: \`${prefix}embed @channel "Hello" "https://img.jpg" "1354..."\`\n\n` +
                 `Make Sure to Use Quotation Marks: \`" "\`, Except \`channel_id\`\n` +
                 `For images, it is recommended to use a public URL.`
             )
