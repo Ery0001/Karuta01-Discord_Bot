@@ -4,11 +4,18 @@ module.exports = {
     name: "embed",
     run: async (client, message, args) => {
         if (args.length < 2) {
+
             return message.reply("You need to provide a channel ID or mention and a message for the announcement.");
         }
 
         // Extract the first argument which could be either channel mention or raw ID
         const channelArg = args.shift();
+
+            return message.reply("You need to provide a channel and a message for the announcement.");
+        }
+
+        const channelArg = args.shift(); // Extract the channel argument
+
         const regex = /"([^"]*)"/g;
         const matches = [...message.content.matchAll(regex)].map(m => m[1]);
 
@@ -35,6 +42,25 @@ module.exports = {
         } else {
             // It's assumed to be a raw channel ID
             announcementChannel = client.channels.cache.get(channelArg);
+
+        const roleMentionRegex = /<@&(\d+)>/; // Role mention regex
+        const channelMentionRegex = /<#(\d+)>/; // Channel mention regex
+
+        let channelId, roleId;
+
+        // Check if channelArg is a mention (role or channel)
+        const channelIdMatch = channelArg.match(channelMentionRegex);
+        const roleIdMatch = channelArg.match(roleMentionRegex);
+
+        if (channelIdMatch) {
+            // If it's a channel mention, extract the channel ID
+            channelId = channelIdMatch[1];
+        } else if (roleIdMatch) {
+            // If it's a role mention, extract the role ID
+            roleId = roleIdMatch[1];
+        } else {
+            // If it's neither, treat it as a plain ID
+            channelId = channelArg;
         }
 
         if (!announcementChannel) {

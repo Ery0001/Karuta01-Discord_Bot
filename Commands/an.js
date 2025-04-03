@@ -21,12 +21,30 @@ module.exports = {
         const imageUrl = message.attachments.size > 0 
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
+
         
         // Check for role ID or mention (optional)
         const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
 
         // Fixed announcement channel ID
         const announcementChannel = client.channels.cache.get("1354658803693518918");
+
+
+        const roleMentionRegex = /<@&(\d+)>/; // Role mention regex
+        const roleIdMatch = matches.length > 1 && matches[1].match(roleMentionRegex);
+
+        let roleId;
+        if (roleIdMatch) {
+            // If it's a role mention, extract the role ID
+            roleId = roleIdMatch[1];
+        } else {
+            // If no role mention is provided, return an error
+            return message.reply("You need to mention a role.");
+        }
+
+        // Use a fixed channel for the announcement
+        const announcementChannel = client.channels.cache.get("1354658803693518918"); // Fixed channel ID
+
         if (!announcementChannel) {
             return message.reply("Announcement channel not found.");
         }
@@ -41,7 +59,11 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
+
         // Mention role if provided
+
+        // Send the announcement to the channel with the mentioned role
+
         const content = roleId ? `<@&${roleId}>` : null;
 
         try {
