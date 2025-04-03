@@ -26,9 +26,6 @@ module.exports = {
         if (roleIdMatch) {
             // If it's a role mention, extract the role ID
             roleId = roleIdMatch[1];
-        } else {
-            // If no role mention is provided, return an error
-            return message.reply("You need to mention a role.");
         }
 
         // Use a fixed channel for the announcement
@@ -46,7 +43,7 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
-        // Send the announcement to the channel with the mentioned role
+        // Send the announcement to the channel, with or without the mentioned role
         const content = roleId ? `<@&${roleId}>` : null;
         announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
         message.delete().catch(console.error);
