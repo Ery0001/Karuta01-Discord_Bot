@@ -4,7 +4,7 @@ module.exports = {
     name: "embed",
     run: (client, message, args) => {
         if (args.length < 2) {
-            return message.channel.send("You need to provide a channel and a message for the announcement.");
+            return message.reply("You need to provide a channel and a message for the announcement.");
         }
 
         const channelArg = args.shift(); // Extract the channel argument
@@ -12,7 +12,7 @@ module.exports = {
         const matches = [...message.content.matchAll(regex)].map(m => m[1]);
 
         if (matches.length < 1) {
-            return message.channel.send("Please use quotes around the message and optional parameters.");
+            return message.reply("Please use quotes around the message and optional parameters.");
         }
 
         const announcementText = matches[0].replace(/\n/g, '\n').replace(/\t/g, '\t');
@@ -42,7 +42,7 @@ module.exports = {
 
         const announcementChannel = client.channels.cache.get(channelId);
         if (!announcementChannel) {
-            return message.channel.send("Announcement channel not found.");
+            return message.reply("Announcement channel not found.");
         }
 
         let embed = new EmbedBuilder()
