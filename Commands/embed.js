@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     name: "embed",
-    run: (client, message, args) => {
+    run: async (client, message, args) => {
         if (args.length < 2) {
             return message.reply("You need to provide a channel and a message for the announcement.");
         }
@@ -20,7 +20,6 @@ module.exports = {
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
 
-        // Handle role mention regex
         const roleMentionRegex = /<@&(\d+)>/; // Role mention regex
         const channelMentionRegex = /<#(\d+)>/; // Channel mention regex
 
@@ -28,7 +27,7 @@ module.exports = {
 
         // Check if channelArg is a mention (role or channel)
         const channelIdMatch = channelArg.match(channelMentionRegex);
-        const roleIdMatch = matches.length > 1 && matches[1].match(roleMentionRegex);
+        const roleIdMatch = channelArg.match(roleMentionRegex);
 
         if (channelIdMatch) {
             // If it's a channel mention, extract the channel ID
@@ -55,13 +54,14 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
-        // Send the role mention outside the embed content
         const content = roleId ? `<@&${roleId}>` : null;
-
-        // Send the message (role mention is outside the embed)
         announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
 
-        // Delete the original command message
-        message.delete().catch(console.error);
+        // Delete the original command message, with error handling
+        try {
+            await message.delete();
+        } catch (error) {
+            console.error("Failed to delete the message:", error);
+        }
     }
 };
