@@ -54,8 +54,13 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
+        // Send the role mention outside of the embed content
         const content = roleId ? `<@&${roleId}>` : null;
+
+        // Send the message (role mention is outside the embed)
         announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
+
+        // Delete the original command message
         message.delete().catch(console.error);
     }
 };
