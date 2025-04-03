@@ -32,7 +32,7 @@ module.exports = {
         }
 
         // Use a fixed channel for the announcement
-        const announcementChannel = client.channels.cache.get("1239586188092768348"); // Fixed channel ID
+        const announcementChannel = client.channels.cache.get("1354658803693518918"); // Fixed channel ID
         if (!announcementChannel) {
             return message.channel.send("Announcement channel not found.");
         }
