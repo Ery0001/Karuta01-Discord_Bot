@@ -20,6 +20,7 @@ module.exports = {
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
 
+        // Handle role mention regex
         const roleMentionRegex = /<@&(\d+)>/; // Role mention regex
         const channelMentionRegex = /<#(\d+)>/; // Channel mention regex
 
@@ -27,7 +28,7 @@ module.exports = {
 
         // Check if channelArg is a mention (role or channel)
         const channelIdMatch = channelArg.match(channelMentionRegex);
-        const roleIdMatch = channelArg.match(roleMentionRegex);
+        const roleIdMatch = matches.length > 1 && matches[1].match(roleMentionRegex);
 
         if (channelIdMatch) {
             // If it's a channel mention, extract the channel ID
@@ -54,7 +55,7 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
-        // Send the role mention outside of the embed content
+        // Send the role mention outside the embed content
         const content = roleId ? `<@&${roleId}>` : null;
 
         // Send the message (role mention is outside the embed)
