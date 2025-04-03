@@ -17,13 +17,16 @@ module.exports = {
         // Replace \n with newline and \t with tab in the announcement message
         const announcementText = matches[0].replace(/\\n/g, '\n').replace(/\\t/g, '\t');
         
+        // Check if there is an image URL or if there's an attachment
         const imageUrl = message.attachments.size > 0 
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
         
+        // Check for role ID or mention (optional)
         const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
 
-        const announcementChannel = client.channels.cache.get("1354658803693518918"); // Fixed channel ID
+        // Fixed announcement channel ID
+        const announcementChannel = client.channels.cache.get("1354658803693518918");
         if (!announcementChannel) {
             return message.reply("Announcement channel not found.");
         }
@@ -33,13 +36,16 @@ module.exports = {
             .setColor("#FC7074")
             .setFooter({ text: `- ${message.author.username}` });
 
+        // Add image to embed if provided
         if (imageUrl) {
             embed.setImage(imageUrl);
         }
 
+        // Mention role if provided
         const content = roleId ? `<@&${roleId}>` : null;
 
         try {
+            // Send the message to the fixed channel
             await announcementChannel.send({ content, embeds: [embed] });
             message.reply("Announcement `embed` cmd has completed successfully.");
         } catch (error) {
