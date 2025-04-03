@@ -4,10 +4,11 @@ module.exports = {
     name: "embed",
     run: async (client, message, args) => {
         if (args.length < 2) {
-            return message.reply("You need to provide a channel ID and a message for the announcement.");
+            return message.reply("You need to provide a channel ID or mention and a message for the announcement.");
         }
 
-        const channelId = args.shift(); // Extract the channel ID
+        // Extract the first argument which could be either channel mention or raw ID
+        const channelArg = args.shift();
         const regex = /"([^"]*)"/g;
         const matches = [...message.content.matchAll(regex)].map(m => m[1]);
 
@@ -22,10 +23,20 @@ module.exports = {
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
         
-        const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
+        const roleIdOrMention = matches.length > 1 ? matches[1] : null;  // Extract role mention or ID from the second parameter
+        
+        let announcementChannel;
 
-        const announcementChannel = client.channels.cache.get(channelId) || 
-            message.guild.channels.cache.find(channel => channel.name === channelId); // Allow channel mention by name
+        // Check if the channel argument is a mention (e.g., #general)
+        if (channelArg.startsWith("<#") && channelArg.endsWith(">")) {
+            // It's a mention, extract the channel ID from the mention
+            const channelId = channelArg.slice(2, -1);
+            announcementChannel = client.channels.cache.get(channelId);
+        } else {
+            // It's assumed to be a raw channel ID
+            announcementChannel = client.channels.cache.get(channelArg);
+        }
+
         if (!announcementChannel) {
             return message.reply("Announcement channel not found.");
         }
@@ -39,13 +50,20 @@ module.exports = {
             embed.setImage(imageUrl);
         }
 
-        const content = roleId ? `<@&${roleId}>` : null;
-        // If the channel is mentioned by name, convert it to a channel mention
-        const channelMention = announcementChannel.isTextBased() ? `<#${announcementChannel.id}>` : null;
+        let content = "";
+        if (roleIdOrMention) {
+            // If the roleIdOrMention is a valid role mention, use it
+            if (roleIdOrMention.startsWith("<@&") && roleIdOrMention.endsWith(">")) {
+                content = roleIdOrMention;  // Role mention (e.g., <@&role_id>)
+            } else {
+                // If it's not a mention, assume it's a raw role ID
+                content = `<@&${roleIdOrMention}>`;  // Role ID (e.g., <@&role_id>)
+            }
+        }
 
-        // Send the message with optional content (role mention) and channel mention
         try {
-            await announcementChannel.send({ content: roleId ? `<@&${roleId}> ${channelMention}` : channelMention, embeds: [embed] });
+            // Send the announcement to the specified channel
+            await announcementChannel.send({ content, embeds: [embed] });
             message.reply("Announcement `embed` cmd has completed successfully.");
         } catch (error) {
             console.error(error);
