@@ -2,47 +2,29 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     name: "embed",
-    run: async (client, message, args) => {
+    run: (client, message, args) => {
         if (args.length < 2) {
-            return message.reply("You need to provide a channel and a message for the announcement.");
+            return message.channel.send("You need to provide a channel ID and a message for the announcement.");
         }
 
-        const channelArg = args.shift(); // Extract the channel argument
+        const channelId = args.shift(); // Extract the channel ID
         const regex = /"([^"]*)"/g;
         const matches = [...message.content.matchAll(regex)].map(m => m[1]);
 
         if (matches.length < 1) {
-            return message.reply("Please use quotes around the message and optional parameters.");
+            return message.channel.send("Please use quotes around the message and optional parameters.");
         }
 
         const announcementText = matches[0].replace(/\n/g, '\n').replace(/\t/g, '\t');
         const imageUrl = message.attachments.size > 0 
             ? message.attachments.first().url 
             : (matches.length > 1 && matches[1].startsWith("http") ? matches[1] : null);
-
-        const roleMentionRegex = /<@&(\d+)>/; // Role mention regex
-        const channelMentionRegex = /<#(\d+)>/; // Channel mention regex
-
-        let channelId, roleId;
-
-        // Check if channelArg is a mention (role or channel)
-        const channelIdMatch = channelArg.match(channelMentionRegex);
-        const roleIdMatch = channelArg.match(roleMentionRegex);
-
-        if (channelIdMatch) {
-            // If it's a channel mention, extract the channel ID
-            channelId = channelIdMatch[1];
-        } else if (roleIdMatch) {
-            // If it's a role mention, extract the role ID
-            roleId = roleIdMatch[1];
-        } else {
-            // If it's neither, treat it as a plain ID
-            channelId = channelArg;
-        }
+        
+        const roleId = matches.length > 2 ? matches[2] : (matches.length === 2 && !imageUrl ? matches[1] : null);
 
         const announcementChannel = client.channels.cache.get(channelId);
         if (!announcementChannel) {
-            return message.reply("Announcement channel not found.");
+            return message.channel.send("Announcement channel not found.");
         }
 
         let embed = new EmbedBuilder()
@@ -56,12 +38,6 @@ module.exports = {
 
         const content = roleId ? `<@&${roleId}>` : null;
         announcementChannel.send({ content, embeds: [embed] }).catch(console.error);
-
-        // Delete the original command message, with error handling
-        try {
-            await message.delete();
-        } catch (error) {
-            console.error("Failed to delete the message:", error);
-        }
+        message.delete().catch(console.error);
     }
 };
