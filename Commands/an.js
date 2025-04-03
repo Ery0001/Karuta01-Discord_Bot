@@ -4,14 +4,14 @@ module.exports = {
     name: "an", // Change this to "embed" for embed.js
     run: (client, message, args) => {
         if (args.length < 1) {
-            return message.channel.send("You need to provide a message for the announcement.");
+            return message.reply("You need to provide a message for the announcement.");
         }
 
         const regex = /"([^"]*)"/g;
         const matches = [...message.content.matchAll(regex)].map(m => m[1]);
 
         if (matches.length < 1) {
-            return message.channel.send("Please use quotes around the message and optional parameters.");
+            return message.reply("Please use quotes around the message and optional parameters.");
         }
 
         const announcementText = matches[0].replace(/\\n/g, '\n').replace(/\\t/g, '\t');
@@ -28,13 +28,13 @@ module.exports = {
             roleId = roleIdMatch[1];
         } else {
             // If no role mention is provided, return an error
-            return message.channel.send("You need to mention a role.");
+            return message.reply("You need to mention a role.");
         }
 
         // Use a fixed channel for the announcement
         const announcementChannel = client.channels.cache.get("1354658803693518918"); // Fixed channel ID
         if (!announcementChannel) {
-            return message.channel.send("Announcement channel not found.");
+            return message.reply("Announcement channel not found.");
         }
 
         let embed = new EmbedBuilder()
