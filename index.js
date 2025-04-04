@@ -318,30 +318,6 @@ client.on("messageCreate", async (message) => {
   });
 });
 
-client.on('guildMemberAdd', async (member) => {
-    console.log(`${member.user.tag} joined!`); // Debugging
-
-    if (member.user.bot) return; 
-
-    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
-    const channelId = '1354694726296797274';
-    const channel = client.channels.cache.get(channelId);
-    
-    if (!channel) {
-        console.log('Channel not found.');
-        return;
-    }
-
-    try {
-        const welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
-        const sentMessage = await channel.send(welcomeMessage);
-        await sentMessage.react(REACT_EMOJI);
-        console.log('Welcome message sent and reacted!');
-    } catch (error) {
-        console.error('Error sending message or adding reaction:', error);
-    }
-});
-
 async function processContributionEmbed(embed, message) {
   if (!embed.fields.length) return;
   const contributionField = embed.fields[0]?.value;
@@ -413,5 +389,24 @@ async function processContributionEmbed(embed, message) {
     await message.reply("It seems like there are no lazy workers.");
   }
 }
+
+client.on('guildMemberAdd', member => {
+    if (member.user.bot) return; // Avoid greeting bots
+
+    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+    const channelId = '1354694726296797274'; // Lian Faction waiting room channel
+    const channel = client.channels.cache.get(channelId);
+
+    if (!channel) {
+        console.log('Welcome channel not found.');
+        return;
+    }
+
+    const welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
+
+    channel.send(welcomeMessage)
+        .then(sentMessage => sentMessage.react(REACT_EMOJI))
+        .catch(console.error);
+});
 
 client.login(process.env.token);
