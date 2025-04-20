@@ -324,6 +324,7 @@ client.on("messageCreate", async (message) => {
   });
 });
 
+
 const lazyWorkerMessageMap = new Map(); // for the embed message
 const lazyWorkerSetMap = new Map();     // for tracking users per message
 
@@ -342,6 +343,25 @@ async function processContributionEmbedWithConfirmation(embed, message) {
     const lazyWorkers = Array.from(existingSet);
     if (!lazyWorkers.length) {
       return await message.reply("No lazy workers to display.");
+
+async function processContributionEmbed(embed, message) {
+  if (!embed.fields?.length) return;
+
+  const contributionField = embed.fields[0]?.value;
+  if (!contributionField?.trim()) return;
+
+  let lazyWorkers = [];
+  const lines = contributionField.split("\n");
+  for (const line of lines) {
+    const parts = line.split(" ");
+    if (parts.length < 5) continue;
+
+    const mention = parts[2];
+    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
+
+    if (contribution === "0") {
+      lazyWorkers.push(mention);
+
     }
 
     const indexedLazyWorkers = lazyWorkers
@@ -385,6 +405,7 @@ async function processContributionEmbedWithConfirmation(embed, message) {
     });
 
     confirmCollector.on("collect", async () => {
+
       try {
         const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
         if (!notifyChannel || !notifyChannel.isTextBased()) {
@@ -407,6 +428,14 @@ async function processContributionEmbedWithConfirmation(embed, message) {
         console.error("Error sending announcement:", sendErr);
         await message.reply("Something went wrong while sending the announcement.");
       }
+
+      const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+      await notifyChannel.send({
+        content:
+          "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
+          `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
+      });
+
     });
   } catch (err) {
     console.error("Error during lazy worker confirmation flow:", err);
