@@ -363,17 +363,14 @@ async function processContributionEmbedWithConfirmation(embed, message) {
       .setColor("#c86781")
       .setDescription("Do you want to proceed with the announcement?");
 
-    // ✅ Combine both embeds
     const confirmationMessage = await message.reply({
       embeds: [embedMessage, confirmationEmbed],
     });
 
-    // ✅ React with ✅ on the confirmation message
     await confirmationMessage.react(CHECK_EMOJI).catch(err =>
       console.error("Failed to add check emoji:", err)
     );
 
-    // ✅ Setup filter for authorized users only
     const confirmFilter = (reaction, user) =>
       reaction.emoji.name === CHECK_EMOJI &&
       !user.bot &&
@@ -381,7 +378,6 @@ async function processContributionEmbedWithConfirmation(embed, message) {
         .get(user.id)
         ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
 
-    // ✅ Create collector on the confirmation message
     const confirmCollector = confirmationMessage.createReactionCollector({
       filter: confirmFilter,
       time: 60000,
@@ -404,6 +400,7 @@ async function processContributionEmbedWithConfirmation(embed, message) {
 
         await confirmationMessage.reply("✅ Announcement has been sent!");
 
+        // Clean up maps if needed
         lazyWorkerSetMap.delete(message.id);
         lazyWorkerMessageMap.delete(message.id);
       } catch (sendErr) {
