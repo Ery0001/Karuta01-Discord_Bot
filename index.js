@@ -363,14 +363,17 @@ async function processContributionEmbedWithConfirmation(embed, message) {
       .setColor("#c86781")
       .setDescription("Do you want to proceed with the announcement?");
 
+    // ✅ Combine both embeds
     const confirmationMessage = await message.reply({
       embeds: [embedMessage, confirmationEmbed],
     });
 
-    await confirmFilter.react(CHECK_EMOJI).catch(err =>
+    // ✅ React with ✅ on the confirmation message
+    await confirmationMessage.react(CHECK_EMOJI).catch(err =>
       console.error("Failed to add check emoji:", err)
     );
 
+    // ✅ Setup filter for authorized users only
     const confirmFilter = (reaction, user) =>
       reaction.emoji.name === CHECK_EMOJI &&
       !user.bot &&
@@ -378,7 +381,8 @@ async function processContributionEmbedWithConfirmation(embed, message) {
         .get(user.id)
         ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
 
-    const confirmCollector = confirmFilter.createReactionCollector({
+    // ✅ Create collector on the confirmation message
+    const confirmCollector = confirmationMessage.createReactionCollector({
       filter: confirmFilter,
       time: 60000,
       max: 1,
@@ -400,7 +404,6 @@ async function processContributionEmbedWithConfirmation(embed, message) {
 
         await confirmationMessage.reply("✅ Announcement has been sent!");
 
-        // Clean up maps if needed
         lazyWorkerSetMap.delete(message.id);
         lazyWorkerMessageMap.delete(message.id);
       } catch (sendErr) {
@@ -413,6 +416,7 @@ async function processContributionEmbedWithConfirmation(embed, message) {
     await message.reply("An unexpected error occurred while processing the confirmation.");
   }
 }
+
 
 client.on("messageUpdate", async (oldMsg, newMsg) => {
   if (newMsg.author?.id !== KARUTA_ID || !newMsg.embeds.length) return;
