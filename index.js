@@ -339,12 +339,10 @@ async function processContributionEmbedWithConfirmation(embed, message) {
     .addFields({ name: "Members:", value: indexedLazyWorkers })
     .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
 
-  const confirmationEmbed = new EmbedBuilder()
-    .setColor("#c86781")
-    .setDescription("Do you want to proceed with the announcement?");
-
+  // Send embed and prompt confirmation
   const confirmationMessage = await message.reply({
-    embeds: [embedMessage, confirmationEmbed],
+    content: "React with ✅ below to confirm sending the announcement.",
+    embeds: [embedMessage],
   });
 
   await confirmationMessage.react(CHECK_EMOJI);
@@ -369,18 +367,18 @@ async function processContributionEmbedWithConfirmation(embed, message) {
       return;
     }
 
+    // Using lazyWorkers array from existingSet to ensure tracking consistency
     await notifyChannel.send({
       content:
         "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
         `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
     });
 
-    // Clear tracking maps after sending
+    // Clear tracking maps after sending the announcement
     lazyWorkerSetMap.delete(message.id);
     lazyWorkerMessageMap.delete(message.id);
   });
 }
-
 
 async function processContributionEmbed(embed, message) {
   if (!embed.fields?.length) return;
