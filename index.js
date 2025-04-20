@@ -229,7 +229,9 @@ For the full main server rules, check <#1305705930926850119>.
         word.startsWith("niczy") ||
         word === "nc" ||
         word === "wow" ||
-        word === "w"
+        word === "w" ||
+        word === "hi" ||
+        word === "hello"
     );
 
     if (reactTheseWords) {
@@ -285,7 +287,6 @@ const REACT_EMOJI = "⚙";
 const CHECK_EMOJI = "✅";
 
 client.on("messageCreate", async (message) => {
-  // Karuta Clan Contribution Listener
   if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
 
   const embed = message.embeds[0];
@@ -298,9 +299,13 @@ client.on("messageCreate", async (message) => {
     console.error("Failed to react:", error);
   }
 
+  // Step 1: process the embed to extract and store lazy workers
+  await processContributionEmbed(embed, message);
+
+  // Step 2: wait for reaction from authorized user to confirm
   const collector = message.createReactionCollector({ time: 60000 });
   collector.on("collect", async (reaction, user) => {
-    if (user.bot) return; // Ignore bot reactions
+    if (user.bot) return;
 
     const member = message.guild.members.cache.get(user.id);
     const hasPermission = member?.roles.cache.some((role) =>
@@ -311,10 +316,33 @@ client.on("messageCreate", async (message) => {
       await message.reply(`${user}, you don't have permission to do that.`);
       return;
     }
+
     console.log(`Reaction collected from ${user.username}`);
-    processContributionEmbed(embed, message);
+    
+    // Step 3: now we trigger the confirmation embed
+    await processContributionEmbedWithConfirmation(embed, message);
   });
 });
+
+
+const lazyWorkerMessageMap = new Map(); // for the embed message
+const lazyWorkerSetMap = new Map();     // for tracking users per message
+
+async function processContributionEmbedWithConfirmation(embed, message) {
+  try {
+    if (!message?.guild || !message.id) {
+      console.error("Invalid message or guild context.");
+      return;
+    }
+
+    const existingSet = lazyWorkerSetMap.get(message.id);
+    if (!existingSet || existingSet.size === 0) {
+      return await message.reply("It seems like there are no lazy workers.");
+    }
+
+    const lazyWorkers = Array.from(existingSet);
+    if (!lazyWorkers.length) {
+      return await message.reply("No lazy workers to display.");
 
 async function processContributionEmbed(embed, message) {
   if (!embed.fields?.length) return;
@@ -333,19 +361,22 @@ async function processContributionEmbed(embed, message) {
 
     if (contribution === "0") {
       lazyWorkers.push(mention);
-    }
-  }
 
-  if (lazyWorkers.length > 0) {
+    }
+
     const indexedLazyWorkers = lazyWorkers
       .map((user, index) => `${index + 1}. ${user}`)
       .join("\n");
+
+    if (!indexedLazyWorkers.trim()) {
+      return await message.reply("No valid mentions found in the list.");
+    }
 
     const embedMessage = new EmbedBuilder()
       .setColor("#FC7074")
       .setTitle("Lazy Workers Detected")
       .setDescription("The following members have not contributed:")
-      .addFields({ name: "Members:", value: indexedLazyWorkers })
+      .addFields([{ name: "Members:", value: indexedLazyWorkers }])
       .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
 
     const confirmationEmbed = new EmbedBuilder()
@@ -356,7 +387,9 @@ async function processContributionEmbed(embed, message) {
       embeds: [embedMessage, confirmationEmbed],
     });
 
-    await confirmationMessage.react(CHECK_EMOJI);
+    await confirmationMessage.react(CHECK_EMOJI).catch(err =>
+      console.error("Failed to add check emoji:", err)
+    );
 
     const confirmFilter = (reaction, user) =>
       reaction.emoji.name === CHECK_EMOJI &&
@@ -372,16 +405,71 @@ async function processContributionEmbed(embed, message) {
     });
 
     confirmCollector.on("collect", async () => {
+
+      try {
+        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+        if (!notifyChannel || !notifyChannel.isTextBased()) {
+          console.error("Notify channel not found or invalid.");
+          return await message.reply("Announcement channel is not available.");
+        }
+
+        await notifyChannel.send({
+          content:
+            "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
+            `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
+        });
+
+        await confirmationMessage.reply("✅ Announcement has been sent!");
+
+        // Clean up maps if needed
+        lazyWorkerSetMap.delete(message.id);
+        lazyWorkerMessageMap.delete(message.id);
+      } catch (sendErr) {
+        console.error("Error sending announcement:", sendErr);
+        await message.reply("Something went wrong while sending the announcement.");
+      }
+
       const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
       await notifyChannel.send({
         content:
           "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
           `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
       });
+
     });
-  } else {
-    await message.reply("It seems like there are no lazy workers.");
+  } catch (err) {
+    console.error("Error during lazy worker confirmation flow:", err);
+    await message.reply("An unexpected error occurred while processing the confirmation.");
   }
 }
+
+
+client.on("messageUpdate", async (oldMsg, newMsg) => {
+  if (newMsg.author?.id !== KARUTA_ID || !newMsg.embeds.length) return;
+
+  const embed = newMsg.embeds[0];
+  if (embed?.title !== "Clan Contribution") return;
+
+  await processContributionEmbed(embed, newMsg); // the non-confirming one
+});
+
+client.on('guildMemberAdd', member => {
+    if (member.user.bot) return; // Avoid greeting bots
+
+    const REACT_EMOJI = "<:Mount_Hua_Sect_Symbol:1354789652606750950>";
+    const channelId = '1354694726296797274'; // Lian Faction waiting room channel
+    const channel = client.channels.cache.get(channelId);
+
+    if (!channel) {
+        console.log('Welcome channel not found.');
+        return;
+    }
+
+    const welcomeMessage = `Welcome to Lian Faction <@${member.id}>. Please wait here.`;
+
+    channel.send(welcomeMessage)
+        .then(sentMessage => sentMessage.react(REACT_EMOJI))
+        .catch(console.error);
+});
 
 client.login(process.env.token);
