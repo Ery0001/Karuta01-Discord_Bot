@@ -287,6 +287,7 @@ const REACT_EMOJI = "⚙";
 const CHECK_EMOJI = "✅";
 
 client.on("messageCreate", async (message) => {
+  // Karuta Clan Contribution Listener
   if (message.author.id !== KARUTA_ID || !message.embeds.length) return;
 
   const embed = message.embeds[0];
@@ -299,13 +300,9 @@ client.on("messageCreate", async (message) => {
     console.error("Failed to react:", error);
   }
 
-  // Step 1: process the embed to extract and store lazy workers
-  await processContributionEmbed(embed, message);
-
-  // Step 2: wait for reaction from authorized user to confirm
   const collector = message.createReactionCollector({ time: 60000 });
   collector.on("collect", async (reaction, user) => {
-    if (user.bot) return;
+    if (user.bot) return; // Ignore bot reactions
 
     const member = message.guild.members.cache.get(user.id);
     const hasPermission = member?.roles.cache.some((role) =>
@@ -316,124 +313,128 @@ client.on("messageCreate", async (message) => {
       await message.reply(`${user}, you don't have permission to do that.`);
       return;
     }
-
     console.log(`Reaction collected from ${user.username}`);
-    
-    // Step 3: now we trigger the confirmation embed
-    await processContributionEmbedWithConfirmation(embed, message);
+    processContributionEmbed(embed, message);
   });
 });
-
 
 const lazyWorkerMessageMap = new Map(); // for the embed message
 const lazyWorkerSetMap = new Map();     // for tracking users per message
 
 async function processContributionEmbedWithConfirmation(embed, message) {
-  try {
-    if (!message?.guild || !message.id) {
-      console.error("Invalid message or guild context.");
+  const existingSet = lazyWorkerSetMap.get(message.id);
+  if (!existingSet || existingSet.size === 0) {
+    return await message.reply("It seems like there are no lazy workers.");
+  }
+
+  const lazyWorkers = Array.from(existingSet);
+  const indexedLazyWorkers = lazyWorkers
+    .map((user, index) => `${index + 1}. ${user}`)
+    .join("\n");
+
+  const embedMessage = new EmbedBuilder()
+    .setColor("#FC7074")
+    .setTitle("Lazy Workers Detected")
+    .setDescription("The following members have not contributed:")
+    .addFields({ name: "Members:", value: indexedLazyWorkers })
+    .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
+
+  const confirmationEmbed = new EmbedBuilder()
+    .setColor("#c86781")
+    .setDescription("Do you want to proceed with the announcement?");
+
+  const confirmationMessage = await message.reply({
+    embeds: [embedMessage, confirmationEmbed],
+  });
+
+  await confirmationMessage.react(CHECK_EMOJI);
+
+  const confirmFilter = (reaction, user) =>
+    reaction.emoji.name === CHECK_EMOJI &&
+    !user.bot &&
+    message.guild.members.cache
+      .get(user.id)
+      ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
+
+  const confirmCollector = confirmationMessage.createReactionCollector({
+    filter: confirmFilter,
+    time: 60000,
+    max: 1,
+  });
+
+  confirmCollector.on("collect", async () => {
+    const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+    if (!notifyChannel) {
+      console.error("Notify channel not found.");
       return;
     }
 
-    const existingSet = lazyWorkerSetMap.get(message.id);
-    if (!existingSet || existingSet.size === 0) {
-      return await message.reply("It seems like there are no lazy workers.");
-    }
-
-    if (!embed.fields?.length) {
-      return await message.reply("No data fields found in the embed.");
-    }
-
-    const contributionField = embed.fields[0]?.value;
-    if (!contributionField?.trim()) {
-      return await message.reply("Contribution field is empty.");
-    }
-
-    const lazyWorkers = [];
-    const lines = contributionField.split("\n");
-    for (const line of lines) {
-      const parts = line.split(" ");
-      if (parts.length < 5) continue;
-
-      const mention = parts[2];
-      const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
-
-      if (contribution === "0") {
-        lazyWorkers.push(mention);
-      }
-    }
-
-    if (!lazyWorkers.length) {
-      return await message.reply("No lazy workers to display.");
-    }
-
-    const indexedLazyWorkers = lazyWorkers
-      .map((user, index) => `${index + 1}. ${user}`)
-      .join("\n");
-
-    const embedMessage = new EmbedBuilder()
-      .setColor("#FC7074")
-      .setTitle("Lazy Workers Detected")
-      .setDescription("The following members have not contributed:")
-      .addFields([{ name: "Members:", value: indexedLazyWorkers }])
-      .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
-
-    const confirmationEmbed = new EmbedBuilder()
-      .setColor("#c86781")
-      .setDescription("Do you want to proceed with the announcement?");
-
-    const confirmationMessage = await message.reply({
-      embeds: [embedMessage, confirmationEmbed],
+    await notifyChannel.send({
+      content:
+        "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
+        `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
     });
 
-    await confirmationMessage.react(CHECK_EMOJI).catch(err =>
-      console.error("Failed to add check emoji:", err)
-    );
-
-    const confirmFilter = (reaction, user) =>
-      reaction.emoji.name === CHECK_EMOJI &&
-      !user.bot &&
-      message.guild.members.cache
-        .get(user.id)
-        ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
-
-    const confirmCollector = confirmationMessage.createReactionCollector({
-      filter: confirmFilter,
-      time: 60000,
-      max: 1,
-    });
-
-    confirmCollector.on("collect", async () => {
-      try {
-        const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-        if (!notifyChannel || !notifyChannel.isTextBased()) {
-          console.error("Notify channel not found or invalid.");
-          return await message.reply("Announcement channel is not available.");
-        }
-
-        await notifyChannel.send({
-          content:
-            "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
-            `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
-        });
-
-        await confirmationMessage.reply("✅ Announcement has been sent!");
-
-        // Clean up maps if needed
-        lazyWorkerSetMap.delete(message.id);
-        lazyWorkerMessageMap.delete(message.id);
-      } catch (sendErr) {
-        console.error("Error sending announcement:", sendErr);
-        await message.reply("Something went wrong while sending the announcement.");
-      }
-    });
-  } catch (err) {
-    console.error("Error during lazy worker confirmation flow:", err);
-    await message.reply("An unexpected error occurred while processing the confirmation.");
-  }
+    // Clear tracking maps after sending
+    lazyWorkerSetMap.delete(message.id);
+    lazyWorkerMessageMap.delete(message.id);
+  });
 }
 
 
+async function processContributionEmbed(embed, message) {
+  if (!embed.fields?.length) return;
+
+  const contributionField = embed.fields[0]?.value;
+  if (!contributionField?.trim()) return;
+
+  const lines = contributionField.split("\n");
+  const existingSet = lazyWorkerSetMap.get(message.id) || new Set();
+
+  for (const line of lines) {
+    const parts = line.split(" ");
+    if (parts.length < 5) continue;
+
+    const mention = parts[2];
+    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
+
+    if (contribution === "0" && !existingSet.has(mention)) {
+      existingSet.add(mention);
+    }
+  }
+
+  if (existingSet.size === 0) return;
+
+  lazyWorkerSetMap.set(message.id, existingSet);
+
+  const indexedLazyWorkers = Array.from(existingSet)
+    .map((user, index) => `${index + 1}. ${user}`)
+    .join("\n");
+
+  const embedMessage = new EmbedBuilder()
+    .setColor("#FC7074")
+    .setTitle("Lazy Workers Detected")
+    .setDescription("The following members have not contributed:")
+    .addFields({ name: "Members:", value: indexedLazyWorkers })
+    .setFooter({ text: `Showing total count: ${existingSet.size}` });
+
+  // Update existing message or create a new one
+  const existingMsg = lazyWorkerMessageMap.get(message.id);
+  if (existingMsg) {
+    try {
+      await existingMsg.edit({ embeds: [embedMessage] });
+    } catch (err) {
+      console.error("Failed to edit lazy workers message:", err);
+    }
+  } else {
+    try {
+      const sentMsg = await message.reply({ embeds: [embedMessage] });
+      lazyWorkerMessageMap.set(message.id, sentMsg);
+    } catch (err) {
+      console.error("Failed to send lazy workers message:", err);
+    }
+  }
+}
 
 client.on("messageUpdate", async (oldMsg, newMsg) => {
   if (newMsg.author?.id !== KARUTA_ID || !newMsg.embeds.length) return;
