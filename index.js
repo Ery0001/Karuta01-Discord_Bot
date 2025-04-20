@@ -318,10 +318,13 @@ client.on("messageCreate", async (message) => {
   });
 });
 
-async function processContributionEmbed(embed, message) {
-  if (!embed.fields.length) return;
+const lazyWorkerMessageMap = new Map();
+
+async function processContributionEmbedWithConfirmation(embed, message) {
+  if (!embed.fields?.length) return;
+
   const contributionField = embed.fields[0]?.value;
-  if (!contributionField || contributionField.trim() === "") return;
+  if (!contributionField?.trim()) return;
 
   let lazyWorkers = [];
   const lines = contributionField.split("\n");
@@ -330,65 +333,69 @@ async function processContributionEmbed(embed, message) {
     if (parts.length < 5) continue;
 
     const mention = parts[2];
-    const contribution = parts[4]
-      .split("/")[0]
-      .replace("**", "")
-      .replace("**", "");
+    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
 
     if (contribution === "0") {
       lazyWorkers.push(mention);
     }
   }
 
-  if (lazyWorkers.length > 0) {
-    const indexedLazyWorkers = lazyWorkers
-      .map((user, index) => `${index + 1}. ${user}`)
-      .join("\n");
-
-    const embedMessage = new EmbedBuilder()
-      .setColor("#FC7074")
-      .setTitle("Lazy Workers Detected")
-      .setDescription("The following members have not contributed:")
-      .addFields({ name: "Members:", value: indexedLazyWorkers })
-      .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
-
-    const confirmationEmbed = new EmbedBuilder()
-      .setColor("#c86781")
-      .setDescription("Do you want to proceed with the announcement?");
-
-    const confirmationMessage = await message.reply({
-      embeds: [embedMessage, confirmationEmbed],
-    });
-
-    await confirmationMessage.react(CHECK_EMOJI);
-
-    const confirmFilter = (reaction, user) =>
-      reaction.emoji.name === CHECK_EMOJI &&
-      !user.bot &&
-      message.guild.members.cache
-        .get(user.id)
-        ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
-
-    const confirmCollector = confirmationMessage.createReactionCollector({
-      filter: confirmFilter,
-      time: 60000,
-      max: 1,
-    });
-
-    confirmCollector.on("collect", async (reaction, user) => {
-      const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
-      await notifyChannel.send({
-        content:
-          "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
-          `The following members have not contributed:\n${lazyWorkers.join(
-            ", "
-          )}`,
-      });
-    });
-  } else {
-    await message.reply("It seems like there are no lazy workers.");
+  if (lazyWorkers.length === 0) {
+    return await message.reply("It seems like there are no lazy workers.");
   }
+
+  const indexedLazyWorkers = lazyWorkers
+    .map((user, index) => `${index + 1}. ${user}`)
+    .join("\n");
+
+  const embedMessage = new EmbedBuilder()
+    .setColor("#FC7074")
+    .setTitle("Lazy Workers Detected")
+    .setDescription("The following members have not contributed:")
+    .addFields({ name: "Members:", value: indexedLazyWorkers })
+    .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
+
+  const confirmationEmbed = new EmbedBuilder()
+    .setColor("#c86781")
+    .setDescription("Do you want to proceed with the announcement?");
+
+  const confirmationMessage = await message.reply({
+    embeds: [embedMessage, confirmationEmbed],
+  });
+
+  await confirmationMessage.react(CHECK_EMOJI);
+
+  const confirmFilter = (reaction, user) =>
+    reaction.emoji.name === CHECK_EMOJI &&
+    !user.bot &&
+    message.guild.members.cache
+      .get(user.id)
+      ?.roles.cache.some((role) => TRACKED_ROLES.includes(role.id));
+
+  const confirmCollector = confirmationMessage.createReactionCollector({
+    filter: confirmFilter,
+    time: 60000,
+    max: 1,
+  });
+
+  confirmCollector.on("collect", async () => {
+    const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+    await notifyChannel.send({
+      content:
+        "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
+        `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
+    });
+  });
 }
+
+client.on("messageUpdate", async (oldMsg, newMsg) => {
+  if (newMsg.author?.id !== KARUTA_ID || !newMsg.embeds.length) return;
+
+  const embed = newMsg.embeds[0];
+  if (embed?.title !== "Clan Contribution") return;
+
+  await processContributionEmbed(embed, newMsg); // the non-confirming one
+});
 
 client.on('guildMemberAdd', member => {
     if (member.user.bot) return; // Avoid greeting bots
