@@ -317,9 +317,10 @@ client.on("messageCreate", async (message) => {
 });
 
 async function processContributionEmbed(embed, message) {
-  if (!embed.fields.length) return;
+  if (!embed.fields?.length) return;
+
   const contributionField = embed.fields[0]?.value;
-  if (!contributionField || contributionField.trim() === "") return;
+  if (!contributionField?.trim()) return;
 
   let lazyWorkers = [];
   const lines = contributionField.split("\n");
@@ -328,10 +329,7 @@ async function processContributionEmbed(embed, message) {
     if (parts.length < 5) continue;
 
     const mention = parts[2];
-    const contribution = parts[4]
-      .split("/")[0]
-      .replace("**", "")
-      .replace("**", "");
+    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
 
     if (contribution === "0") {
       lazyWorkers.push(mention);
@@ -373,14 +371,12 @@ async function processContributionEmbed(embed, message) {
       max: 1,
     });
 
-    confirmCollector.on("collect", async (reaction, user) => {
+    confirmCollector.on("collect", async () => {
       const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
       await notifyChannel.send({
         content:
           "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
-          `The following members have not contributed:\n${lazyWorkers.join(
-            ", "
-          )}`,
+          `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
       });
     });
   } else {
