@@ -388,6 +388,57 @@ async function processContributionEmbedWithConfirmation(embed, message) {
   });
 }
 
+async function processContributionEmbed(embed, message) {
+  if (!embed.fields?.length) return;
+
+  const contributionField = embed.fields[0]?.value;
+  if (!contributionField?.trim()) return;
+
+  let lazyWorkers = [];
+  const lines = contributionField.split("\n");
+  for (const line of lines) {
+    const parts = line.split(" ");
+    if (parts.length < 5) continue;
+
+    const mention = parts[2];
+    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
+
+    if (contribution === "0") {
+      lazyWorkers.push(mention);
+    }
+  }
+
+  if (lazyWorkers.length === 0) return;
+
+  const indexedLazyWorkers = lazyWorkers
+    .map((user, index) => `${index + 1}. ${user}`)
+    .join("\n");
+
+  const embedMessage = new EmbedBuilder()
+    .setColor("#FC7074")
+    .setTitle("Lazy Workers Detected")
+    .setDescription("The following members have not contributed:")
+    .addFields({ name: "Members:", value: indexedLazyWorkers })
+    .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
+
+  // Check if we already sent a message for this message ID
+  const existingMsg = lazyWorkerMessageMap.get(message.id);
+  if (existingMsg) {
+    try {
+      await existingMsg.edit({ embeds: [embedMessage] });
+    } catch (err) {
+      console.error("Failed to edit lazy workers message:", err);
+    }
+  } else {
+    try {
+      const sentMsg = await message.reply({ embeds: [embedMessage] });
+      lazyWorkerMessageMap.set(message.id, sentMsg);
+    } catch (err) {
+      console.error("Failed to send lazy workers message:", err);
+    }
+  }
+}
+
 client.on("messageUpdate", async (oldMsg, newMsg) => {
   if (newMsg.author?.id !== KARUTA_ID || !newMsg.embeds.length) return;
 
