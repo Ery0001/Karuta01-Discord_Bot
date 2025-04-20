@@ -318,32 +318,16 @@ client.on("messageCreate", async (message) => {
   });
 });
 
-const lazyWorkerMessageMap = new Map();
+const lazyWorkerMessageMap = new Map(); // for the embed message
+const lazyWorkerSetMap = new Map();     // for tracking users per message
 
 async function processContributionEmbedWithConfirmation(embed, message) {
-  if (!embed.fields?.length) return;
-
-  const contributionField = embed.fields[0]?.value;
-  if (!contributionField?.trim()) return;
-
-  let lazyWorkers = [];
-  const lines = contributionField.split("\n");
-  for (const line of lines) {
-    const parts = line.split(" ");
-    if (parts.length < 5) continue;
-
-    const mention = parts[2];
-    const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
-
-    if (contribution === "0") {
-      lazyWorkers.push(mention);
-    }
-  }
-
-  if (lazyWorkers.length === 0) {
+  const existingSet = lazyWorkerSetMap.get(message.id);
+  if (!existingSet || existingSet.size === 0) {
     return await message.reply("It seems like there are no lazy workers.");
   }
 
+  const lazyWorkers = Array.from(existingSet);
   const indexedLazyWorkers = lazyWorkers
     .map((user, index) => `${index + 1}. ${user}`)
     .join("\n");
@@ -380,13 +364,23 @@ async function processContributionEmbedWithConfirmation(embed, message) {
 
   confirmCollector.on("collect", async () => {
     const notifyChannel = message.guild.channels.cache.get(NOTIFY_CHANNEL_ID);
+    if (!notifyChannel) {
+      console.error("Notify channel not found.");
+      return;
+    }
+
     await notifyChannel.send({
       content:
         "Dear clan members of **__Lian faction__**, please contribute to the clan treasury.\n\n" +
         `The following members have not contributed:\n${lazyWorkers.join(", ")}`,
     });
+
+    // Clear tracking maps after sending
+    lazyWorkerSetMap.delete(message.id);
+    lazyWorkerMessageMap.delete(message.id);
   });
 }
+
 
 async function processContributionEmbed(embed, message) {
   if (!embed.fields?.length) return;
@@ -394,8 +388,9 @@ async function processContributionEmbed(embed, message) {
   const contributionField = embed.fields[0]?.value;
   if (!contributionField?.trim()) return;
 
-  let lazyWorkers = [];
   const lines = contributionField.split("\n");
+  const existingSet = lazyWorkerSetMap.get(message.id) || new Set();
+
   for (const line of lines) {
     const parts = line.split(" ");
     if (parts.length < 5) continue;
@@ -403,14 +398,16 @@ async function processContributionEmbed(embed, message) {
     const mention = parts[2];
     const contribution = parts[4].split("/")[0].replace(/\*\*/g, "");
 
-    if (contribution === "0") {
-      lazyWorkers.push(mention);
+    if (contribution === "0" && !existingSet.has(mention)) {
+      existingSet.add(mention);
     }
   }
 
-  if (lazyWorkers.length === 0) return;
+  if (existingSet.size === 0) return;
 
-  const indexedLazyWorkers = lazyWorkers
+  lazyWorkerSetMap.set(message.id, existingSet);
+
+  const indexedLazyWorkers = Array.from(existingSet)
     .map((user, index) => `${index + 1}. ${user}`)
     .join("\n");
 
@@ -419,9 +416,9 @@ async function processContributionEmbed(embed, message) {
     .setTitle("Lazy Workers Detected")
     .setDescription("The following members have not contributed:")
     .addFields({ name: "Members:", value: indexedLazyWorkers })
-    .setFooter({ text: `Showing total count: ${lazyWorkers.length}` });
+    .setFooter({ text: `Showing total count: ${existingSet.size}` });
 
-  // Check if we already sent a message for this message ID
+  // Update existing message or create a new one
   const existingMsg = lazyWorkerMessageMap.get(message.id);
   if (existingMsg) {
     try {
